@@ -9,6 +9,10 @@
           {
             "title": "Introduction",
             "path": "introduction"
+          },
+          {
+            "title": "Dummy",
+            "path": "reference-manager"
           }
         ]
       }
