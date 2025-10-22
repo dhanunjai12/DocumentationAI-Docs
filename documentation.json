@@ -1,6 +1,6 @@
 {
   "name": "Documentation AI App",
-  "initialRoute": "introductionn",
+  "initialRoute": "introduction",
   "navigation": {
     "groups": [
       {
@@ -8,7 +8,7 @@
         "pages": [
           {
             "title": "Introduction",
-            "path": "introductionn"
+            "path": "introduction"
           },
           {
             "title": "Dummy",
