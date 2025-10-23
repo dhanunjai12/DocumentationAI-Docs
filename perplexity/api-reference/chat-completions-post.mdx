@@ -1,0 +1,258 @@
+---
+title: Chat Completions
+description: Generate a model's response for the given chat conversation with real-time web search capabilities.
+type: reference
+---
+
+## Overview
+
+The Chat Completions endpoint generates AI responses for chat conversations using Perplexity's Sonar models. This endpoint supports real-time web search, multimodal inputs, structured outputs, and streaming responses.
+
+Common use cases:
+- Generate AI responses with up-to-date web search results
+- Create conversational AI applications with citation support
+- Build research tools with academic or SEC filing search modes
+- Implement multimodal chat with image and file attachments
+
+## Endpoint
+
+````http
+POST https://api.perplexity.ai/chat/completions
+````
+
+## Authentication
+
+This endpoint requires Bearer token authentication. Include your API key in the Authorization header:
+
+````http
+Authorization: Bearer YOUR_API_KEY
+````
+
+## Request Body
+
+<ParamField body="model" param-type="string" required="true" showLocation="false">
+  The name of the model that will complete your prompt. Available options: sonar (lightweight search), sonar-pro (advanced search), sonar-deep-research (exhaustive research), sonar-reasoning (fast reasoning), or sonar-reasoning-pro (premier reasoning).
+</ParamField>
+
+<ParamField body="messages" param-type="array" required="true" showLocation="false">
+  A list of messages comprising the conversation so far. Each message must include role (system, user, or assistant) and content (text or multimodal array).
+</ParamField>
+
+<ParamField body="search_mode" param-type="string" required="false" showLocation="false">
+  Controls search mode. Options: academic (prioritizes scholarly sources), sec (prioritizes SEC filings), or web (general web search). Defaults to web.
+</ParamField>
+
+<ParamField body="reasoning_effort" param-type="string" required="false" showLocation="false">
+  Controls computational effort for deep research models. Options: low (faster, simpler answers), medium (balanced approach), or high (deeper, thorough responses). Only applicable for sonar-deep-research. Defaults to medium.
+</ParamField>
+
+<ParamField body="max_tokens" param-type="integer" required="false" showLocation="false">
+  The maximum number of completion tokens returned by the API. Controls response length. Higher values allow longer responses but may increase costs.
+</ParamField>
+
+<ParamField body="temperature" param-type="number" required="false" showLocation="false">
+  The amount of randomness in the response, valued between 0 and 2. Lower values make output more focused and deterministic. Higher values make output more creative. Defaults to 0.2.
+</ParamField>
+
+<ParamField body="top_p" param-type="number" required="false" showLocation="false">
+  The nucleus sampling threshold, valued between 0 and 1. Controls diversity by considering only tokens whose cumulative probability exceeds this value. Defaults to 0.9.
+</ParamField>
+
+<ParamField body="language_preference" param-type="string" required="false" showLocation="false">
+  The language preference for the chat completion response content. Controls the language of the response.
+</ParamField>
+
+<ParamField body="search_domain_filter" param-type="array" required="false" showLocation="false">
+  A list of domains to limit search results to. Currently limited to 20 domains for allowlisting and denylisting. For denylisting, add a dash at the beginning of the domain string.
+</ParamField>
+
+<ParamField body="return_images" param-type="boolean" required="false" showLocation="false">
+  Determines whether search results should include images. Defaults to false.
+</ParamField>
+
+<ParamField body="return_related_questions" param-type="boolean" required="false" showLocation="false">
+  Determines whether related questions should be returned. Defaults to false.
+</ParamField>
+
+<ParamField body="search_recency_filter" param-type="string" required="false" showLocation="false">
+  Filters search results based on time, such as week or day.
+</ParamField>
+
+<ParamField body="search_after_date_filter" param-type="string" required="false" showLocation="false">
+  Filters search results to only include content published after this date. Format: %m/%d/%Y (e.g., 3/1/2025).
+</ParamField>
+
+<ParamField body="search_before_date_filter" param-type="string" required="false" showLocation="false">
+  Filters search results to only include content published before this date. Format: %m/%d/%Y (e.g., 3/1/2025).
+</ParamField>
+
+<ParamField body="last_updated_after_filter" param-type="string" required="false" showLocation="false">
+  Filters search results to only include content last updated after this date. Format: %m/%d/%Y (e.g., 3/1/2025).
+</ParamField>
+
+<ParamField body="last_updated_before_filter" param-type="string" required="false" showLocation="false">
+  Filters search results to only include content last updated before this date. Format: %m/%d/%Y (e.g., 3/1/2025).
+</ParamField>
+
+<ParamField body="top_k" param-type="number" required="false" showLocation="false">
+  The number of tokens to keep for top-k filtering. Limits the model to consider only the k most likely next tokens. A value of 0 disables this filter. Defaults to 0.
+</ParamField>
+
+<ParamField body="stream" param-type="boolean" required="false" showLocation="false">
+  Determines whether to stream the response incrementally. Defaults to false.
+</ParamField>
+
+<ParamField body="presence_penalty" param-type="number" required="false" showLocation="false">
+  Positive values increase the likelihood of discussing new topics. Values typically range from 0 to 2.0. Defaults to 0.
+</ParamField>
+
+<ParamField body="frequency_penalty" param-type="number" required="false" showLocation="false">
+  Decreases likelihood of repetition based on prior frequency. Values typically range from 0 to 2.0. Defaults to 0.
+</ParamField>
+
+<ParamField body="response_format" param-type="object" required="false" showLocation="false">
+  Enables structured JSON output formatting.
+</ParamField>
+
+<ParamField body="disable_search" param-type="boolean" required="false" showLocation="false">
+  When set to true, disables web search completely and the model will only use its training data to respond. Defaults to false.
+</ParamField>
+
+<ParamField body="enable_search_classifier" param-type="boolean" required="false" showLocation="false">
+  Enables a classifier that decides if web search is needed based on your query. Defaults to false.
+</ParamField>
+
+<ParamField body="web_search_options" param-type="object" required="false" showLocation="false">
+  Configuration for using web search in model responses, including search_context_size, user_location, and image_search_relevance_enhanced.
+</ParamField>
+
+<ParamField body="media_response" param-type="object" required="false" showLocation="false">
+  Configuration for controlling media content in responses, such as videos and images. Use the overrides property to enable specific media types.
+</ParamField>
+
+## Request Example
+
+````json
+{
+  "model": "sonar-deep-research",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Be precise and concise."
+    },
+    {
+      "role": "user",
+      "content": "How many stars are there in our galaxy?"
+    }
+  ],
+  "search_mode": "web",
+  "temperature": 0.2,
+  "top_p": 0.9,
+  "max_tokens": 500
+}
+````
+
+## Response
+
+### Success Response (200)
+
+Returns a JSON object containing the chat completion response.
+
+````json
+{
+  "id": "chatcmpl-abc123",
+  "model": "sonar-deep-research",
+  "created": 1697654400,
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 45,
+    "completion_tokens": 312,
+    "total_tokens": 357,
+    "citation_tokens": 28,
+    "num_search_queries": 3
+  },
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "The Milky Way galaxy contains an estimated 100 to 400 billion stars..."
+      }
+    }
+  ],
+  "search_results": [
+    {
+      "title": "How many stars are in the Milky Way?",
+      "url": "https://example.com/astronomy/milky-way-stars",
+      "date": "2024-03-15"
+    }
+  ]
+}
+````
+
+### Response Fields
+
+<ParamField path="id" param-type="string" required="true" showLocation="false">
+  A unique identifier for the chat completion.
+</ParamField>
+
+<ParamField path="model" param-type="string" required="true" showLocation="false">
+  The model that generated the response.
+</ParamField>
+
+<ParamField path="created" param-type="integer" required="true" showLocation="false">
+  The Unix timestamp (in seconds) of when the chat completion was created.
+</ParamField>
+
+<ParamField path="object" param-type="string" required="true" showLocation="false">
+  The type of object, which is always chat.completion.
+</ParamField>
+
+<ParamField path="usage" param-type="object" required="true" showLocation="false">
+  Token usage information including prompt_tokens, completion_tokens, total_tokens, and optionally citation_tokens, num_search_queries, and reasoning_tokens.
+</ParamField>
+
+<ParamField path="choices" param-type="array" required="true" showLocation="false">
+  A list of chat completion choices. Each choice contains index, finish_reason, and message fields.
+</ParamField>
+
+<ParamField path="search_results" param-type="array" required="false" showLocation="false">
+  A list of search results related to the response, each containing title, url, and optional date.
+</ParamField>
+
+<ParamField path="videos" param-type="array" required="false" showLocation="false">
+  A list of video results when media_response.overrides.return_videos is enabled. Contains video URLs and metadata.
+</ParamField>
+
+### Streaming Response (200)
+
+When stream is set to true, returns Server-Sent Events with `chat.completion.chunk` objects.
+
+````json
+{
+  "id": "chatcmpl-abc123",
+  "model": "sonar-deep-research",
+  "created": 1697654400,
+  "object": "chat.completion.chunk",
+  "choices": [
+    {
+      "index": 0,
+      "delta": {
+        "role": "assistant",
+        "content": "The Milky"
+      },
+      "finish_reason": null
+    }
+  ]
+}
+````
+
+## Common Patterns
+
+- **Real-time search** - Use web search mode to get current information and citations for user queries requiring up-to-date knowledge
+- **Academic research** - Set search_mode to academic for queries requiring scholarly sources and peer-reviewed research
+- **Streaming responses** - Enable stream for real-time user experience in chat interfaces where responses appear incrementally
+- **Structured outputs** - Use response_format to get consistent JSON structures for parsing and integration with downstream systems
+- **Domain filtering** - Apply search_domain_filter to limit results to trusted sources or exclude specific domains for content quality control
+
