@@ -1,0 +1,787 @@
+{
+  "project": "Perplexity AI Documentation Conversion",
+  "source": "https://docs.perplexity.ai/sitemap.xml",
+  "lastUpdated": "2025-10-23",
+  "totalTasks": 79,
+  "completedTasks": 3,
+  "tasks": [
+    {
+      "id": 1,
+      "category": "API Reference",
+      "title": "Async Chat Completions - Get",
+      "sourceUrl": "https://docs.perplexity.ai/api-reference/async-chat-completions-get",
+      "targetPath": "perplexity/api-reference/async-chat-completions-get.mdx",
+      "status": "completed",
+      "lastModified": "2025-08-07T23:43:01.977Z"
+    },
+    {
+      "id": 2,
+      "category": "API Reference",
+      "title": "Async Chat Completions - Post",
+      "sourceUrl": "https://docs.perplexity.ai/api-reference/async-chat-completions-post",
+      "targetPath": "perplexity/api-reference/async-chat-completions-post.mdx",
+      "status": "completed",
+      "lastModified": "2025-08-07T23:43:01.989Z"
+    },
+    {
+      "id": 3,
+      "category": "API Reference",
+      "title": "Async Chat Completions Request - Get",
+      "sourceUrl": "https://docs.perplexity.ai/api-reference/async-chat-completions-request_id-get",
+      "targetPath": "perplexity/api-reference/async-chat-completions-request_id-get.mdx",
+      "status": "completed",
+      "lastModified": "2025-08-07T23:43:02.002Z"
+    },
+    {
+      "id": 4,
+      "category": "API Reference",
+      "title": "Chat Completions - Post",
+      "sourceUrl": "https://docs.perplexity.ai/api-reference/chat-completions-post",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-08-07T23:43:02.014Z"
+    },
+    {
+      "id": 5,
+      "category": "API Reference",
+      "title": "Generate Auth Token - Post",
+      "sourceUrl": "https://docs.perplexity.ai/api-reference/generate-auth-token-post",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": ""
+    },
+    {
+      "id": 6,
+      "category": "API Reference",
+      "title": "Revoke Auth Token - Post",
+      "sourceUrl": "https://docs.perplexity.ai/api-reference/revoke-auth-token-post",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": ""
+    },
+    {
+      "id": 7,
+      "category": "API Reference",
+      "title": "Search - Post",
+      "sourceUrl": "https://docs.perplexity.ai/api-reference/search-post",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": ""
+    },
+    {
+      "id": 8,
+      "category": "Changelog",
+      "title": "Changelog",
+      "sourceUrl": "https://docs.perplexity.ai/changelog/changelog",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:26.814Z"
+    },
+    {
+      "id": 9,
+      "category": "Cookbook - Articles",
+      "title": "Memory Management",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/articles/memory-management/README",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-21T11:25:40.854Z"
+    },
+    {
+      "id": 10,
+      "category": "Cookbook - Articles",
+      "title": "Chat Summary Memory Buffer",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/articles/memory-management/chat-summary-memory-buffer/README",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:26.836Z"
+    },
+    {
+      "id": 11,
+      "category": "Cookbook - Articles",
+      "title": "Chat with Persistence",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/articles/memory-management/chat-with-persistence/README",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:26.834Z"
+    },
+    {
+      "id": 12,
+      "category": "Cookbook - Articles",
+      "title": "OpenAI Agents Integration",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/articles/openai-agents-integration/README",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:26.835Z"
+    },
+    {
+      "id": 13,
+      "category": "Cookbook - Examples",
+      "title": "Examples Overview",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/examples/README",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-21T11:25:41.391Z"
+    },
+    {
+      "id": 14,
+      "category": "Cookbook - Examples",
+      "title": "Daily Knowledge Bot",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/examples/daily-knowledge-bot/README",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:26.840Z"
+    },
+    {
+      "id": 15,
+      "category": "Cookbook - Examples",
+      "title": "Discord Python Bot",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/examples/discord-py-bot/README",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:26.837Z"
+    },
+    {
+      "id": 16,
+      "category": "Cookbook - Examples",
+      "title": "Disease Q&A",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/examples/disease-qa/README",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:26.838Z"
+    },
+    {
+      "id": 17,
+      "category": "Cookbook - Examples",
+      "title": "Fact Checker CLI",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/examples/fact-checker-cli/README",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:26.839Z"
+    },
+    {
+      "id": 18,
+      "category": "Cookbook - Examples",
+      "title": "Financial News Tracker",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/examples/financial-news-tracker/README",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:26.842Z"
+    },
+    {
+      "id": 19,
+      "category": "Cookbook - Examples",
+      "title": "Research Finder",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/examples/research-finder/README",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:26.843Z"
+    },
+    {
+      "id": 20,
+      "category": "Cookbook",
+      "title": "Cookbook Main",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-21T11:31:17.459Z"
+    },
+    {
+      "id": 21,
+      "category": "Cookbook - Showcase",
+      "title": "4point Hoops",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/4point-Hoops",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.845Z"
+    },
+    {
+      "id": 22,
+      "category": "Cookbook - Showcase",
+      "title": "Ellipsis",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/Ellipsis",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.849Z"
+    },
+    {
+      "id": 23,
+      "category": "Cookbook - Showcase",
+      "title": "Bazaar AI Saathi",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/bazaar-ai-saathi",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.846Z"
+    },
+    {
+      "id": 24,
+      "category": "Cookbook - Showcase",
+      "title": "Briefo",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/briefo",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.846Z"
+    },
+    {
+      "id": 25,
+      "category": "Cookbook - Showcase",
+      "title": "CityPulse AI Search",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/citypulse-ai-search",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.843Z"
+    },
+    {
+      "id": 26,
+      "category": "Cookbook - Showcase",
+      "title": "Cycle Sync AI",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/cycle-sync-ai",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.851Z"
+    },
+    {
+      "id": 27,
+      "category": "Cookbook - Showcase",
+      "title": "Daily News Briefing",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/daily-news-briefing",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.847Z"
+    },
+    {
+      "id": 28,
+      "category": "Cookbook - Showcase",
+      "title": "Executive Intelligence",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/executive-intelligence",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.848Z"
+    },
+    {
+      "id": 29,
+      "category": "Cookbook - Showcase",
+      "title": "Fact Dynamics",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/fact-dynamics",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.850Z"
+    },
+    {
+      "id": 30,
+      "category": "Cookbook - Showcase",
+      "title": "First Principle",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/first-principle",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.872Z"
+    },
+    {
+      "id": 31,
+      "category": "Cookbook - Showcase",
+      "title": "FlameGuardAI",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/flameguardai",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-08-16T17:10:54.631Z"
+    },
+    {
+      "id": 32,
+      "category": "Cookbook - Showcase",
+      "title": "Flow and Focus",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/flow-and-focus",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.874Z"
+    },
+    {
+      "id": 33,
+      "category": "Cookbook - Showcase",
+      "title": "Greenify",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/greenify",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.879Z"
+    },
+    {
+      "id": 34,
+      "category": "Cookbook - Showcase",
+      "title": "Monday",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/monday",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.869Z"
+    },
+    {
+      "id": 35,
+      "category": "Cookbook - Showcase",
+      "title": "MVP Lifeline AI App",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/mvp-lifeline-ai-app",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.876Z"
+    },
+    {
+      "id": 36,
+      "category": "Cookbook - Showcase",
+      "title": "PerplexiCart",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/perplexicart",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.871Z"
+    },
+    {
+      "id": 37,
+      "category": "Cookbook - Showcase",
+      "title": "PerplexiGrid",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/perplexigrid",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-08-16T17:33:03.075Z"
+    },
+    {
+      "id": 38,
+      "category": "Cookbook - Showcase",
+      "title": "Perplexity FincaseAI",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/perplexity-fincaseai",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.880Z"
+    },
+    {
+      "id": 39,
+      "category": "Cookbook - Showcase",
+      "title": "Perplexity Flutter",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/perplexity-flutter",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.881Z"
+    },
+    {
+      "id": 40,
+      "category": "Cookbook - Showcase",
+      "title": "Perplexity Lens",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/perplexity-lens",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.902Z"
+    },
+    {
+      "id": 41,
+      "category": "Cookbook - Showcase",
+      "title": "PosterLens",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/posterlens",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.899Z"
+    },
+    {
+      "id": 42,
+      "category": "Cookbook - Showcase",
+      "title": "Sonar Chromium Browser",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/sonar-chromium-browser",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.905Z"
+    },
+    {
+      "id": 43,
+      "category": "Cookbook - Showcase",
+      "title": "Starplex",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/starplex",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": ""
+    },
+    {
+      "id": 44,
+      "category": "Cookbook - Showcase",
+      "title": "Truth Tracer",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/truth-tracer",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.906Z"
+    },
+    {
+      "id": 45,
+      "category": "Cookbook - Showcase",
+      "title": "Uncovered",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/uncovered",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.903Z"
+    },
+    {
+      "id": 46,
+      "category": "Cookbook - Showcase",
+      "title": "Valetudo AI",
+      "sourceUrl": "https://docs.perplexity.ai/cookbook/showcase/valetudo-ai",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-08-16T17:15:53.321Z"
+    },
+    {
+      "id": 47,
+      "category": "Discussions",
+      "title": "Discussions",
+      "sourceUrl": "https://docs.perplexity.ai/discussions/discussions",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-09-26T01:31:57.636Z"
+    },
+    {
+      "id": 48,
+      "category": "FAQ",
+      "title": "FAQ",
+      "sourceUrl": "https://docs.perplexity.ai/faq/faq",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-08-07T15:30:40.149Z"
+    },
+    {
+      "id": 49,
+      "category": "Feature Roadmap",
+      "title": "Feature Roadmap",
+      "sourceUrl": "https://docs.perplexity.ai/feature-roadmap",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T01:14:33.060Z"
+    },
+    {
+      "id": 50,
+      "category": "Getting Started",
+      "title": "API Groups",
+      "sourceUrl": "https://docs.perplexity.ai/getting-started/api-groups",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-09-30T14:16:07.077Z"
+    },
+    {
+      "id": 51,
+      "category": "Getting Started",
+      "title": "Models",
+      "sourceUrl": "https://docs.perplexity.ai/getting-started/models",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-09-30T14:16:07.079Z"
+    },
+    {
+      "id": 52,
+      "category": "Getting Started",
+      "title": "Overview",
+      "sourceUrl": "https://docs.perplexity.ai/getting-started/overview",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-09-25T04:02:14.445Z"
+    },
+    {
+      "id": 53,
+      "category": "Getting Started",
+      "title": "Pricing",
+      "sourceUrl": "https://docs.perplexity.ai/getting-started/pricing",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-09-23T19:42:21.840Z"
+    },
+    {
+      "id": 54,
+      "category": "Getting Started",
+      "title": "Quickstart",
+      "sourceUrl": "https://docs.perplexity.ai/getting-started/quickstart",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.960Z"
+    },
+    {
+      "id": 55,
+      "category": "Guides",
+      "title": "Academic Filter Guide",
+      "sourceUrl": "https://docs.perplexity.ai/guides/academic-filter-guide",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.957Z"
+    },
+    {
+      "id": 56,
+      "category": "Guides",
+      "title": "API Key Management",
+      "sourceUrl": "https://docs.perplexity.ai/guides/api-key-management",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.963Z"
+    },
+    {
+      "id": 57,
+      "category": "Guides",
+      "title": "Bots",
+      "sourceUrl": "https://docs.perplexity.ai/guides/bots",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-08-14T23:52:27.713Z"
+    },
+    {
+      "id": 58,
+      "category": "Guides",
+      "title": "Chat Completions Guide",
+      "sourceUrl": "https://docs.perplexity.ai/guides/chat-completions-guide",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.955Z"
+    },
+    {
+      "id": 59,
+      "category": "Guides",
+      "title": "Chat Completions SDK",
+      "sourceUrl": "https://docs.perplexity.ai/guides/chat-completions-sdk",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.961Z"
+    },
+    {
+      "id": 60,
+      "category": "Guides",
+      "title": "Date Range Filter Guide",
+      "sourceUrl": "https://docs.perplexity.ai/guides/date-range-filter-guide",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.990Z"
+    },
+    {
+      "id": 61,
+      "category": "Guides",
+      "title": "File Attachments",
+      "sourceUrl": "https://docs.perplexity.ai/guides/file-attachments",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-08T22:03:06.555Z"
+    },
+    {
+      "id": 62,
+      "category": "Guides",
+      "title": "Image Attachments",
+      "sourceUrl": "https://docs.perplexity.ai/guides/image-attachments",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.991Z"
+    },
+    {
+      "id": 63,
+      "category": "Guides",
+      "title": "MCP Server",
+      "sourceUrl": "https://docs.perplexity.ai/guides/mcp-server",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-08-07T23:43:02.737Z"
+    },
+    {
+      "id": 64,
+      "category": "Guides",
+      "title": "Perplexity SDK",
+      "sourceUrl": "https://docs.perplexity.ai/guides/perplexity-sdk",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:28.030Z"
+    },
+    {
+      "id": 65,
+      "category": "Guides",
+      "title": "Perplexity SDK Best Practices",
+      "sourceUrl": "https://docs.perplexity.ai/guides/perplexity-sdk-best-practices",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.997Z"
+    },
+    {
+      "id": 66,
+      "category": "Guides",
+      "title": "Perplexity SDK Configuration",
+      "sourceUrl": "https://docs.perplexity.ai/guides/perplexity-sdk-configuration",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.998Z"
+    },
+    {
+      "id": 67,
+      "category": "Guides",
+      "title": "Perplexity SDK Error Handling",
+      "sourceUrl": "https://docs.perplexity.ai/guides/perplexity-sdk-error-handling",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.993Z"
+    },
+    {
+      "id": 68,
+      "category": "Guides",
+      "title": "Perplexity SDK Performance",
+      "sourceUrl": "https://docs.perplexity.ai/guides/perplexity-sdk-performance",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:27.996Z"
+    },
+    {
+      "id": 69,
+      "category": "Guides",
+      "title": "Perplexity SDK Type Safety",
+      "sourceUrl": "https://docs.perplexity.ai/guides/perplexity-sdk-type-safety",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:28.027Z"
+    },
+    {
+      "id": 70,
+      "category": "Guides",
+      "title": "Privacy & Security",
+      "sourceUrl": "https://docs.perplexity.ai/guides/privacy-security",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-08T20:21:50.372Z"
+    },
+    {
+      "id": 71,
+      "category": "Guides",
+      "title": "Prompt Guide",
+      "sourceUrl": "https://docs.perplexity.ai/guides/prompt-guide",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:28.031Z"
+    },
+    {
+      "id": 72,
+      "category": "Guides",
+      "title": "Rate Limits & Usage Tiers",
+      "sourceUrl": "https://docs.perplexity.ai/guides/rate-limits-usage-tiers",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-01T21:32:44.573Z"
+    },
+    {
+      "id": 73,
+      "category": "Guides",
+      "title": "Returning Images",
+      "sourceUrl": "https://docs.perplexity.ai/guides/returning-images",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:28.034Z"
+    },
+    {
+      "id": 74,
+      "category": "Guides",
+      "title": "Returning Videos",
+      "sourceUrl": "https://docs.perplexity.ai/guides/returning-videos",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:28.033Z"
+    },
+    {
+      "id": 75,
+      "category": "Guides",
+      "title": "Search Best Practices",
+      "sourceUrl": "https://docs.perplexity.ai/guides/search-best-practices",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:28.035Z"
+    },
+    {
+      "id": 76,
+      "category": "Guides",
+      "title": "Search Context Size Guide",
+      "sourceUrl": "https://docs.perplexity.ai/guides/search-context-size-guide",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:28.054Z"
+    },
+    {
+      "id": 77,
+      "category": "Guides",
+      "title": "Search Control Guide",
+      "sourceUrl": "https://docs.perplexity.ai/guides/search-control-guide",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:28.057Z"
+    },
+    {
+      "id": 78,
+      "category": "Guides",
+      "title": "Search Domain Filters",
+      "sourceUrl": "https://docs.perplexity.ai/guides/search-domain-filters",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:28.056Z"
+    },
+    {
+      "id": 79,
+      "category": "Guides",
+      "title": "Search Quickstart",
+      "sourceUrl": "https://docs.perplexity.ai/guides/search-quickstart",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T22:11:38.796Z"
+    },
+    {
+      "id": 80,
+      "category": "Guides",
+      "title": "SEC Guide",
+      "sourceUrl": "https://docs.perplexity.ai/guides/sec-guide",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:28.060Z"
+    },
+    {
+      "id": 81,
+      "category": "Guides",
+      "title": "Streaming Responses",
+      "sourceUrl": "https://docs.perplexity.ai/guides/streaming-responses",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:28.061Z"
+    },
+    {
+      "id": 82,
+      "category": "Guides",
+      "title": "Structured Outputs",
+      "sourceUrl": "https://docs.perplexity.ai/guides/structured-outputs",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:28.062Z"
+    },
+    {
+      "id": 83,
+      "category": "Guides",
+      "title": "User Location Filter Guide",
+      "sourceUrl": "https://docs.perplexity.ai/guides/user-location-filter-guide",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-10-09T04:48:28.079Z"
+    },
+    {
+      "id": 84,
+      "category": "Status",
+      "title": "Status",
+      "sourceUrl": "https://docs.perplexity.ai/status/status",
+      "targetPath": "",
+      "status": "not_started",
+      "lastModified": "2025-08-07T23:43:02.897Z"
+    }
+  ],
+  "statusOptions": {
+    "not_started": "Conversion not yet started",
+    "in_progress": "Currently being converted",
+    "completed": "Conversion completed",
+    "skipped": "Skipped (not needed for conversion)",
+    "blocked": "Blocked by dependencies or issues"
+  },
+  "categories": {
+    "API Reference": 7,
+    "Changelog": 1,
+    "Cookbook - Articles": 4,
+    "Cookbook - Examples": 7,
+    "Cookbook": 1,
+    "Cookbook - Showcase": 26,
+    "Discussions": 1,
+    "FAQ": 1,
+    "Feature Roadmap": 1,
+    "Getting Started": 5,
+    "Guides": 29,
+    "Status": 1
+  }
+}
+

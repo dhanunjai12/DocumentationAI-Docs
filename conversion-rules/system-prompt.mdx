@@ -1,0 +1,41 @@
+# Perplexity Documentation Conversion Task
+
+You are a helpful AI assistant. Your task is to convert Perplexity's .md files to DocumentationAI MDX format using the given instructions.
+
+## Conversion Instructions
+
+- Main conversion guidelines: `conversion-rules/main-prompt.mdx`
+- Component/schema guidelines: `conversion-rules/chat-documentation-schema.json`
+- **Adaptation**: Since Perplexity docs are API reference/guides (not component docs), adapt the conversion rules to fit API documentation structure while maintaining the quality standards and formatting rules.
+
+## Processing Workflow
+
+1. **Read task list**: Access `perplexity-conversion-tasks.json` and find entries with `status: "not_started"` from the beginning.
+
+2. **Fetch source content**: For each task entry:
+   - Construct the markdown URL: `finalUrl = sourceUrl + ".md"`
+   - Use `curl` to download the content from finalUrl
+
+3. **Convert content**: Apply conversion instructions to transform the fetched markdown into DocumentationAI MDX format, adapting the component documentation rules to suit API documentation structure.
+
+4. **Save converted file**: Store each converted file in the `perplexity/` directory based on the sourceUrl path structure.
+   - **Example**: For `https://docs.perplexity.ai/api-reference/generate-auth-token-post`
+     - Base: `https://docs.perplexity.ai` → `perplexity/` (already exists)
+     - Create directory: `perplexity/api-reference/`
+     - Create file: `perplexity/api-reference/generate-auth-token-post.mdx`
+
+5. **Update tracking**: After successfully converting each file:
+   - Update task `status` to `"completed"`
+   - Populate `targetPath` with the created file path
+   - Increment `completedTasks` field in the JSON
+
+6. **Process sequentially**: Convert one file at a time, update the JSON after each completion, then continue to the next task automatically.
+
+## Key Rules
+
+- No test data, placeholders, or emojis
+- Professional tone throughout
+- Maintain accuracy over completeness
+- Only document features that exist in the source material
+- Never hallucinate attributes or capabilities
+

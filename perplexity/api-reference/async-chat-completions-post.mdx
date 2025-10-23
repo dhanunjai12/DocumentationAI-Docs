@@ -1,0 +1,298 @@
+---
+title: Create Async Chat Completion
+description: Create an asynchronous chat completion job for processing large-scale or time-intensive AI requests without blocking.
+type: reference
+---
+
+## Overview
+
+The Create Async Chat Completion endpoint allows you to submit chat completion requests that process asynchronously. This is ideal for complex queries, deep research tasks, or when you don't need immediate responses and want to avoid connection timeouts.
+
+Common use cases:
+- Submit deep research queries that may take several minutes to process
+- Process large batches of chat completion requests without blocking
+- Handle complex reasoning tasks that require extended processing time
+- Manage requests that exceed typical API timeout limits
+
+## Endpoint
+
+````http
+POST https://api.perplexity.ai/async/chat/completions
+````
+
+## Authentication
+
+This endpoint requires Bearer token authentication. Include your API key in the Authorization header:
+
+````http
+Authorization: Bearer YOUR_API_KEY
+````
+
+## Request Body
+
+<ParamField body="request" param-type="object" required="true" showLocation="false">
+  The chat completion request object containing all parameters for the async job.
+</ParamField>
+
+### Request Object Parameters
+
+<ParamField body="model" param-type="string" required="true" showLocation="false">
+  The name of the model that will complete your prompt. Available options: sonar (lightweight search), sonar-pro (advanced search), sonar-deep-research (exhaustive research), sonar-reasoning (fast reasoning), or sonar-reasoning-pro (premier reasoning).
+</ParamField>
+
+<ParamField body="messages" param-type="array" required="true" showLocation="false">
+  A list of messages comprising the conversation so far. Each message must include role (system, user, or assistant) and content (text or multimodal array).
+</ParamField>
+
+<ParamField body="search_mode" param-type="string" required="false" showLocation="false">
+  Controls search mode. Options: academic (prioritizes scholarly sources), sec (prioritizes SEC filings), or web (general web search). Defaults to web.
+</ParamField>
+
+<ParamField body="reasoning_effort" param-type="string" required="false" showLocation="false">
+  Controls computational effort for deep research models. Options: low (faster, simpler answers), medium (balanced approach), or high (deeper, thorough responses). Only applicable for sonar-deep-research. Defaults to medium.
+</ParamField>
+
+<ParamField body="max_tokens" param-type="integer" required="false" showLocation="false">
+  The maximum number of completion tokens returned by the API. Controls response length. Higher values allow longer responses but may increase costs.
+</ParamField>
+
+<ParamField body="temperature" param-type="number" required="false" showLocation="false">
+  The amount of randomness in the response, valued between 0 and 2. Lower values make output more focused and deterministic. Higher values make output more creative. Defaults to 0.2.
+</ParamField>
+
+<ParamField body="top_p" param-type="number" required="false" showLocation="false">
+  The nucleus sampling threshold, valued between 0 and 1. Controls diversity by considering only tokens whose cumulative probability exceeds this value. Defaults to 0.9.
+</ParamField>
+
+<ParamField body="language_preference" param-type="string" required="false" showLocation="false">
+  The language preference for the chat completion response content. Controls the language of the response.
+</ParamField>
+
+<ParamField body="search_domain_filter" param-type="array" required="false" showLocation="false">
+  A list of domains to limit search results to. Currently limited to 20 domains for allowlisting and denylisting. For denylisting, add a dash at the beginning of the domain string.
+</ParamField>
+
+<ParamField body="return_images" param-type="boolean" required="false" showLocation="false">
+  Determines whether search results should include images. Defaults to false.
+</ParamField>
+
+<ParamField body="return_related_questions" param-type="boolean" required="false" showLocation="false">
+  Determines whether related questions should be returned. Defaults to false.
+</ParamField>
+
+<ParamField body="search_recency_filter" param-type="string" required="false" showLocation="false">
+  Filters search results based on time, such as week or day.
+</ParamField>
+
+<ParamField body="search_after_date_filter" param-type="string" required="false" showLocation="false">
+  Filters search results to only include content published after this date. Format: %m/%d/%Y (e.g., 3/1/2025).
+</ParamField>
+
+<ParamField body="search_before_date_filter" param-type="string" required="false" showLocation="false">
+  Filters search results to only include content published before this date. Format: %m/%d/%Y (e.g., 3/1/2025).
+</ParamField>
+
+<ParamField body="last_updated_after_filter" param-type="string" required="false" showLocation="false">
+  Filters search results to only include content last updated after this date. Format: %m/%d/%Y (e.g., 3/1/2025).
+</ParamField>
+
+<ParamField body="last_updated_before_filter" param-type="string" required="false" showLocation="false">
+  Filters search results to only include content last updated before this date. Format: %m/%d/%Y (e.g., 3/1/2025).
+</ParamField>
+
+<ParamField body="top_k" param-type="number" required="false" showLocation="false">
+  The number of tokens to keep for top-k filtering. Limits the model to consider only the k most likely next tokens. A value of 0 disables this filter. Defaults to 0.
+</ParamField>
+
+<ParamField body="stream" param-type="boolean" required="false" showLocation="false">
+  Determines whether to stream the response incrementally. Defaults to false.
+</ParamField>
+
+<ParamField body="presence_penalty" param-type="number" required="false" showLocation="false">
+  Positive values increase the likelihood of discussing new topics. Values typically range from 0 to 2.0. Defaults to 0.
+</ParamField>
+
+<ParamField body="frequency_penalty" param-type="number" required="false" showLocation="false">
+  Decreases likelihood of repetition based on prior frequency. Values typically range from 0 to 2.0. Defaults to 0.
+</ParamField>
+
+<ParamField body="response_format" param-type="object" required="false" showLocation="false">
+  Enables structured JSON output formatting.
+</ParamField>
+
+<ParamField body="disable_search" param-type="boolean" required="false" showLocation="false">
+  When set to true, disables web search completely and the model will only use its training data to respond. Defaults to false.
+</ParamField>
+
+<ParamField body="enable_search_classifier" param-type="boolean" required="false" showLocation="false">
+  Enables a classifier that decides if web search is needed based on your query. Defaults to false.
+</ParamField>
+
+<ParamField body="web_search_options" param-type="object" required="false" showLocation="false">
+  Configuration for using web search in model responses.
+</ParamField>
+
+<ParamField body="media_response" param-type="object" required="false" showLocation="false">
+  Configuration for controlling media content in responses, such as videos and images. Use the overrides property to enable specific media types.
+</ParamField>
+
+### Web Search Options
+
+<ParamField body="web_search_options.search_context_size" param-type="string" required="false" showLocation="false">
+  Determines how much search context is retrieved. Options: low (minimizes context for cost savings), medium (balanced approach), or high (maximizes context for comprehensive answers). Defaults to low.
+</ParamField>
+
+<ParamField body="web_search_options.user_location" param-type="object" required="false" showLocation="false">
+  To refine search results based on geography, specify an approximate user location. Supports latitude, longitude, country, region, and city fields.
+</ParamField>
+
+<ParamField body="web_search_options.image_search_relevance_enhanced" param-type="boolean" required="false" showLocation="false">
+  When enabled, improves the relevance of image search results to the user query. Defaults to false.
+</ParamField>
+
+### Media Response Configuration
+
+<ParamField body="media_response.overrides.return_videos" param-type="boolean" required="false" showLocation="false">
+  When set to true, enables video content to be returned in the response. Defaults to false.
+</ParamField>
+
+<ParamField body="media_response.overrides.return_images" param-type="boolean" required="false" showLocation="false">
+  When set to true, enables image content to be returned in the response. This overrides the top-level return_images parameter. Defaults to false.
+</ParamField>
+
+## Request Example
+
+````json
+{
+  "request": {
+    "model": "sonar-deep-research",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Be precise and concise."
+      },
+      {
+        "role": "user",
+        "content": "How many stars are there in our galaxy?"
+      }
+    ],
+    "search_mode": "web",
+    "reasoning_effort": "low",
+    "max_tokens": 500,
+    "temperature": 0.2,
+    "top_p": 0.9,
+    "return_images": false,
+    "return_related_questions": false
+  }
+}
+````
+
+## Response
+
+### Success Response (200)
+
+Returns a JSON object containing the async job details and status.
+
+````json
+{
+  "id": "async_req_abc123",
+  "model": "sonar-deep-research",
+  "created_at": 1697654400,
+  "started_at": null,
+  "completed_at": null,
+  "response": null,
+  "failed_at": null,
+  "error_message": null,
+  "status": "CREATED"
+}
+````
+
+### Response Fields
+
+<ParamField path="id" param-type="string" required="true" showLocation="false">
+  Unique identifier for the asynchronous job.
+</ParamField>
+
+<ParamField path="model" param-type="string" required="true" showLocation="false">
+  The model used for the request.
+</ParamField>
+
+<ParamField path="created_at" param-type="integer" required="true" showLocation="false">
+  Unix timestamp (in seconds) of when the job was created.
+</ParamField>
+
+<ParamField path="started_at" param-type="integer" required="false" showLocation="false">
+  Unix timestamp (in seconds) of when processing started. Returns null if processing has not begun.
+</ParamField>
+
+<ParamField path="completed_at" param-type="integer" required="false" showLocation="false">
+  Unix timestamp (in seconds) of when processing completed. Returns null if not yet completed.
+</ParamField>
+
+<ParamField path="response" param-type="object" required="false" showLocation="false">
+  The actual chat completion response, available when status is COMPLETED. Returns null until completion.
+</ParamField>
+
+<ParamField path="failed_at" param-type="integer" required="false" showLocation="false">
+  Unix timestamp (in seconds) of when processing failed. Returns null if the job did not fail.
+</ParamField>
+
+<ParamField path="error_message" param-type="string" required="false" showLocation="false">
+  Error message if the job failed. Returns null if the job succeeded or is still processing.
+</ParamField>
+
+<ParamField path="status" param-type="string" required="true" showLocation="false">
+  Current processing status of the job. Possible values: CREATED, IN_PROGRESS, COMPLETED, FAILED.
+</ParamField>
+
+### Completed Response Object
+
+When the job status is COMPLETED, the response field contains:
+
+<ParamField path="response.id" param-type="string" required="true" showLocation="false">
+  A unique identifier for the chat completion.
+</ParamField>
+
+<ParamField path="response.model" param-type="string" required="true" showLocation="false">
+  The model that generated the response.
+</ParamField>
+
+<ParamField path="response.created" param-type="integer" required="true" showLocation="false">
+  The Unix timestamp (in seconds) of when the chat completion was created.
+</ParamField>
+
+<ParamField path="response.object" param-type="string" required="true" showLocation="false">
+  The type of object, which is always chat.completion.
+</ParamField>
+
+<ParamField path="response.usage" param-type="object" required="true" showLocation="false">
+  Token usage information including prompt_tokens, completion_tokens, total_tokens, and optionally citation_tokens, num_search_queries, and reasoning_tokens.
+</ParamField>
+
+<ParamField path="response.choices" param-type="array" required="true" showLocation="false">
+  A list of chat completion choices containing index, finish_reason, and message fields.
+</ParamField>
+
+<ParamField path="response.search_results" param-type="array" required="false" showLocation="false">
+  A list of search results related to the response, each containing title, url, and optional date.
+</ParamField>
+
+<ParamField path="response.videos" param-type="array" required="false" showLocation="false">
+  A list of video results when media_response.overrides.return_videos is enabled. Contains video URLs and metadata.
+</ParamField>
+
+## Status Values
+
+- **CREATED** - Job has been created but processing has not started
+- **IN_PROGRESS** - Job is currently being processed
+- **COMPLETED** - Job has been successfully processed and results are available
+- **FAILED** - Job processing has failed
+
+## Common Patterns
+
+- **Deep research queries** - Use sonar-deep-research model with high reasoning_effort for comprehensive analysis that requires extended processing time
+- **Batch processing** - Submit multiple async requests without blocking, then poll for completion using the List Async Chat Completions endpoint
+- **Long-running tasks** - Set appropriate max_tokens and reasoning_effort values for queries that require extensive computation
+- **Error handling** - Monitor the status field and check error_message when status is FAILED to handle processing failures gracefully
+- **Result retrieval** - After receiving the async job ID, use the Get Async Chat Completion endpoint to retrieve the completed response when status is COMPLETED
+

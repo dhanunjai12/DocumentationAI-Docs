@@ -1,0 +1,434 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DocumentationAI MDX Component Documentation Schema",
+  "description": "Schema for validating and generating DocumentationAI component documentation",
+  "type": "object",
+  "required": ["frontMatter", "overview", "basicSyntax", "attributes", "commonPatterns"],
+  "properties": {
+    "frontMatter": {
+      "type": "object",
+      "required": ["title", "description", "type"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Component name in title case",
+          "pattern": "^[A-Z][a-zA-Z\\s]+$"
+        },
+        "description": {
+          "type": "string",
+          "description": "One-line description of component purpose",
+          "minLength": 20,
+          "maxLength": 150
+        },
+        "type": {
+          "type": "string",
+          "enum": ["reference"],
+          "description": "Always 'reference' for component documentation"
+        }
+      }
+    },
+    "overview": {
+      "type": "object",
+      "required": ["description", "useCases", "example"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "2-3 sentences describing the component",
+          "minLength": 50
+        },
+        "useCases": {
+          "type": "array",
+          "description": "Common use cases (4-6 items)",
+          "minItems": 4,
+          "maxItems": 6,
+          "items": {
+            "type": "string",
+            "description": "Specific, real-world use case",
+            "minLength": 10
+          }
+        },
+        "example": {
+          "type": "string",
+          "description": "Visual example rendering the component"
+        }
+      }
+    },
+    "basicSyntax": {
+      "type": "object",
+      "required": ["description", "codeExample", "renderedOutput"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Brief explanation of basic usage"
+        },
+        "codeExample": {
+          "type": "string",
+          "description": "Code example with 4 backticks and jsx identifier",
+          "pattern": "^````jsx"
+        },
+        "renderedOutput": {
+          "type": "string",
+          "description": "Rendered component output"
+        }
+      }
+    },
+    "featureSections": {
+      "type": "array",
+      "description": "Feature-specific sections (optional but recommended)",
+      "items": {
+        "type": "object",
+        "required": ["title", "description", "examples"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Feature name or category"
+          },
+          "description": {
+            "type": "string",
+            "description": "When and how to use this feature"
+          },
+          "examples": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["code", "output"],
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "Code example with 4 backticks"
+                },
+                "output": {
+                  "type": "string",
+                  "description": "Rendered output"
+                }
+              }
+            }
+          },
+          "callout": {
+            "type": "object",
+            "description": "Optional callout for important information",
+            "properties": {
+              "kind": {
+                "enum": ["info", "tip", "success", "alert", "danger"]
+              },
+              "content": {
+                "type": "string",
+                "maxLength": 200
+              }
+            }
+          }
+        }
+      }
+    },
+    "attributes": {
+      "type": "array",
+      "description": "Component attributes/props documentation",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "required", "description"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Attribute name"
+          },
+          "location": {
+            "enum": ["path", "query", "header", "body"],
+            "description": "For API params. Use 'path' for component props"
+          },
+          "type": {
+            "enum": ["string", "boolean", "number", "integer", "object", "array"],
+            "description": "Data type of the attribute"
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether attribute is required"
+          },
+          "showLocation": {
+            "type": "boolean",
+            "default": false,
+            "description": "Set to false for component props"
+          },
+          "deprecated": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether attribute is deprecated"
+          },
+          "description": {
+            "type": "string",
+            "description": "Clear description including default value if applicable",
+            "minLength": 10
+          },
+          "default": {
+            "type": "string",
+            "description": "Default value if attribute is optional"
+          }
+        }
+      }
+    },
+    "commonPatterns": {
+      "type": "array",
+      "description": "Common usage patterns (5-8 items)",
+      "minItems": 5,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Pattern name (bold in output)",
+            "minLength": 5
+          },
+          "description": {
+            "type": "string",
+            "description": "Real-world scenario or use case (1-2 sentences)",
+            "minLength": 20,
+            "maxLength": 150
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "componentUsage": {
+      "Callout": {
+        "syntax": "<Callout kind=\"{kind}\">{content}</Callout>",
+        "attributes": {
+          "kind": {
+            "type": "string",
+            "enum": ["info", "tip", "success", "alert", "danger"],
+            "required": false,
+            "default": "info"
+          }
+        },
+        "rules": [
+          "Maximum 2-3 callouts per major section",
+          "Keep content to 1-2 sentences",
+          "Place after relevant content"
+        ]
+      },
+      "ParamField": {
+        "syntax": "<ParamField {location}=\"{name}\" param-type=\"{type}\" required=\"{boolean}\" showLocation=\"{boolean}\">{description}</ParamField>",
+        "attributes": {
+          "location": {
+            "oneOf": ["path", "query", "header", "body"],
+            "required": true,
+            "note": "Use exactly one location attribute"
+          },
+          "param-type": {
+            "type": "string",
+            "enum": ["string", "boolean", "number", "integer", "object", "array"],
+            "required": false
+          },
+          "required": {
+            "type": "string",
+            "enum": ["true", "false"],
+            "required": false,
+            "note": "Must be string, not boolean"
+          },
+          "showLocation": {
+            "type": "string",
+            "enum": ["true", "false"],
+            "required": false,
+            "default": "false",
+            "note": "Set to 'false' for component props"
+          }
+        },
+        "rules": [
+          "Use for all component attributes",
+          "No blank lines between ParamFields",
+          "Required params first, optional params second"
+        ]
+      },
+      "Card": {
+        "syntax": "<Card title=\"{title}\" icon=\"{icon}\" href=\"{url}\" cta=\"{text}\" horizontal image=\"{url}\" target=\"{target}\">{content}</Card>",
+        "attributes": {
+          "title": {
+            "type": "string",
+            "required": true
+          },
+          "href": {
+            "type": "string",
+            "required": true
+          },
+          "icon": {
+            "type": "string",
+            "required": false,
+            "note": "Lucide icon name without 'Icon' suffix"
+          },
+          "image": {
+            "type": "string",
+            "required": false,
+            "note": "Full URL to header image"
+          },
+          "cta": {
+            "type": "string",
+            "required": false,
+            "note": "Call-to-action text"
+          },
+          "horizontal": {
+            "type": "boolean",
+            "required": false,
+            "note": "Use as flag, no value needed"
+          },
+          "target": {
+            "type": "string",
+            "enum": ["_self", "_blank"],
+            "required": false,
+            "default": "_self"
+          }
+        },
+        "rules": [
+          "Use with Columns for grid layouts",
+          "Provide meaningful content, not test data",
+          "Use horizontal for compact layouts"
+        ]
+      },
+      "Columns": {
+        "syntax": "<Columns cols={number}>{children}</Columns>",
+        "attributes": {
+          "cols": {
+            "type": "number",
+            "enum": [1, 2, 3, 4, 5],
+            "required": false,
+            "default": 1,
+            "note": "Must be number, not string"
+          }
+        },
+        "rules": [
+          "Responsive: stacks to 1 column on mobile",
+          "2-3 cols most common",
+          "Use horizontal cards for 4-5 cols"
+        ]
+      },
+      "CodeGroup": {
+        "syntax": "<CodeGroup tabs=\"Tab1,Tab2\">{code blocks}</CodeGroup>",
+        "attributes": {
+          "tabs": {
+            "type": "string",
+            "required": false,
+            "note": "Comma-separated tab names, overrides language names"
+          }
+        },
+        "rules": [
+          "Each code block needs language identifier",
+          "Tabs auto-detected from languages if not specified"
+        ]
+      },
+      "Expandable": {
+        "syntax": "<Expandable title=\"{title}\" default-open=\"{boolean}\">{content}</Expandable>",
+        "attributes": {
+          "title": {
+            "type": "string",
+            "required": false,
+            "default": "Click to expand"
+          },
+          "default-open": {
+            "type": "string",
+            "enum": ["true", "false"],
+            "required": false,
+            "default": "false",
+            "note": "Must be string, not boolean"
+          }
+        },
+        "rules": [
+          "Can contain any MDX content",
+          "Use ExpandableGroup for multiple expandables"
+        ]
+      }
+    },
+    "codeExampleRules": {
+      "backtickCount": 4,
+      "languageIdentifiers": {
+        "component": "jsx",
+        "typescript": "typescript",
+        "javascript": "javascript",
+        "python": "python",
+        "shell": "bash",
+        "json": "json",
+        "yaml": "yaml",
+        "plaintext": "plaintext"
+      },
+      "features": {
+        "highlight": "Line numbers or ranges to highlight: \"1-2,5\"",
+        "focus": "Line numbers or ranges to focus: \"2,4-5\"",
+        "show-lines": "Set to {true} to show line numbers"
+      },
+      "rules": [
+        "Always use 4 backticks for examples in documentation",
+        "Always specify language identifier",
+        "Show code example followed by rendered output",
+        "Use realistic, meaningful code content"
+      ]
+    },
+    "contentGuidelines": {
+      "forbidden": [
+        "Test data: 'Test Card 1', 'Example Text'",
+        "Placeholders: 'foo', 'bar', 'test123'",
+        "Emojis or casual language",
+        "Generic descriptions",
+        "Vague terminology"
+      ],
+      "required": [
+        "Real-world examples",
+        "Specific, actionable descriptions",
+        "Professional tone",
+        "Meaningful URLs and values",
+        "Complete sentences",
+        "Proper grammar"
+      ],
+      "tone": {
+        "professional": true,
+        "clear": true,
+        "concise": true,
+        "helpful": true,
+        "casual": false,
+        "emoji": false
+      }
+    },
+    "errorPrevention": {
+      "mdxSyntax": [
+        "Use 4 backticks, not 3, for code examples",
+        "Always specify language identifier",
+        "Properly close all tags",
+        "Use double quotes for attribute values"
+      ],
+      "componentAttributes": [
+        "Only use documented attributes",
+        "Match documented attribute types",
+        "Boolean attributes as strings for some components",
+        "Number attributes without quotes"
+      ],
+      "commonMistakes": [
+        "Mixing location attributes in ParamField",
+        "Using non-existent component features",
+        "Inconsistent structure across sections",
+        "Missing required attributes"
+      ]
+    }
+  },
+  "validationRules": {
+    "structure": [
+      "Front matter must be first",
+      "Overview must include use cases",
+      "Every code example needs rendered output",
+      "Attributes section must use ParamField",
+      "Common patterns must have 5-8 items"
+    ],
+    "content": [
+      "No test data or placeholders",
+      "Professional tone throughout",
+      "Real-world examples only",
+      "Specific, not generic, descriptions"
+    ],
+    "syntax": [
+      "4 backticks for code examples",
+      "Language identifiers on all code blocks",
+      "Proper component syntax",
+      "Correct attribute types"
+    ]
+  }
+}
+
