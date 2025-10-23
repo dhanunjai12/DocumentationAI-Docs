@@ -1,6 +1,6 @@
 {
   "name": "Documentation AI App",
-  "initialRoute": "introduction",
+  "initialRoute": "perplexity/api-reference/async-chat-completions-get",
   "navigation": {
     "groups": [
       {
