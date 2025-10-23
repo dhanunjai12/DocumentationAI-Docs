@@ -1,120 +1,137 @@
 ---
 title: List Async Chat Completions
-description: Retrieve all asynchronous chat completion requests for the authenticated user with pagination support.
+description: Lists all asynchronous chat completion requests for the authenticated user.
 type: reference
 ---
 
-## Overview
+# List Async Chat Completions
 
-The List Async Chat Completions endpoint allows you to retrieve and monitor all asynchronous chat completion requests associated with your account. This endpoint supports pagination for handling large numbers of requests efficiently.
+> Lists all asynchronous chat completion requests for the authenticated user.
 
-Common use cases:
-- Monitor the status of multiple async chat completion jobs
-- Retrieve paginated lists of historical async requests
-- Track processing progress across multiple concurrent requests
-- Audit and review past asynchronous API usage
+## OpenAPI
 
-## Endpoint
-
-````http
-GET https://api.perplexity.ai/async/chat/completions
+````yaml get /async/chat/completions
+paths:
+  path: /async/chat/completions
+  method: get
+  servers:
+    - url: https://api.perplexity.ai
+  request:
+    security:
+      - title: HTTPBearer
+        parameters:
+          query: {}
+          header:
+            Authorization:
+              type: http
+              scheme: bearer
+          cookie: {}
+    parameters:
+      path: {}
+      query:
+        limit:
+          schema:
+            - type: integer
+              required: false
+              description: Maximum number of requests to return.
+              default: 20
+        next_token:
+          schema:
+            - type: string
+              required: false
+              description: >-
+                Token for fetching the next page of results. Ensure this token
+                is URL-encoded when passed as a query parameter.
+      header: {}
+      cookie: {}
+    body: {}
+  response:
+    '200':
+      application/json:
+        schemaArray:
+          - type: object
+            properties:
+              next_token:
+                allOf:
+                  - title: Next Token
+                    type: string
+                    nullable: true
+                    description: Token for fetching the next page of results.
+              requests:
+                allOf:
+                  - title: Requests
+                    type: array
+                    items:
+                      $ref: >-
+                        #/components/schemas/AsyncApiChatCompletionsResponseSummary
+            title: ListAsyncApiChatCompletionsResponse
+            refIdentifier: '#/components/schemas/ListAsyncApiChatCompletionsResponse'
+            requiredProperties:
+              - requests
+        examples:
+          example:
+            value:
+              next_token: <string>
+              requests:
+                - id: <string>
+                  created_at: 123
+                  started_at: 123
+                  completed_at: 123
+                  failed_at: 123
+                  model: <string>
+                  status: CREATED
+        description: Successfully retrieved list of async chat completion requests.
+  deprecated: false
+  type: path
+components:
+  schemas:
+    AsyncProcessingStatus:
+      title: AsyncProcessingStatus
+      type: string
+      enum:
+        - CREATED
+        - IN_PROGRESS
+        - COMPLETED
+        - FAILED
+      description: The status of an asynchronous processing job.
+    AsyncApiChatCompletionsResponseSummary:
+      title: AsyncApiChatCompletionsResponseSummary
+      type: object
+      properties:
+        id:
+          title: ID
+          type: string
+        created_at:
+          title: Created At
+          type: integer
+          format: int64
+          description: Unix timestamp of when the request was created.
+        started_at:
+          title: Started At
+          type: integer
+          format: int64
+          nullable: true
+          description: Unix timestamp of when processing started.
+        completed_at:
+          title: Completed At
+          type: integer
+          format: int64
+          nullable: true
+          description: Unix timestamp of when processing completed.
+        failed_at:
+          title: Failed At
+          type: integer
+          format: int64
+          nullable: true
+          description: Unix timestamp of when processing failed.
+        model:
+          title: Model
+          type: string
+        status:
+          $ref: '#/components/schemas/AsyncProcessingStatus'
+      required:
+        - id
+        - created_at
+        - model
+        - status
 ````
-
-## Authentication
-
-This endpoint requires Bearer token authentication. Include your API key in the Authorization header:
-
-````http
-Authorization: Bearer YOUR_API_KEY
-````
-
-## Query Parameters
-
-<ParamField query="limit" param-type="integer" required="false" showLocation="false">
-  Maximum number of requests to return per page. Defaults to 20 if not specified.
-</ParamField>
-
-<ParamField query="next_token" param-type="string" required="false" showLocation="false">
-  Token for fetching the next page of results. Ensure this token is URL-encoded when passed as a query parameter. Obtained from the previous response's next_token field.
-</ParamField>
-
-## Response
-
-### Success Response (200)
-
-Returns a JSON object containing the list of async chat completion requests.
-
-````json
-{
-  "next_token": "encoded_pagination_token",
-  "requests": [
-    {
-      "id": "request_abc123",
-      "created_at": 1697654400,
-      "started_at": 1697654405,
-      "completed_at": 1697654420,
-      "failed_at": null,
-      "model": "llama-3.1-sonar-small-128k-online",
-      "status": "COMPLETED"
-    }
-  ]
-}
-````
-
-### Response Fields
-
-<ParamField path="next_token" param-type="string" required="false" showLocation="false">
-  Token for fetching the next page of results. Returns null if there are no more pages available.
-</ParamField>
-
-<ParamField path="requests" param-type="array" required="true" showLocation="false">
-  Array of async chat completion request summaries containing status and metadata for each request.
-</ParamField>
-
-### Request Object Fields
-
-<ParamField path="id" param-type="string" required="true" showLocation="false">
-  Unique identifier for the async chat completion request.
-</ParamField>
-
-<ParamField path="created_at" param-type="integer" required="true" showLocation="false">
-  Unix timestamp (in seconds) indicating when the request was created.
-</ParamField>
-
-<ParamField path="started_at" param-type="integer" required="false" showLocation="false">
-  Unix timestamp (in seconds) indicating when processing started. Returns null if processing has not begun.
-</ParamField>
-
-<ParamField path="completed_at" param-type="integer" required="false" showLocation="false">
-  Unix timestamp (in seconds) indicating when processing completed successfully. Returns null if not yet completed.
-</ParamField>
-
-<ParamField path="failed_at" param-type="integer" required="false" showLocation="false">
-  Unix timestamp (in seconds) indicating when processing failed. Returns null if the request did not fail.
-</ParamField>
-
-<ParamField path="model" param-type="string" required="true" showLocation="false">
-  The model used for the chat completion request.
-</ParamField>
-
-<ParamField path="status" param-type="string" required="true" showLocation="false">
-  Current processing status of the request. Possible values: CREATED, IN_PROGRESS, COMPLETED, FAILED.
-</ParamField>
-
-## Status Values
-
-The status field can have one of the following values:
-
-- **CREATED** - Request has been created but processing has not started
-- **IN_PROGRESS** - Request is currently being processed
-- **COMPLETED** - Request has been successfully processed
-- **FAILED** - Request processing has failed
-
-## Common Patterns
-
-- **Polling for completion** - Periodically call this endpoint to check the status of async requests until they reach COMPLETED or FAILED status
-- **Pagination handling** - Use the next_token from each response to retrieve subsequent pages of results when managing large numbers of requests
-- **Filtering by status** - Retrieve all requests and filter client-side to monitor only IN_PROGRESS or FAILED requests
-- **Audit logging** - Fetch historical requests with pagination to maintain records of all API usage
-- **Rate limit management** - Monitor created requests to ensure compliance with concurrent request limits and quotas
-
