@@ -4,19 +4,24 @@
   "navigation": {
     "groups": [
       {
-        "group": "Getting Started",
+        "group": "Perplexity API",
         "pages": [
           {
-            "title": "Introduction",
-            "path": "introduction"
-          },
-          {
-            "title": "Dummy",
-            "path": "reference-manager"
-          },
-          {
-            "title": "Deepsearch",
-            "path": "deepsearch-paperguide-latest"
+            "title": "API Reference",
+            "pages": [
+              {
+                "title": "List Async Chat Completions",
+                "path": "perplexity/api-reference/async-chat-completions-get"
+              },
+              {
+                "title": "Create Async Chat Completion",
+                "path": "perplexity/api-reference/async-chat-completions-post"
+              },
+              {
+                "title": "Get Async Chat Completion Response",
+                "path": "perplexity/api-reference/async-chat-completions-request_id-get"
+              }
+            ]
           }
         ]
       }
