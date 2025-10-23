@@ -3,7 +3,7 @@
   "source": "https://docs.perplexity.ai/sitemap.xml",
   "lastUpdated": "2025-10-23",
   "totalTasks": 79,
-  "completedTasks": 3,
+  "completedTasks": 4,
   "tasks": [
     {
       "id": 1,
@@ -37,8 +37,8 @@
       "category": "API Reference",
       "title": "Chat Completions - Post",
       "sourceUrl": "https://docs.perplexity.ai/api-reference/chat-completions-post",
-      "targetPath": "",
-      "status": "not_started",
+      "targetPath": "perplexity/api-reference/chat-completions-post.mdx",
+      "status": "completed",
       "lastModified": "2025-08-07T23:43:02.014Z"
     },
     {

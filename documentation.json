@@ -5,21 +5,31 @@
     "groups": [
       {
         "group": "Perplexity API",
+        "icon": "api",
         "pages": [
           {
-            "title": "API Reference",
+            "group": "API Reference",
+            "icon": "code",
             "pages": [
               {
+                "title": "Chat Completions",
+                "path": "perplexity/api-reference/chat-completions-post",
+                "icon": "message-square"
+              },
+              {
                 "title": "List Async Chat Completions",
-                "path": "perplexity/api-reference/async-chat-completions-get"
+                "path": "perplexity/api-reference/async-chat-completions-get",
+                "icon": "list"
               },
               {
                 "title": "Create Async Chat Completion",
-                "path": "perplexity/api-reference/async-chat-completions-post"
+                "path": "perplexity/api-reference/async-chat-completions-post",
+                "icon": "plus-circle"
               },
               {
                 "title": "Get Async Chat Completion Response",
-                "path": "perplexity/api-reference/async-chat-completions-request_id-get"
+                "path": "perplexity/api-reference/async-chat-completions-request_id-get",
+                "icon": "search"
               }
             ]
           }
