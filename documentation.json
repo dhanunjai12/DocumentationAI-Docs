@@ -30,6 +30,11 @@
                 "title": "Get Async Chat Completion Response",
                 "path": "perplexity/api-reference/async-chat-completions-request_id-get",
                 "icon": "search"
+              },
+              {
+                "title": "Chat Completions SDK",
+                "path": "perplexity/api-reference/chat-completions-sdk",
+                "icon": "message-square"
               }
             ]
           }
