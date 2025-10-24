@@ -601,7 +601,7 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      description: Bearer authentication header in the form Bearer <token>, where <token> is your Tavily API key (e.g., Bearer tvly-YOUR_API_KEY).
+      description: Bearer authentication header in the form `Bearer <token>`, where `<token>` is your Tavily API key (e.g., `Bearer tvly-YOUR_API_KEY`).
 
   responses:
     BadRequest:
