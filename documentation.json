@@ -68,31 +68,12 @@
           {
             "group": "API Reference",
             "icon": "code",
+            "openapi": "tavily/api-reference/openapi.yaml",
             "pages": [
               {
                 "title": "Introduction",
                 "path": "tavily/api-reference/introduction",
                 "icon": "book-open"
-              },
-              {
-                "title": "Tavily Search",
-                "path": "tavily/api-reference/search",
-                "icon": "search"
-              },
-              {
-                "title": "Tavily Extract",
-                "path": "tavily/api-reference/extract",
-                "icon": "file-text"
-              },
-              {
-                "title": "Tavily Crawl",
-                "path": "tavily/api-reference/crawl",
-                "icon": "git-branch"
-              },
-              {
-                "title": "Tavily Map",
-                "path": "tavily/api-reference/map",
-                "icon": "sitemap"
               },
               {
                 "title": "Usage",
@@ -119,6 +100,103 @@
                 "title": "Best Practices for Crawl",
                 "path": "tavily/best-practices/crawl",
                 "icon": "git-branch"
+              }
+            ]
+          },
+          {
+            "group": "Integrations",
+            "icon": "puzzle",
+            "pages": [
+              {
+                "title": "LangChain",
+                "path": "tavily/integrations/langchain",
+                "icon": "link"
+              },
+              {
+                "title": "LlamaIndex",
+                "path": "tavily/integrations/llamaindex",
+                "icon": "database"
+              },
+              {
+                "title": "OpenAI",
+                "path": "tavily/integrations/openai",
+                "icon": "bot"
+              },
+              {
+                "title": "Anthropic",
+                "path": "tavily/integrations/anthropic",
+                "icon": "sparkles"
+              },
+              {
+                "title": "n8n",
+                "path": "tavily/integrations/n8n",
+                "icon": "workflow"
+              },
+              {
+                "title": "Make",
+                "path": "tavily/integrations/make",
+                "icon": "wrench"
+              },
+              {
+                "title": "Langflow",
+                "path": "tavily/integrations/langflow",
+                "icon": "git-branch"
+              },
+              {
+                "title": "Zapier",
+                "path": "tavily/integrations/zapier",
+                "icon": "zap"
+              },
+              {
+                "title": "Tines",
+                "path": "tavily/integrations/tines",
+                "icon": "shield"
+              },
+              {
+                "title": "Dify",
+                "path": "tavily/integrations/dify",
+                "icon": "blocks"
+              },
+              {
+                "title": "Composio",
+                "path": "tavily/integrations/composio",
+                "icon": "layers"
+              },
+              {
+                "title": "Agno",
+                "path": "tavily/integrations/agno",
+                "icon": "cpu"
+              },
+              {
+                "title": "Pydantic AI",
+                "path": "tavily/integrations/pydantic-ai",
+                "icon": "package"
+              },
+              {
+                "title": "FlowiseAI",
+                "path": "tavily/integrations/flowise",
+                "icon": "workflow"
+              },
+              {
+                "title": "CrewAI",
+                "path": "tavily/integrations/crewai",
+                "icon": "users"
+              },
+              {
+                "title": "Vercel AI",
+                "path": "tavily/integrations/vercel",
+                "icon": "triangle"
+              }
+            ]
+          },
+          {
+            "group": "MCP",
+            "icon": "server",
+            "pages": [
+              {
+                "title": "Tavily MCP Server",
+                "path": "tavily/mcp",
+                "icon": "plug"
               }
             ]
           }

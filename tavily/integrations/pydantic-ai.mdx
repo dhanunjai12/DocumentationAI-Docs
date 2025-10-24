@@ -1,0 +1,94 @@
+---
+title: Pydantic AI
+description: Integrate Tavily with Pydantic AI to enhance your AI agents with powerful web search capabilities.
+---
+
+## Introduction
+
+Integrate [Tavily with Pydantic AI](https://ai.pydantic.dev/common-tools/#tavily-search-tool) to enhance your AI agents with powerful web search capabilities. Pydantic AI provides a framework for building AI agents with tools, making it easy to incorporate real-time web search and data extraction into your applications.
+
+## Step-by-Step Integration Guide
+
+<Steps>
+  <Step title="Install Required Packages" icon="download">
+    Install the necessary Python packages:
+
+```bash
+pip install "pydantic-ai-slim[tavily]"
+```
+  </Step>
+
+  <Step title="Set Up API Keys" icon="key">
+    Get your [Tavily API key](https://app.tavily.com/home) and set it as an environment variable in your terminal or add it to your environment configuration file:
+
+```bash
+export TAVILY_API_KEY=your_tavily_api_key
+```
+  </Step>
+
+  <Step title="Initialize Pydantic AI Agent with Tavily Tools" icon="settings">
+```python
+import os
+from pydantic_ai.agent import Agent
+from pydantic_ai.common_tools.tavily import tavily_search_tool
+
+# Get API key from environment
+api_key = os.getenv('TAVILY_API_KEY')
+assert api_key is not None
+
+# Initialize the agent with Tavily tools
+agent = Agent(
+    'openai:o3-mini',
+    tools=[tavily_search_tool(api_key)],
+    system_prompt='Search Tavily for the given query and return the results.'
+)
+```
+  </Step>
+
+  <Step title="Example Use Cases" icon="code">
+```python
+# Example: Basic search for news
+result = agent.run_sync('Tell me the top news in the GenAI world, give me links.')
+print(result.output)
+```
+
+**Example Response:**
+
+```markdown
+Here are some of the top recent news articles related to GenAI:
+
+1. How CLEAR users can improve risk analysis with GenAI – Thomson Reuters
+   Read more: https://legal.thomsonreuters.com/blog/how-clear-users-can-improve-risk-analysis-with-genai/
+   (This article discusses how CLEAR's new GenAI-powered tool streamlines risk analysis by quickly summarizing key information from various public data sources.)
+
+2. TELUS Digital Survey Reveals Enterprise Employees Are Entering Sensitive Data Into AI Assistants More Than You Think – FT.com
+   Read more: https://markets.ft.com/data/announce/detail?dockey=600-202502260645BIZWIRE_USPRX____20250226_BW490609-1
+   (This news piece highlights findings from a TELUS Digital survey showing that many enterprise employees use public GenAI tools and sometimes even enter sensitive data.)
+
+3. The Essential Guide to Generative AI – Virtualization Review
+   Read more: https://virtualizationreview.com/Whitepapers/2025/02/SNOWFLAKE-The-Essential-Guide-to-Generative-AI.aspx
+   (This guide provides insights into how GenAI is revolutionizing enterprise strategies and productivity, with input from industry leaders.)
+```
+  </Step>
+</Steps>
+
+## Additional Use Cases
+
+<Columns cols={2}>
+  <Card title="Content Curation" icon="list">
+    Gather and organize information from multiple sources
+  </Card>
+
+  <Card title="Real-time Data Integration" icon="refresh-cw">
+    Keep your AI agents up-to-date with the latest information
+  </Card>
+
+  <Card title="Technical Documentation" icon="book-open">
+    Search and analyze technical documentation
+  </Card>
+
+  <Card title="Market Analysis" icon="trending-up">
+    Conduct comprehensive market research and analysis
+  </Card>
+</Columns>
+

@@ -1,0 +1,187 @@
+---
+title: Vercel AI
+description: Integrate Tavily with Vercel AI SDK to enhance your AI agents with powerful web search capabilities.
+---
+
+## Introduction
+
+Vercel AI SDK provides a comprehensive framework for building AI applications with tools, making it easy to incorporate real-time web search and data extraction into your applications.
+
+## Step-by-Step Integration Guide
+
+<Steps>
+  <Step title="Install Required Packages" icon="download">
+    Install the necessary packages:
+
+```bash
+npm install ai @ai-sdk/openai @tavily/core zod
+```
+  </Step>
+
+  <Step title="Set Up API Keys" icon="key">
+    Get your API keys:
+
+- **Tavily API Key:** [Get your Tavily API key here](https://app.tavily.com/home)
+- **OpenAI API Key:** [Get your OpenAI API key here](https://platform.openai.com/account/api-keys)
+
+Set these as environment variables:
+
+```bash
+export TAVILY_API_KEY=your_tavily_api_key
+export OPENAI_API_KEY=your_openai_api_key
+```
+  </Step>
+
+  <Step title="Initialize Your AI Agent" icon="settings">
+```javascript
+import { generateText } from 'ai';
+import { openai } from '@ai-sdk/openai';
+
+const { text } = await generateText({
+  model: openai('gpt-4o-mini'),
+  prompt: 'Research the latest trends in renewable energy technology',
+  tools: {
+    webSearch,
+  },
+  maxSteps: 3,
+});
+```
+  </Step>
+
+  <Step title="Example Use Cases" icon="code">
+```javascript
+// Example 1: News research
+const newsResult = await generateText({
+  model: openai('gpt-4o-mini'),
+  prompt: 'What are the top technology news stories from this week?',
+  tools: { webSearch },
+  maxSteps: 2,
+});
+
+// Example 2: Market analysis
+const marketResult = await generateText({
+  model: openai('gpt-4o-mini'),
+  prompt: 'Analyze the current state of the electric vehicle market',
+  tools: { advancedWebSearch },
+  maxSteps: 3,
+});
+```
+  </Step>
+</Steps>
+
+## Web Search Tool Implementation
+
+Here's how to create a web search tool using Tavily with Vercel AI SDK:
+
+```javascript
+import { generateText, tool, stepCountIs } from 'ai';
+import { openai } from '@ai-sdk/openai';
+import { z } from 'zod';
+import { tavily } from '@tavily/core';
+
+export const tavilyClient = tavily(process.env.TAVILY_API_KEY);
+
+export const webSearch = tool({
+  description: 'Search the web for up-to-date information',
+  inputSchema: z.object({
+    query: z.string().min(1).max(100).describe('The search query')
+  }),
+  execute: async ({query}) => {
+    const response = await tavilyClient.search(query)
+    return response.results.map(result => ({
+      title: result.title,
+      url: result.url,
+      content: result.content,
+      score: result.score,
+    }));
+  },
+});
+
+const { text } = await generateText({
+  model: openai('gpt-4o-mini'),
+  prompt: 'What happened in New York City last week?',
+  tools: {
+    webSearch,
+  },
+  stopWhen: stepCountIs(5),
+});
+
+console.log(text);
+```
+
+## Advanced Configuration
+
+For more sophisticated use cases, you can enhance the tool with additional Tavily parameters:
+
+```javascript
+import { generateText, tool, stepCountIs } from 'ai';
+import { openai } from '@ai-sdk/openai';
+import { z } from 'zod';
+import { tavily } from '@tavily/core';
+
+export const tavilyClient = tavily(process.env.TAVILY_API_KEY);
+
+export const AdvancedwebSearch = tool({
+  description: 'Search the web for up-to-date information',
+  inputSchema: z.object({
+    query: z.string().min(1).max(100).describe('The search query'),
+    maxResults: z.number().min(1).max(20).optional().describe('Maximum number of results to return'),
+    searchDepth: z.enum(['basic', 'advanced']).optional().describe('Search depth level'),
+    timeRange: z.enum(['week']).optional().describe('Time range for search results'),
+  }),
+  execute: async ({ 
+    query, 
+    maxResults = 5, 
+    searchDepth = 'advanced',
+    timeRange = 'week',
+  }) => {
+    const response = await tavilyClient.search(query, {
+      max_results: maxResults,
+      search_depth: searchDepth,
+      time_range: timeRange,
+    });
+    return response.results.map(result => ({
+      title: result.title,
+      url: result.url,
+      content: result.content,
+      score: result.score,
+    }));
+  },
+});
+
+const { text } = await generateText({
+  model: openai('gpt-4o-mini'),
+  prompt: 'What happened in New York City last week?',
+  tools: {
+    AdvancedwebSearch,
+  },
+  stopWhen: stepCountIs(5),
+});
+
+console.log(text);
+```
+
+## Benefits of Tavily + Vercel AI SDK
+
+<Columns cols={2}>
+  <Card title="Real-time Information" icon="clock">
+    Access up-to-date web content for your AI agents
+  </Card>
+
+  <Card title="Optimized for LLMs" icon="zap">
+    Search results are specifically formatted for language models
+  </Card>
+
+  <Card title="Comprehensive Coverage" icon="globe">
+    Search across multiple sources with advanced filtering
+  </Card>
+
+  <Card title="Easy Integration" icon="puzzle">
+    Simple tool-based approach that works seamlessly with Vercel AI SDK
+  </Card>
+
+  <Card title="Flexible Configuration" icon="settings">
+    Customize search parameters to match your specific needs
+  </Card>
+</Columns>
+

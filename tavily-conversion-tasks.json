@@ -3,7 +3,7 @@
   "source": "https://docs.tavily.com/sitemap.xml",
   "lastUpdated": "2025-10-24",
   "totalTasks": 32,
-  "completedTasks": 25,
+  "completedTasks": 30,
   "tasks": [
     {
       "id": 1,
@@ -55,36 +55,36 @@
       "category": "API Reference",
       "title": "Tavily Search",
       "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/search",
-      "targetPath": "tavily/api-reference/search.mdx",
+      "targetPath": "tavily/api-reference/openapi.yaml",
       "status": "completed",
-      "lastModified": "2025-08-21T18:27:03.965Z"
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 7,
       "category": "API Reference",
       "title": "Tavily Extract",
       "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/extract",
-      "targetPath": "tavily/api-reference/extract.mdx",
+      "targetPath": "tavily/api-reference/openapi.yaml",
       "status": "completed",
-      "lastModified": "2025-08-21T18:27:03.963Z"
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 8,
       "category": "API Reference",
       "title": "Tavily Crawl",
       "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/crawl",
-      "targetPath": "tavily/api-reference/crawl.mdx",
+      "targetPath": "tavily/api-reference/openapi.yaml",
       "status": "completed",
-      "lastModified": "2025-08-21T18:27:04.044Z"
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 9,
       "category": "API Reference",
       "title": "Tavily Map",
       "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/map",
-      "targetPath": "tavily/api-reference/map.mdx",
+      "targetPath": "tavily/api-reference/openapi.yaml",
       "status": "completed",
-      "lastModified": "2025-08-21T18:27:03.964Z"
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 10,
@@ -236,8 +236,8 @@
       "title": "Pydantic AI",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/pydantic-ai",
       "targetPath": "tavily/integrations/pydantic-ai.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.693Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 27,
@@ -245,8 +245,8 @@
       "title": "FlowiseAI",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/flowise",
       "targetPath": "tavily/integrations/flowise.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.690Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 28,
@@ -254,8 +254,8 @@
       "title": "CrewAI",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/crewai",
       "targetPath": "tavily/integrations/crewai.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.311Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 29,
@@ -263,8 +263,8 @@
       "title": "Vercel AI",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/vercel",
       "targetPath": "tavily/integrations/vercel.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.692Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 30,
@@ -272,8 +272,8 @@
       "title": "Tavily MCP Server",
       "sourceUrl": "https://docs.tavily.com/documentation/mcp",
       "targetPath": "tavily/mcp.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:53.342Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 31,
