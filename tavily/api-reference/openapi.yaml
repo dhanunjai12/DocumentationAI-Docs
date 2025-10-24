@@ -11,23 +11,12 @@ servers:
   - url: https://api.tavily.com
     description: Production
 
-tags:
-  - name: Search
-    description: Execute search queries using Tavily Search
-  - name: Extract
-    description: Extract web page content from specified URLs
-  - name: Crawl
-    description: Graph-based website traversal with intelligent discovery
-  - name: Map
-    description: Generate comprehensive site maps through graph traversal
-
 security:
   - bearerAuth: []
 
 paths:
   /search:
     post:
-      tags: [Search]
       summary: Execute a search query
       description: Execute a search query using Tavily Search to retrieve relevant results optimized for AI agents.
       operationId: searchPost
@@ -233,7 +222,6 @@ paths:
 
   /extract:
     post:
-      tags: [Extract]
       summary: Extract web page content
       description: Extract web page content from one or more specified URLs using Tavily Extract.
       operationId: extractPost
@@ -359,7 +347,6 @@ paths:
 
   /crawl:
     post:
-      tags: [Crawl]
       summary: Crawl website
       description: Graph-based website traversal tool that can explore hundreds of paths in parallel with built-in extraction and intelligent discovery.
       operationId: crawlPost
@@ -500,7 +487,6 @@ paths:
 
   /map:
     post:
-      tags: [Map]
       summary: Map website
       description: Traverse websites like a graph to explore hundreds of paths in parallel with intelligent discovery to generate comprehensive site maps.
       operationId: mapPost
