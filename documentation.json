@@ -39,6 +39,23 @@
             ]
           }
         ]
+      },
+      {
+        "group": "Tavily",
+        "icon": "api",
+        "pages": [
+          {
+            "group": "Documentation",
+            "icon": "code",
+            "pages": [
+              {
+                "title": "About",
+                "path": "tavily/about",
+                "icon": "plus-circle"
+              }
+            ]
+          }
+        ]
       }
     ]
   }
