@@ -26,39 +26,35 @@ Integrate [Tavily with Make](https://www.make.com/en/integrations/tavily) to enh
   </Expandable>
 
   <Expandable title="Step 3: Add Tavily as an Action Module" default-open="false">
+    Add Tavily as an action module in your scenario and choose between **Perform a Search** or **Extract Raw Content**:
 
-Add Tavily as an action module in your scenario and choose between **Perform a Search** or **Extract Raw Content**:
+    **Connection:** Connect your Tavily account by entering your [Tavily API key](https://app.tavily.com/home).
 
-**Connection:** Connect your Tavily account by entering your [Tavily API key](https://app.tavily.com/home).
+    **Configuration:** Set up your parameters:
 
-**Configuration:** Set up your parameters:
+    **For Search:**
 
-**For Search:**
+    - Enter your search `query` (can be manually entered or populated from another module's output)
+    - Select a `topic` (`general` or `news`)
+    - Choose whether to include raw content or generate an answer
+    - Specify domains to include or exclude
+    - Set search depth and other optional parameters
 
-- Enter your search `query` (can be manually entered or populated from another module's output)
-- Select a `topic` (`general` or `news`)
-- Choose whether to include raw content or generate an answer
-- Specify domains to include or exclude
-- Set search depth and other optional parameters
+    **For Extract:**
 
-**For Extract:**
+    - Enter the URL(s) to extract content from (can be a single URL or multiple URLs from another module's output)
+    - Choose extraction type (`basic` or `advanced`)
 
-- Enter the URL(s) to extract content from (can be a single URL or multiple URLs from another module's output)
-- Choose extraction type (`basic` or `advanced`)
-
-**Test:** Run a test to verify your configuration.
-
+    **Test:** Run a test to verify your configuration.
   </Expandable>
 
   <Expandable title="Step 4: Process and Use Tavily Results" default-open="false">
+    Utilize the search results in your workflow:
 
-Utilize the search results in your workflow:
-
-- Process data through additional modules
-- Send information to your CRM or database
-- Generate reports or notifications
-- Feed data into AI models for further processing
-
+    - Process data through additional modules
+    - Send information to your CRM or database
+    - Generate reports or notifications
+    - Feed data into AI models for further processing
   </Expandable>
 </ExpandableGroup>
 
@@ -77,14 +73,12 @@ Leverage Tavily's capabilities to create powerful automated workflows:
 Create an automated workflow that performs market research and delivers insights to your team.
 
 <Expandable title="Workflow Steps" default-open="false">
-
-1. **Trigger**: Schedule the scenario to run daily or weekly
-2. **Generate Search Queries**: Use an AI module to create relevant search queries
-3. **Execute Searches**: Use Tavily to perform multiple searches with the generated queries
-4. **Process Results**: Filter and organize the search results
-5. **Generate Report**: Use an AI module to create a comprehensive report
-6. **Deliver Insights**: Send the report via email or to your team's communication platform
-
+  1. **Trigger**: Schedule the scenario to run daily or weekly
+  2. **Generate Search Queries**: Use an AI module to create relevant search queries
+  3. **Execute Searches**: Use Tavily to perform multiple searches with the generated queries
+  4. **Process Results**: Filter and organize the search results
+  5. **Generate Report**: Use an AI module to create a comprehensive report
+  6. **Deliver Insights**: Send the report via email or to your team's communication platform
 </Expandable>
 
 ## Best practices
