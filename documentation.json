@@ -167,6 +167,28 @@
                 "icon": "plug"
               }
             ]
+          },
+          {
+            "group": "Partnerships",
+            "icon": "handshake",
+            "pages": [
+              {
+                "title": "IBM Partnership",
+                "path": "tavily/partnerships/ibm",
+                "icon": "building"
+              }
+            ]
+          },
+          {
+            "group": "Resources",
+            "icon": "book",
+            "pages": [
+              {
+                "title": "Search Crawler",
+                "path": "tavily/search-crawler",
+                "icon": "bot"
+              }
+            ]
           }
         ]
       }

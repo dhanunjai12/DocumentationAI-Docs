@@ -3,7 +3,7 @@
   "source": "https://docs.tavily.com/sitemap.xml",
   "lastUpdated": "2025-10-24",
   "totalTasks": 32,
-  "completedTasks": 30,
+  "completedTasks": 32,
   "tasks": [
     {
       "id": 1,
@@ -281,8 +281,8 @@
       "title": "IBM Partnership",
       "sourceUrl": "https://docs.tavily.com/documentation/partnerships/IBM",
       "targetPath": "tavily/partnerships/ibm.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:53.340Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 32,
@@ -290,8 +290,8 @@
       "title": "Tavily Search Crawler",
       "sourceUrl": "https://docs.tavily.com/documentation/search-crawler",
       "targetPath": "tavily/search-crawler.mdx",
-      "status": "not_started",
-      "lastModified": "2025-08-21T18:27:06.452Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     }
   ],
   "statusOptions": {

@@ -1,0 +1,155 @@
+# IBM Partnership
+
+Tavily and IBM have partnered to deliver AI-enriched spreadsheets, combining real-time web search with advanced foundation models to transform business data workflows.
+
+<Columns cols={2}>
+  <Image 
+    src="https://mintcdn.com/tavilyai/tgJqPSjqNVSkMFTO/images/logo_circle.png?fit=max&auto=format&n=tgJqPSjqNVSkMFTO&q=85&s=d818735b0cfebd7617f00a2ba9fa97ff" 
+    alt="Tavily Logo" 
+    width="160"
+    height="160"
+    style="margin: 0 auto;"
+  />
+  <Image 
+    src="https://mintcdn.com/tavilyai/tgJqPSjqNVSkMFTO/images/watsonx_circle.svg?fit=max&auto=format&n=tgJqPSjqNVSkMFTO&q=85&s=7e36765e09c53fd6fe7497ea6cc03d22" 
+    alt="IBM watsonx Logo" 
+    width="160"
+    height="160"
+    style="margin: 0 auto;"
+  />
+</Columns>
+
+Powered by [Tavily](https://tavily.com) and [IBM watsonx.ai](https://www.ibm.com/products/watsonx-ai)
+
+## Overview
+
+Tavily and IBM have partnered to deliver [AI-enriched spreadsheets](https://github.com/tavily-ai/watsonx-tavily-spreadsheets) that combine Tavily's real-time web search with IBM watsonx.ai's advanced foundation models. This open-source solution enables users to enrich spreadsheet data with live, cited web information and powerful LLM-driven insights.
+
+## What is it?
+
+With this application, you can:
+
+- Enrich spreadsheet cells with AI-generated content backed by live web data
+- Entity extraction and data processing with Granite LLMs
+- Process entire columns in batch for efficient data enhancement
+- Access source citations for all web-sourced information
+- Export your enriched data as CSV files for further use
+
+## How it Works
+
+<Steps>
+  <Step title="Fill in spreadsheet columns" icon="table">
+    Add your data to the spreadsheet columns.
+  </Step>
+  <Step title="Enrich your spreadsheet" icon="sparkles">
+    The app uses Tavily's search and IBM watsonx.ai models to add live, relevant information.
+  </Step>
+  <Step title="Export as CSV" icon="download">
+    Export the enriched data for further use.
+  </Step>
+</Steps>
+
+<Video 
+  src="https://www.youtube.com/embed/fv1TnJfTC0E" 
+  title="Tavily and IBM watsonx.ai Spreadsheet Demo"
+  width="560" 
+  height="315"
+/>
+
+## Architecture
+
+<Image 
+  src="https://mintcdn.com/tavilyai/tgJqPSjqNVSkMFTO/images/spreadsheet.png?fit=max&auto=format&n=tgJqPSjqNVSkMFTO&q=85&s=9b15deaf4fe13bd422f49b1e7a6c07f7" 
+  alt="Architecture diagram showing the integration between Tavily search API and IBM watsonx.ai for spreadsheet enrichment" 
+  width="1029"
+  height="923"
+/>
+
+## Setup Instructions
+
+<ExpandableGroup>
+  <Expandable title="API Keys & Environment Variables" default-open="true">
+    Get your [Tavily API key](https://app.tavily.com/home) and [IBM watsonx.ai API key](https://www.ibm.com/products/watsonx-ai).
+
+    Create a `.env` file in the project root:
+
+```bash
+TAVILY_API_KEY=<your API key>
+WATSONX_API_KEY=<your API key>
+WATSONX_PROJECT_ID=<your project id>
+WATSONX_URL=<your data center url>
+FOUNDATION_MODEL_ID=<watsonx.ai model id>
+```
+
+<Callout kind="info">
+  `FOUNDATION_MODEL_ID` is optional. Defaults to `ibm/granite-3-2-8b-instruct` if not set.
+</Callout>
+
+Create `.env.development` in `ui/` directory:
+
+```bash
+VITE_API_URL=http://localhost:8000
+VITE_WS_URL=ws://localhost:8000
+```
+  </Expandable>
+
+  <Expandable title="Backend Setup (Python)" default-open="false">
+    Create and activate a Python 3.11 virtual environment:
+
+```bash
+python3.11 -m venv venv
+source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+```
+
+Install dependencies:
+
+```bash
+python3.11 -m pip install -r requirements.txt
+```
+
+Run the backend server:
+
+```bash
+python app.py
+```
+  </Expandable>
+
+  <Expandable title="Backend Setup (Docker)" default-open="false">
+    Build the Docker image:
+
+```bash
+docker build -t spreadsheet .
+```
+
+Run the container:
+
+```bash
+docker run -p 8000:8000 --env-file .env spreadsheet
+```
+  </Expandable>
+
+  <Expandable title="Frontend Setup" default-open="false">
+    Navigate to the frontend directory:
+
+```bash
+cd ui
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:5174](http://localhost:5174) in your browser.
+  </Expandable>
+</ExpandableGroup>
+
+See full setup, usage, and contribution details in the [GitHub repository](https://github.com/tavily-ai/watsonx-tavily-spreadsheets).
+
