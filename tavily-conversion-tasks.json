@@ -3,7 +3,7 @@
   "source": "https://docs.tavily.com/sitemap.xml",
   "lastUpdated": "2025-10-24",
   "totalTasks": 32,
-  "completedTasks": 4,
+  "completedTasks": 13,
   "tasks": [
     {
       "id": 1,
@@ -47,7 +47,7 @@
       "title": "API Introduction",
       "sourceUrl": "https://docs.tavily.com/documentation/api-reference/introduction",
       "targetPath": "tavily/api-reference/introduction.mdx",
-      "status": "not_started",
+      "status": "completed",
       "lastModified": "2025-10-17T18:55:52.308Z"
     },
     {
@@ -56,7 +56,7 @@
       "title": "Tavily Search",
       "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/search",
       "targetPath": "tavily/api-reference/search.mdx",
-      "status": "not_started",
+      "status": "completed",
       "lastModified": "2025-08-21T18:27:03.965Z"
     },
     {
@@ -65,7 +65,7 @@
       "title": "Tavily Extract",
       "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/extract",
       "targetPath": "tavily/api-reference/extract.mdx",
-      "status": "not_started",
+      "status": "completed",
       "lastModified": "2025-08-21T18:27:03.963Z"
     },
     {
@@ -74,7 +74,7 @@
       "title": "Tavily Crawl",
       "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/crawl",
       "targetPath": "tavily/api-reference/crawl.mdx",
-      "status": "not_started",
+      "status": "completed",
       "lastModified": "2025-08-21T18:27:04.044Z"
     },
     {
@@ -83,7 +83,7 @@
       "title": "Tavily Map",
       "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/map",
       "targetPath": "tavily/api-reference/map.mdx",
-      "status": "not_started",
+      "status": "completed",
       "lastModified": "2025-08-21T18:27:03.964Z"
     },
     {
@@ -92,7 +92,7 @@
       "title": "Usage",
       "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/usage",
       "targetPath": "tavily/api-reference/usage.mdx",
-      "status": "not_started",
+      "status": "completed",
       "lastModified": "2025-08-21T18:27:03.966Z"
     },
     {
@@ -101,7 +101,7 @@
       "title": "Best Practices for Search",
       "sourceUrl": "https://docs.tavily.com/documentation/best-practices/best-practices-search",
       "targetPath": "tavily/best-practices/search.mdx",
-      "status": "not_started",
+      "status": "completed",
       "lastModified": "2025-10-17T18:55:52.310Z"
     },
     {
@@ -110,7 +110,7 @@
       "title": "Best Practices for Extract",
       "sourceUrl": "https://docs.tavily.com/documentation/best-practices/best-practices-extract",
       "targetPath": "tavily/best-practices/extract.mdx",
-      "status": "not_started",
+      "status": "completed",
       "lastModified": "2025-10-17T18:55:52.309Z"
     },
     {
@@ -119,7 +119,7 @@
       "title": "Best Practices for Crawl",
       "sourceUrl": "https://docs.tavily.com/documentation/best-practices/best-practices-crawl",
       "targetPath": "tavily/best-practices/crawl.mdx",
-      "status": "not_started",
+      "status": "completed",
       "lastModified": "2025-10-17T18:55:52.307Z"
     },
     {

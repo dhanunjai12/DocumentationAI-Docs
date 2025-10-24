@@ -64,6 +64,63 @@
                 "icon": "gauge"
               }
             ]
+          },
+          {
+            "group": "API Reference",
+            "icon": "code",
+            "pages": [
+              {
+                "title": "Introduction",
+                "path": "tavily/api-reference/introduction",
+                "icon": "book-open"
+              },
+              {
+                "title": "Tavily Search",
+                "path": "tavily/api-reference/search",
+                "icon": "search"
+              },
+              {
+                "title": "Tavily Extract",
+                "path": "tavily/api-reference/extract",
+                "icon": "file-text"
+              },
+              {
+                "title": "Tavily Crawl",
+                "path": "tavily/api-reference/crawl",
+                "icon": "git-branch"
+              },
+              {
+                "title": "Tavily Map",
+                "path": "tavily/api-reference/map",
+                "icon": "sitemap"
+              },
+              {
+                "title": "Usage",
+                "path": "tavily/api-reference/usage",
+                "icon": "bar-chart"
+              }
+            ]
+          },
+          {
+            "group": "Best Practices",
+            "icon": "lightbulb",
+            "pages": [
+              {
+                "title": "Best Practices for Search",
+                "path": "tavily/best-practices/search",
+                "icon": "search"
+              },
+              {
+                "title": "Best Practices for Extract",
+                "path": "tavily/best-practices/extract",
+                "icon": "file-text"
+              },
+              {
+                "title": "Best Practices for Crawl",
+                "path": "tavily/best-practices/crawl",
+                "icon": "git-branch"
+              }
+            ]
           }
         ]
       }
