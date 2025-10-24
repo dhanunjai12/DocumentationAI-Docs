@@ -72,7 +72,7 @@ tools = [
 ```
 
 <Callout kind="tip">
-Scroll to [Tavily endpoints schema](#schemas) to find the full JSON schema for search, extract, map, and crawl.
+Scroll down to the **Tavily endpoints schema for Anthropic tool definition** section to find the full JSON schema for search, extract, map, and crawl.
 </Callout>
 
 ### Tool execution
@@ -254,7 +254,7 @@ chat_with_claude("What is trending now in the agents space in 2025?")
 
 </Expandable>
 
-## Tavily endpoints schema for Anthropic tool definition {#schemas}
+## Tavily endpoints schema for Anthropic tool definition
 
 <Callout kind="info">
 When using these schemas, you can customize which parameters are exposed to the model based on your specific use case. For example, if you are building a finance application, you might set `topic: "finance"` for all queries without exposing the `topic` parameter. This way, the LLM can focus on deciding other parameters, such as `time_range`, `country`, and so on, based on the user's request. Feel free to modify these schemas as needed and only pass the parameters that are relevant to your application.
