@@ -1,77 +1,81 @@
 ---
-title: Credits & Pricing
+title: About
+description: Welcome to Tavily!
 ---
-## Free API Credits
 
-<Card uid="b16e9841-20c7-43cc-8254-c5d4b6fa357e" title="Get your free API key" href="https://app.tavily.com" icon="key">
+<Callout kind="info">
+  Looking for a step-by-step tutorial to get started in under 5 minutes? Head to our [Quickstart guide](/guides/quickstart) and start coding!
+</Callout>
+
+## Who are we?
+
+We're a team of AI researchers and developers passionate about helping you build the next generation of AI assistants.
+Our mission is to empower individuals and organizations with accurate, unbiased, and factual information.
+
+## What is the Tavily Search Engine?
+
+Building an AI agent that leverages realtime online information is not a simple task. Scraping doesn't scale and requires expertise to refine, current search engine APIs don't provide explicit information to queries but simply potential related articles (which are not always related), and are not very customziable for AI agent needs. This is why we're excited to introduce the first search engine for AI agents - [Tavily](https://app.tavily.com).
+
+Tavily is a search engine optimized for LLMs, aimed at efficient, quick and persistent search results. Unlike other search APIs such as Serp or Google, Tavily focuses on optimizing search for AI developers and autonomous AI agents. We take care of all the burden of searching, scraping, filtering and extracting the most relevant information from online sources. All in a single API call!
+
+To try the API in action, you can now use our hosted version on our [API Playground](https://app.tavily.com/playground).
+
+<Callout kind="info">
+  If you're an AI developer looking to integrate your application with our API, or seek increased API limits, [please reach out!](mailto:support@tavily.com)
+</Callout>
+
+## Why choose Tavily?
+
+Tavily shines where others fail, with a Search API optimized for LLMs.
+
+<ExpandableGroup>
+  <Expandable title="Purpose-Built" default-open="false">
+    Tailored just for LLM Agents, we ensure the search results are optimized for [RAG](https://towardsdatascience.com/retrieval-augmented-generation-intuitively-and-exhaustively-explain-6a39d6fe6fc9). We take care of all the burden in searching, scraping, filtering and extracting information from online sources. All in a single API call! Simply pass the returned search results as context to your LLM.
+  </Expandable>
+
+  <Expandable title="Versatility" default-open="false">
+    Beyond just fetching results, the Tavily Search API offers precision. With customizable search depths, domain management, and parsing HTML content controls, you're in the driver's seat.
+  </Expandable>
+
+  <Expandable title="Performance" default-open="false">
+    Committed to speed and efficiency, our API guarantees real-time and trusted information. Our team works hard to improve Tavily's performance over time.
+  </Expandable>
+
+  <Expandable title="Integration-friendly" default-open="false">
+    We appreciate the essence of adaptability. That's why integrating our API with your existing setup is a breeze. You can choose our [Python library](https://pypi.org/project/tavily-python/), [JavaScript package](https://www.npmjs.com/package/@tavily/core) or a simple API call. You can also use Tavily through any of our supported partners such as [LangChain](/integrations/langchain) and [LlamaIndex](/integrations/llamaindex).
+  </Expandable>
+
+  <Expandable title="Transparent & Informative" default-open="false">
+    Our detailed documentation ensures you're never left in the dark. From setup basics to nuanced features, we've got you covered.
+  </Expandable>
+</ExpandableGroup>
+
+## How does the Search API work?
+
+Traditional search APIs such as Google, Serp and Bing retrieve search results based on a user query. However, the results are sometimes irrelevant to the goal of the search, and return simple URLs and snippets of content which are not always relevant. Because of this, any developer would need to then scrape the sites to extract relevant content, filter irrelevant information, optimize the content to fit LLM context limits, and more. This task is a burden and requires a lot of time and effort to complete. The Tavily Search API takes care of all of this for you in a single API call.
+
+The Tavily Search API aggregates up to 20 sites per a single API call, and uses proprietary AI to score, filter and rank the top most relevant sources and content to your task, query or goal.
+In addition, Tavily allows developers to add custom fields such as context and limit response tokens to enable the optimal search experience for LLMs.
+
+Tavily can also help your AI agent make better decisions by including a short answer for cross-agent communication.
+
+<Callout kind="tip">
+  With LLM hallucinations, it's crucial to optimize for RAG with the right context and information. This is where Tavily comes in, delivering accurate and precise information for your RAG applications.
+</Callout>
+
+## Getting started
+
+[Sign up](https://app.tavily.com) for Tavily to get your API key. You get **1,000 free API Credits every month**. No credit card required.
+
+<Card icon="key" href="https://app.tavily.com" title="Get your free API key" horizontal>
   You get 1,000 free API Credits every month. **No credit card required.**
 </Card>
 
-## Pricing Overview
+Head to our [API Playground](https://app.tavily.com/playground) to familiarize yourself with our API.
 
-Tavily operates on a simple, credit-based model:
+To get started with Tavily's APIs and SDKs using code, head to our [Quickstart Guide](/guides/quickstart) and follow the steps.
 
-- **Free**: 1,000 credits/month
-
-- **Pay-as-you-go**: $0.008 per credit (allows you to be charged per credit once your plan's credit limit is reached).
-
-- **Monthly plans**: $0.0075 - $0.005 per credit
-
-- **Enterprise**: Custom pricing and volume
-
-| **Plan**          | **Credits per month** | **Monthly price** | **Price per credit** |
-| ----------------- | --------------------- | ----------------- | -------------------- |
-| **Researcher**    | 1,000                 | Free              | -                    |
-| **Project**       | 4,000                 | $30               | $0.0075              |
-| **Bootstrap**     | 15,000                | $100              | $0.0067              |
-| **Startup**       | 38,000                | $220              | $0.0058              |
-| **Growth**        | 100,000               | $500              | $0.005               |
-| **Pay as you go** | Per usage             | $0.008 / Credit   | $0.008               |
-| **Enterprise**    | Custom                | Custom            | Custom               |
-
-Head to [billing](https://app.tavily.com/billing) to explore our different options and manage your plan.
-
-## API Credits Costs
-
-### Tavily Search
-
-Your [search depth](/api-reference/endpoint/search#body-search-depth) determines the cost of your request.
-
-- **Basic Search (****`basic`****):**
-  Each request costs **1 API credit**.
-
-- **Advanced Search (****`advanced`****):**
-  Each request costs **2 API credits**.
-
-### Tavily Extract
-
-The number of successful URL extractions and your [extraction depth](/api-reference/endpoint/extract#body-extract-depth) determines the cost of your request. You never get charged if a URL extraction fails.
-
-- **Basic Extract (****`basic`****):**
-  Every 5 successful URL extractions cost **1 API credit**
-
-- **Advanced Extract (****`advanced`****):**
-  Every 5 successful URL extractions cost **2 API credits**
-
-### Tavily Map
-
-The number of pages mapped and whether or not natural-language [instructions](/api-reference/endpoint/map#instructions) are specified determines the cost of your request. You never get charged if a map request fails.
-
-- **Regular Mapping:**
-  Every 10 successful pages returned cost **1 API credit**
-
-- **Map with (****`instructions`****):**
-  Every 10 successful pages returned cost **2 API credits**
-
-### Tavily Crawl
-
-Tavily Crawl combines both mapping and extraction operations, so the cost is the sum of both:
-
-- **Crawl Cost = Mapping Cost + Extraction Cost**
-
-For example:
-
-- If you crawl 10 pages with basic extraction depth, you'll be charged **1 credit for mapping** (10 pages) + **2 credits for extraction** (10 successful extractions ÷ 5) = **3 total credits**
-
-- If you crawl 10 pages with advanced extraction depth, you'll be charged **1 credit for mapping** + **4 credits for extraction** = **5 total credits**
+<Callout kind="info">
+  Got questions? Stumbled upon an issue? Simply intrigued? Don't hesitate! Our support team is always on standby, eager to assist. Join us, dive deep, and redefine your search experience! [Contact us!](mailto:support@tavily.com)
+</Callout>
 
