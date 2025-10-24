@@ -1,40 +1,8 @@
 {
   "name": "Documentation AI App",
-  "initialRoute": "perplexity/api-reference/async-chat-completions-get",
+  "initialRoute": "tavily/about",
   "navigation": {
     "groups": [
-      {
-        "group": "Perplexity API",
-        "icon": "api",
-        "pages": [
-          {
-            "group": "API Reference",
-            "icon": "code",
-            "pages": [
-              {
-                "title": "Chat Completions",
-                "path": "perplexity/api-reference/chat-completions-post",
-                "icon": "message-square"
-              },
-              {
-                "title": "List Async Chat Completions",
-                "path": "perplexity/api-reference/async-chat-completions-get",
-                "icon": "list"
-              },
-              {
-                "title": "Create Async Chat Completion",
-                "path": "perplexity/api-reference/async-chat-completions-post",
-                "icon": "plus-circle"
-              },
-              {
-                "title": "Get Async Chat Completion Response",
-                "path": "perplexity/api-reference/async-chat-completions-request_id-get",
-                "icon": "search"
-              }
-            ]
-          }
-        ]
-      },
       {
         "group": "Tavily",
         "icon": "search",
