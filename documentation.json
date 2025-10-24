@@ -37,16 +37,31 @@
       },
       {
         "group": "Tavily",
-        "icon": "api",
+        "icon": "search",
         "pages": [
           {
-            "group": "Documentation",
-            "icon": "code",
+            "group": "Overview",
+            "icon": "book-open",
             "pages": [
               {
                 "title": "About",
                 "path": "tavily/about",
-                "icon": "message-square"
+                "icon": "info"
+              },
+              {
+                "title": "Quickstart",
+                "path": "tavily/quickstart",
+                "icon": "zap"
+              },
+              {
+                "title": "Credits & Pricing",
+                "path": "tavily/api-credits",
+                "icon": "credit-card"
+              },
+              {
+                "title": "Rate Limits",
+                "path": "tavily/rate-limits",
+                "icon": "gauge"
               }
             ]
           }

@@ -1,0 +1,314 @@
+{
+  "project": "Tavily Documentation Conversion",
+  "source": "https://docs.tavily.com/sitemap.xml",
+  "lastUpdated": "2025-10-24",
+  "totalTasks": 32,
+  "completedTasks": 4,
+  "tasks": [
+    {
+      "id": 1,
+      "category": "Overview",
+      "title": "About",
+      "sourceUrl": "https://docs.tavily.com/documentation/about",
+      "targetPath": "tavily/about.mdx",
+      "status": "completed",
+      "lastModified": "2025-08-21T18:27:03.962Z"
+    },
+    {
+      "id": 2,
+      "category": "Overview",
+      "title": "Quickstart",
+      "sourceUrl": "https://docs.tavily.com/documentation/quickstart",
+      "targetPath": "tavily/quickstart.mdx",
+      "status": "completed",
+      "lastModified": "2025-10-17T18:55:53.341Z"
+    },
+    {
+      "id": 3,
+      "category": "Overview",
+      "title": "API Credits & Pricing",
+      "sourceUrl": "https://docs.tavily.com/documentation/api-credits",
+      "targetPath": "tavily/api-credits.mdx",
+      "status": "completed",
+      "lastModified": "2025-08-21T18:27:04.046Z"
+    },
+    {
+      "id": 4,
+      "category": "Overview",
+      "title": "Rate Limits",
+      "sourceUrl": "https://docs.tavily.com/documentation/rate-limits",
+      "targetPath": "tavily/rate-limits.mdx",
+      "status": "completed",
+      "lastModified": "2025-08-21T18:27:06.447Z"
+    },
+    {
+      "id": 5,
+      "category": "API Reference",
+      "title": "API Introduction",
+      "sourceUrl": "https://docs.tavily.com/documentation/api-reference/introduction",
+      "targetPath": "tavily/api-reference/introduction.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.308Z"
+    },
+    {
+      "id": 6,
+      "category": "API Reference",
+      "title": "Tavily Search",
+      "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/search",
+      "targetPath": "tavily/api-reference/search.mdx",
+      "status": "not_started",
+      "lastModified": "2025-08-21T18:27:03.965Z"
+    },
+    {
+      "id": 7,
+      "category": "API Reference",
+      "title": "Tavily Extract",
+      "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/extract",
+      "targetPath": "tavily/api-reference/extract.mdx",
+      "status": "not_started",
+      "lastModified": "2025-08-21T18:27:03.963Z"
+    },
+    {
+      "id": 8,
+      "category": "API Reference",
+      "title": "Tavily Crawl",
+      "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/crawl",
+      "targetPath": "tavily/api-reference/crawl.mdx",
+      "status": "not_started",
+      "lastModified": "2025-08-21T18:27:04.044Z"
+    },
+    {
+      "id": 9,
+      "category": "API Reference",
+      "title": "Tavily Map",
+      "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/map",
+      "targetPath": "tavily/api-reference/map.mdx",
+      "status": "not_started",
+      "lastModified": "2025-08-21T18:27:03.964Z"
+    },
+    {
+      "id": 10,
+      "category": "API Reference",
+      "title": "Usage",
+      "sourceUrl": "https://docs.tavily.com/documentation/api-reference/endpoint/usage",
+      "targetPath": "tavily/api-reference/usage.mdx",
+      "status": "not_started",
+      "lastModified": "2025-08-21T18:27:03.966Z"
+    },
+    {
+      "id": 11,
+      "category": "Best Practices",
+      "title": "Best Practices for Search",
+      "sourceUrl": "https://docs.tavily.com/documentation/best-practices/best-practices-search",
+      "targetPath": "tavily/best-practices/search.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.310Z"
+    },
+    {
+      "id": 12,
+      "category": "Best Practices",
+      "title": "Best Practices for Extract",
+      "sourceUrl": "https://docs.tavily.com/documentation/best-practices/best-practices-extract",
+      "targetPath": "tavily/best-practices/extract.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.309Z"
+    },
+    {
+      "id": 13,
+      "category": "Best Practices",
+      "title": "Best Practices for Crawl",
+      "sourceUrl": "https://docs.tavily.com/documentation/best-practices/best-practices-crawl",
+      "targetPath": "tavily/best-practices/crawl.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.307Z"
+    },
+    {
+      "id": 14,
+      "category": "Integrations",
+      "title": "LangChain",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/langchain",
+      "targetPath": "tavily/integrations/langchain.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.691Z"
+    },
+    {
+      "id": 15,
+      "category": "Integrations",
+      "title": "LlamaIndex",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/llamaindex",
+      "targetPath": "tavily/integrations/llamaindex.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.689Z"
+    },
+    {
+      "id": 16,
+      "category": "Integrations",
+      "title": "OpenAI",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/openai",
+      "targetPath": "tavily/integrations/openai.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.694Z"
+    },
+    {
+      "id": 17,
+      "category": "Integrations",
+      "title": "Anthropic",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/anthropic",
+      "targetPath": "tavily/integrations/anthropic.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.310Z"
+    },
+    {
+      "id": 18,
+      "category": "Integrations",
+      "title": "n8n",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/n8n",
+      "targetPath": "tavily/integrations/n8n.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.691Z"
+    },
+    {
+      "id": 19,
+      "category": "Integrations",
+      "title": "Make",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/make",
+      "targetPath": "tavily/integrations/make.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.693Z"
+    },
+    {
+      "id": 20,
+      "category": "Integrations",
+      "title": "Langflow",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/langflow",
+      "targetPath": "tavily/integrations/langflow.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.689Z"
+    },
+    {
+      "id": 21,
+      "category": "Integrations",
+      "title": "Zapier",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/zapier",
+      "targetPath": "tavily/integrations/zapier.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:53.339Z"
+    },
+    {
+      "id": 22,
+      "category": "Integrations",
+      "title": "Tines",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/tines",
+      "targetPath": "tavily/integrations/tines.mdx",
+      "status": "not_started",
+      "lastModified": "2025-08-21T18:27:05.729Z"
+    },
+    {
+      "id": 23,
+      "category": "Integrations",
+      "title": "Dify",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/dify",
+      "targetPath": "tavily/integrations/dify.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.309Z"
+    },
+    {
+      "id": 24,
+      "category": "Integrations",
+      "title": "Composio",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/composio",
+      "targetPath": "tavily/integrations/composio.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.306Z"
+    },
+    {
+      "id": 25,
+      "category": "Integrations",
+      "title": "Agno",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/agno",
+      "targetPath": "tavily/integrations/agno.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.308Z"
+    },
+    {
+      "id": 26,
+      "category": "Integrations",
+      "title": "Pydantic AI",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/pydantic-ai",
+      "targetPath": "tavily/integrations/pydantic-ai.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.693Z"
+    },
+    {
+      "id": 27,
+      "category": "Integrations",
+      "title": "FlowiseAI",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/flowise",
+      "targetPath": "tavily/integrations/flowise.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.690Z"
+    },
+    {
+      "id": 28,
+      "category": "Integrations",
+      "title": "CrewAI",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/crewai",
+      "targetPath": "tavily/integrations/crewai.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.311Z"
+    },
+    {
+      "id": 29,
+      "category": "Integrations",
+      "title": "Vercel AI",
+      "sourceUrl": "https://docs.tavily.com/documentation/integrations/vercel",
+      "targetPath": "tavily/integrations/vercel.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:52.692Z"
+    },
+    {
+      "id": 30,
+      "category": "MCP",
+      "title": "Tavily MCP Server",
+      "sourceUrl": "https://docs.tavily.com/documentation/mcp",
+      "targetPath": "tavily/mcp.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:53.342Z"
+    },
+    {
+      "id": 31,
+      "category": "Partnerships",
+      "title": "IBM Partnership",
+      "sourceUrl": "https://docs.tavily.com/documentation/partnerships/IBM",
+      "targetPath": "tavily/partnerships/ibm.mdx",
+      "status": "not_started",
+      "lastModified": "2025-10-17T18:55:53.340Z"
+    },
+    {
+      "id": 32,
+      "category": "Search Crawler",
+      "title": "Tavily Search Crawler",
+      "sourceUrl": "https://docs.tavily.com/documentation/search-crawler",
+      "targetPath": "tavily/search-crawler.mdx",
+      "status": "not_started",
+      "lastModified": "2025-08-21T18:27:06.452Z"
+    }
+  ],
+  "statusOptions": {
+    "not_started": "Conversion not yet started",
+    "in_progress": "Currently being converted",
+    "completed": "Conversion completed",
+    "skipped": "Skipped (not needed for conversion)",
+    "blocked": "Blocked by dependencies or issues"
+  },
+  "categories": {
+    "Overview": 4,
+    "API Reference": 6,
+    "Best Practices": 3,
+    "Integrations": 16,
+    "MCP": 1,
+    "Partnerships": 1,
+    "Search Crawler": 1
+  }
+}
+
