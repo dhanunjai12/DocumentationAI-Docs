@@ -3,7 +3,7 @@
   "source": "https://docs.tavily.com/sitemap.xml",
   "lastUpdated": "2025-10-24",
   "totalTasks": 32,
-  "completedTasks": 13,
+  "completedTasks": 25,
   "tasks": [
     {
       "id": 1,
@@ -128,8 +128,8 @@
       "title": "LangChain",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/langchain",
       "targetPath": "tavily/integrations/langchain.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.691Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 15,
@@ -137,8 +137,8 @@
       "title": "LlamaIndex",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/llamaindex",
       "targetPath": "tavily/integrations/llamaindex.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.689Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 16,
@@ -146,8 +146,8 @@
       "title": "OpenAI",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/openai",
       "targetPath": "tavily/integrations/openai.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.694Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 17,
@@ -155,8 +155,8 @@
       "title": "Anthropic",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/anthropic",
       "targetPath": "tavily/integrations/anthropic.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.310Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 18,
@@ -164,8 +164,8 @@
       "title": "n8n",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/n8n",
       "targetPath": "tavily/integrations/n8n.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.691Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 19,
@@ -173,8 +173,8 @@
       "title": "Make",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/make",
       "targetPath": "tavily/integrations/make.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.693Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 20,
@@ -182,8 +182,8 @@
       "title": "Langflow",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/langflow",
       "targetPath": "tavily/integrations/langflow.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.689Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 21,
@@ -191,8 +191,8 @@
       "title": "Zapier",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/zapier",
       "targetPath": "tavily/integrations/zapier.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:53.339Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 22,
@@ -200,8 +200,8 @@
       "title": "Tines",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/tines",
       "targetPath": "tavily/integrations/tines.mdx",
-      "status": "not_started",
-      "lastModified": "2025-08-21T18:27:05.729Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 23,
@@ -209,8 +209,8 @@
       "title": "Dify",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/dify",
       "targetPath": "tavily/integrations/dify.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.309Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 24,
@@ -218,8 +218,8 @@
       "title": "Composio",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/composio",
       "targetPath": "tavily/integrations/composio.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.306Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 25,
@@ -227,8 +227,8 @@
       "title": "Agno",
       "sourceUrl": "https://docs.tavily.com/documentation/integrations/agno",
       "targetPath": "tavily/integrations/agno.mdx",
-      "status": "not_started",
-      "lastModified": "2025-10-17T18:55:52.308Z"
+      "status": "completed",
+      "lastModified": "2025-10-24T00:00:00.000Z"
     },
     {
       "id": 26,
