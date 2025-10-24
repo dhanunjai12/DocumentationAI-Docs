@@ -134,23 +134,23 @@ Alternatively, you can also run the MCP server locally.
 
 <ExpandableGroup>
   <Expandable title="Required Tools" default-open="false">
-- [Tavily API key](https://app.tavily.com/home) - If you don't have a Tavily API key, you can sign up for a free account [here](https://app.tavily.com/home)
-- [Claude Desktop](https://claude.ai/download) or [Cursor](https://cursor.sh)
-- [Node.js](https://nodejs.org/) (v20 or higher) - You can verify your Node.js installation by running:
+    - [Tavily API key](https://app.tavily.com/home) - If you don't have a Tavily API key, you can sign up for a free account [here](https://app.tavily.com/home)
+    - [Claude Desktop](https://claude.ai/download) or [Cursor](https://cursor.sh)
+    - [Node.js](https://nodejs.org/) (v20 or higher) - You can verify your Node.js installation by running:
 
-```bash
-node --version
-```
+    ```bash
+    node --version
+    ```
   </Expandable>
 
   <Expandable title="Git Installation (Optional)" default-open="false">
     Only needed if using Git installation method:
 
-- On macOS: `brew install git`
-- On Linux:
-  - Debian/Ubuntu: `sudo apt install git`
-  - RedHat/CentOS: `sudo yum install git`
-- On Windows: Download [Git for Windows](https://git-scm.com/download/win)
+    - On macOS: `brew install git`
+    - On Linux:
+      - Debian/Ubuntu: `sudo apt install git`
+      - RedHat/CentOS: `sudo yum install git`
+    - On Windows: Download [Git for Windows](https://git-scm.com/download/win)
   </Expandable>
 </ExpandableGroup>
 
@@ -245,37 +245,37 @@ Add this configuration (replace `tvly-YOUR_API_KEY-here` with your [Tavily API k
 
 <ExpandableGroup>
   <Expandable title="Tavily Search Examples" default-open="false">
-1. **General Web Search**:
+    1. **General Web Search**:
 
-```
-Can you search for recent developments in quantum computing?
-```
+    ```
+    Can you search for recent developments in quantum computing?
+    ```
 
-2. **News Search**:
+    2. **News Search**:
 
-```
-Search for news articles about AI startups from the last 7 days.
-```
+    ```
+    Search for news articles about AI startups from the last 7 days.
+    ```
 
-3. **Domain-Specific Search**:
+    3. **Domain-Specific Search**:
 
-```
-Search for climate change research on nature.com and sciencedirect.com
-```
+    ```
+    Search for climate change research on nature.com and sciencedirect.com
+    ```
   </Expandable>
 
   <Expandable title="Tavily Extract Examples" default-open="false">
-**Extract Article Content**: 
+    **Extract Article Content**: 
 
-```
-Extract the main content from this article: https://example.com/article
-```
+    ```
+    Extract the main content from this article: https://example.com/article
+    ```
   </Expandable>
 
   <Expandable title="Combined Usage" default-open="false">
-```
-Search for news articles about AI startups from the last 7 days and extract the main content from each article to generate a detailed report.
-```
+    ```
+    Search for news articles about AI startups from the last 7 days and extract the main content from each article to generate a detailed report.
+    ```
   </Expandable>
 </ExpandableGroup>
 
@@ -284,36 +284,36 @@ Search for news articles about AI startups from the last 7 days and extract the 
 <Expandable title="Server Not Found" default-open="false">
   If you encounter server connection issues, run these commands to verify your environment:
 
-```bash
-npm --version
-node --version
-```
+  ```bash
+  npm --version
+  node --version
+  ```
 
-Make sure to also check your configuration syntax for any errors.
+  Make sure to also check your configuration syntax for any errors.
 </Expandable>
 
 <Expandable title="NPX Issues" default-open="false">
   If experiencing problems with npx, locate your executable:
 
-```bash
-which npx
-```
+  ```bash
+  which npx
+  ```
 
-<Callout kind="tip">
-  Once you have the path, update your configuration to use the full path to the npx executable.
-</Callout>
+  <Callout kind="tip">
+    Once you have the path, update your configuration to use the full path to the npx executable.
+  </Callout>
 </Expandable>
 
 <Expandable title="API Key Issues" default-open="false">
   When troubleshooting API key problems, verify that your key is:
 
-- Properly formatted with the `tvly-` prefix
-- Valid and active in your Tavily dashboard
-- Correctly configured in your environment variables
+  - Properly formatted with the `tvly-` prefix
+  - Valid and active in your Tavily dashboard
+  - Correctly configured in your environment variables
 
-<Callout kind="tip">
-  You can test your API key validity by making a simple test request through the [Tavily Playground](https://app.tavily.com/playground)
-</Callout>
+  <Callout kind="tip">
+    You can test your API key validity by making a simple test request through the [Tavily Playground](https://app.tavily.com/playground)
+  </Callout>
 </Expandable>
 
 ## Acknowledgments
