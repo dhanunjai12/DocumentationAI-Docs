@@ -19,7 +19,7 @@
               {
                 "title": "Quickstart",
                 "path": "tavily/quickstart",
-                "icon": "zap"
+                "icon": "rocket"
               },
               {
                 "title": "Credits & Pricing",
@@ -46,7 +46,7 @@
               {
                 "title": "Usage",
                 "path": "tavily/api-reference/usage",
-                "icon": "bar-chart"
+                "icon": "bar-chart-2"
               }
             ]
           },
@@ -67,7 +67,7 @@
               {
                 "title": "Best Practices for Crawl",
                 "path": "tavily/best-practices/crawl",
-                "icon": "git-branch"
+                "icon": "navigation"
               }
             ]
           },
@@ -78,7 +78,7 @@
               {
                 "title": "LangChain",
                 "path": "tavily/integrations/langchain",
-                "icon": "link"
+                "icon": "link-2"
               },
               {
                 "title": "LlamaIndex",
@@ -88,7 +88,7 @@
               {
                 "title": "OpenAI",
                 "path": "tavily/integrations/openai",
-                "icon": "bot"
+                "icon": "cpu"
               },
               {
                 "title": "Anthropic",
@@ -98,7 +98,7 @@
               {
                 "title": "n8n",
                 "path": "tavily/integrations/n8n",
-                "icon": "workflow"
+                "icon": "tool"
               },
               {
                 "title": "Make",
@@ -108,7 +108,7 @@
               {
                 "title": "Langflow",
                 "path": "tavily/integrations/langflow",
-                "icon": "git-branch"
+                "icon": "flowchart"
               },
               {
                 "title": "Zapier",
@@ -123,7 +123,7 @@
               {
                 "title": "Dify",
                 "path": "tavily/integrations/dify",
-                "icon": "blocks"
+                "icon": "cube"
               },
               {
                 "title": "Composio",
@@ -143,7 +143,7 @@
               {
                 "title": "FlowiseAI",
                 "path": "tavily/integrations/flowise",
-                "icon": "workflow"
+                "icon": "cpu"
               },
               {
                 "title": "CrewAI",
