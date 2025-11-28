@@ -1,0 +1,31 @@
+---
+title: "Microsoft ADK"
+description: "Use Tavily from your Microsoft ADK agents for web search, extraction, and crawling."
+---
+
+## Overview
+
+Use Tavily inside your Microsoft ADK agents to:
+
+- Search the live web
+- Extract key facts from pages
+- Crawl sites for more complete context
+
+The integration will work like other Tavily agent integrations:
+
+1. Add an action in Microsoft ADK that calls the Tavily HTTP API.
+2. Store your Tavily API key in a secure place (env var or secrets manager).
+3. Send the user query and any options (like depth or topic) in the Tavily request.
+4. Use Tavily’s answer and results to ground your agent’s final response.
+
+<Callout kind="info">
+  This is an early draft. We’ll add a full step-by-step guide and code samples once the official Microsoft ADK + Tavily integration is finalized.
+</Callout>
+
+## Learn more
+
+- [Quickstart](/tavily/quickstart)
+- [API Usage](/tavily/api-reference/usage)
+- [Best Practices for Search](/tavily/best-practices/search)
+- [Best Practices for Extract](/tavily/best-practices/extract)
+- [Best Practices for Crawl](/tavily/best-practices/crawl)
