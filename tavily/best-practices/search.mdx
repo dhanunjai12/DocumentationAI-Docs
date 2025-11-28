@@ -160,7 +160,7 @@ Set to true to return the full extracted content of the web page, useful for dee
 1. Search: Retrieve relevant URLs.
 2. Extract: Extract content from those URLs.
 
-For more information on this two-step process, please refer to the [Best Practices for the Extract API](/documentation/best-practices/best-practices-extract#2-two-step-process-search-then-extract).
+For more information on this two-step process, please refer to the [Best Practices for the Extract API](/tavily/best-practices/extract#2-two-step-process-search-then-extract).
 
 <CodeGroup tabs="✅ Good,👍 Moderate">
 ```json
@@ -418,7 +418,7 @@ Tavily's Search API provides rich metadata that can be leveraged to refine and p
 #### Key metadata fields and their Functions
 
 - **`title`**: Helps in identifying articles that are more likely to be relevant based on their headlines. Filtering results by keyword occurrences in the title can improve result relevancy.
-- **`raw_content`**: Provides the extracted content from the web page, allowing deeper analysis. If the `content` does not provide enough information, raw content can be useful for further filtering and ranking. You can also use the Extract API with a two-step extraction process. For more information, see [Best Practices for Extract API](/documentation/best-practices/best-practices-extract#2-two-step-process-search-then-extract).
+- **`raw_content`**: Provides the extracted content from the web page, allowing deeper analysis. If the `content` does not provide enough information, raw content can be useful for further filtering and ranking. You can also use the Extract API with a two-step extraction process. For more information, see [Best Practices for Extract API](/tavily/best-practices/extract#2-two-step-process-search-then-extract).
 - **`score`**: Represents the relevancy between the query and the retrieved content snippet. Higher scores typically indicate better matches.
 - **`content`**: Offers a general summary of the webpage, providing a quick way to gauge relevance without processing the full content. When `search_depth` is set to `advanced`, the content is more closely aligned with the query, offering valuable insights.
 
@@ -489,3 +489,16 @@ print(emails)  # Output: ['john@example.com', 'support@tavily.com']
   By leveraging post-processing techniques such as LLM-assisted filtering, metadata analysis, and score-based ranking, along with regex-based data extraction, you can optimize Tavily's Search API results for better relevance. Incorporating these methods into your workflow will help you extract high-quality insights tailored to your needs.
 </Callout>
 
+## Recommended integrations for search
+
+Several integrations make it easier to apply these best practices in real applications. Three popular options are:
+
+1. **OpenAI** – Great when you already use OpenAI models and want a simple way to call Tavily as a tool/function from chat completions.
+2. **LangChain** – Helpful for building agents, tools, and RAG pipelines where Tavily is one of several tools in a chain.
+3. **LlamaIndex** – Well-suited for index-based RAG setups where Tavily fetches fresh web data that you then index or combine with existing documents.
+
+For concrete examples and code, see:
+
+- [OpenAI integration](/tavily/integrations/openai)
+- [LangChain integration](/tavily/integrations/langchain)
+- [LlamaIndex integration](/tavily/integrations/llamaindex)
