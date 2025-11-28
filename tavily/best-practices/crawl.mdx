@@ -1,42 +1,37 @@
 ---
 title: Best Practices for Crawl
-description: Learn how to effectively use Tavily's Crawl API to extract and process web content.
+description: Learn when and how to use Tavily's Crawl API, in plain language.
 ---
 
-## When to Use `crawl` vs `map`
+## Crawl vs. Map (simple rule)
+
+Use **Crawl** when you care about **page content**.
+Use **Map** when you care about **URLs and structure**.
 
 ### Use Crawl when you need:
 
-- Full content extraction from pages
-- Deep content analysis
-- Processing of paginated or nested content
-- Extraction of specific content patterns
-- Integration with RAG systems
+- The actual text (and optional images) from pages
+- Deeper analysis of content
+- Data for search or RAG
 
 ### Use Map when you need:
 
-- Quick site structure discovery
-- URL collection without content extraction
-- Sitemap generation
-- Path pattern matching
-- Domain structure analysis
+- A quick list of URLs
+- To see how a site is structured
+- Paths to later pass into Crawl
 
-## Use Cases
+---
 
-### 1. Deep or Unlinked Content
+## Common Crawl setups
 
-Many sites have content that's difficult to access through standard means:
+Below are a few beginner-friendly patterns you can copy and adjust.
 
-- Deeply nested pages not in main navigation
-- Paginated archives (old blog posts, changelogs)
-- Internal search-only content
-
-**Best Practice:**
+### 1. Blog or changelog section
 
 ```json
 {
-  "url": "example.com",
-  "max_depth": 3,
+  "url": "https://example.com",
+  "max_depth": 2,
   "max_breadth": 50,
   "limit": 200,
   "select_paths": ["/blog/.*", "/changelog/.*"],
@@ -44,244 +39,94 @@ Many sites have content that's difficult to access through standard means:
 }
 ```
 
-### 2. Structured but Nonstandard Layouts
+Use this when you want posts or release notes, not the whole site.
 
-For content that's structured but not marked up in schema.org:
-
-- Documentation
-- Changelogs
-- FAQs
-
-**Best Practice:**
+### 2. Documentation for RAG
 
 ```json
 {
-  "url": "docs.example.com",
-  "max_depth": 2,
-  "extract_depth": "advanced",
-  "select_paths": ["/docs/.*"]
-}
-```
-
-### 3. Multi-modal Information Needs
-
-When you need to combine information from multiple sections:
-
-- Cross-referencing content
-- Finding related information
-- Building comprehensive knowledge bases
-
-**Best Practice:**
-
-```json
-{
-  "url": "example.com",
-  "max_depth": 2,
-  "instructions": "Find all documentation pages that link to API reference docs",
-  "extract_depth": "advanced"
-}
-```
-
-### 4. Rapidly Changing Content
-
-For content that updates frequently:
-
-- API documentation
-- Product announcements
-- News sections
-
-**Best Practice:**
-
-```json
-{
-  "url": "api.example.com",
-  "max_depth": 1,
-  "max_breadth": 100,
-  "extract_depth": "basic"
-}
-```
-
-### 5. Behind Auth / Paywalls
-
-For content requiring authentication:
-
-- Internal knowledge bases
-- Customer help centers
-- Gated documentation
-
-**Best Practice:**
-
-```json
-{
-  "url": "help.example.com",
-  "max_depth": 2,
-  "select_domains": ["^help\\.example\\.com$"],
-  "exclude_domains": ["^public\\.example\\.com$"]
-}
-```
-
-### 6. Complete Coverage / Auditing
-
-For comprehensive content analysis:
-
-- Legal compliance checks
-- Security audits
-- Policy verification
-
-**Best Practice:**
-
-```json
-{
-  "url": "example.com",
-  "max_depth": 3,
-  "max_breadth": 100,
-  "limit": 1000,
-  "extract_depth": "advanced",
-  "instructions": "Find all mentions of GDPR and data protection policies"
-}
-```
-
-### 7. Semantic Search or RAG Integration
-
-For feeding content into LLMs or search systems:
-
-- RAG systems
-- Enterprise search
-- Knowledge bases
-
-**Best Practice:**
-
-```json
-{
-  "url": "docs.example.com",
+  "url": "https://docs.example.com",
   "max_depth": 2,
   "extract_depth": "advanced",
   "include_images": true
 }
 ```
 
-### 8. Known URL Patterns
+Use this when you want high-quality content to feed into an LLM or search index.
 
-When you have specific paths to crawl:
-
-- Sitemap-based crawling
-- Section-specific extraction
-- Pattern-based content collection
-
-**Best Practice:**
+### 3. Fast, shallow crawl
 
 ```json
 {
-  "url": "example.com",
+  "url": "https://api.example.com",
   "max_depth": 1,
-  "select_paths": ["/docs/.*", "/api/.*", "/guides/.*"],
-  "exclude_paths": ["/private/.*", "/admin/.*"]
+  "max_breadth": 100,
+  "extract_depth": "basic"
 }
 ```
 
-## Performance Considerations
+Use this when you want a quick snapshot of a small part of a site.
 
-### Depth vs. Performance
+### 4. Known URL patterns
 
-- Each level of depth increases crawl time exponentially
-- Start with `max_depth: 1` and increase as needed
-- Use `max_breadth` to control horizontal expansion
-- Set appropriate `limit` to prevent excessive crawling
+```json
+{
+  "url": "https://example.com",
+  "max_depth": 1,
+  "select_paths": ["/docs/.*", "/guides/.*"],
+  "exclude_paths": ["/admin/.*"]
+}
+```
 
-### Resource Optimization
+Use this when you already know which folders matter.
 
-- Use `basic` extract_depth for simple content
-- Use `advanced` extract_depth only when needed
-- Set appropriate `max_breadth` based on site structure
-- Use `select_paths` and `exclude_paths` to focus crawling
+---
 
-### Rate Limiting
+## Performance tips
 
-- Respect site's robots.txt
-- Implement appropriate delays between requests
-- Monitor API usage and limits
-- Use appropriate error handling for rate limits
+- **Start shallow:** begin with `max_depth: 1` and small `max_breadth`.
+- **Limit scope:** use `select_paths` / `exclude_paths` so you don’t crawl the whole site.
+- **Choose extract depth wisely:**
+  - `basic` for simple pages
+  - `advanced` only when you truly need richer extraction
 
-## Best Practices Summary
+<Callout kind="tip">
 
-1. **Start Small**
-   - Begin with limited depth and breadth
-   - Gradually increase based on needs
-   - Monitor performance and adjust
+If a crawl feels slow or expensive:
 
-2. **Be Specific**
-   - Use path patterns to focus crawling
-   - Exclude irrelevant sections
+- Lower `max_depth` and `max_breadth`.
+- Add more specific `select_paths`.
+- Switch from `advanced` to `basic` extract depth.
 
-3. **Optimize Resources**
-   - Choose appropriate extract_depth
-   - Set reasonable limits
-   - Use include_images only when needed
+</Callout>
 
-4. **Handle Errors**
-   - Implement retry logic
-   - Monitor failed results
-   - Handle rate limits appropriately
+---
 
-5. **Security**
-   - Respect robots.txt
-   - Use appropriate authentication
-   - Exclude sensitive paths
+## Safe and polite crawling
 
-6. **Integration**
-   - Plan for data processing
-   - Consider storage requirements
-   - Design for scalability
+- Respect `robots.txt` and site policies.
+- Avoid crawling sensitive or private paths.
+- Add auth only where you are allowed to (internal docs, paywalled help centers, etc.).
 
-## Common Pitfalls
+Example for an internal help center:
 
-1. **Excessive Depth**
-   - Avoid setting max_depth too high
-   - Start with 1-2 levels
-   - Increase only if necessary
+```json
+{
+  "url": "https://help.example.com",
+  "max_depth": 2,
+  "select_domains": ["^help\\.example\\.com$"],
+  "exclude_paths": ["/admin/.*", "/billing/.*"]
+}
+```
 
-2. **Unfocused Crawling**
-   - Use instructions for guidance
+---
 
-3. **Resource Overuse**
-   - Monitor API usage
-   - Set appropriate limits
-   - Use basic extract_depth when possible
+## Quick checklist
 
-4. **Missing Content**
-   - Verify path patterns
-   - Monitor crawl coverage
+Before you run a big crawl, check:
 
-## Integration with Map
+1. Do I really need this depth and breadth?
+2. Have I focused on the right paths?
+3. Am I respecting the site’s rules and rate limits?
 
-Consider using Map before Crawl to:
-
-1. Discover site structure
-2. Identify relevant paths
-3. Plan crawl strategy
-4. Validate URL patterns
-
-Example workflow:
-
-1. Use Map to get site structure
-2. Analyze paths and patterns
-3. Configure Crawl with discovered paths
-4. Execute focused crawl
-
-## Conclusion
-
-Tavily's Crawl API is powerful for extracting structured content from websites. By following these best practices, you can:
-
-- Optimize crawl performance
-- Ensure complete coverage
-- Maintain resource efficiency
-- Build robust content extraction pipelines
-
-Remember to:
-
-- Start with limited scope
-- Use appropriate parameters
-- Monitor performance
-- Handle errors gracefully
-- Respect site policies
-
+If the answer is yes, you’re ready to run Crawl and plug the results into your pipeline or RAG system.
