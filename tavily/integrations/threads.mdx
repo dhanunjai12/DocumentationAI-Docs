@@ -1,0 +1,222 @@
+---
+title: Threads
+description: Integrate Tavily into threaded, stateful conversation loops using the Threads pattern.
+---
+
+## Overview
+
+The Threads integration shows how to plug Tavily search into a conversation-level, stateful `threads` API pattern. Use this when:
+
+- You manage long-running conversations with thread or session ids.
+- Your model can call tools or functions during a chat turn.
+- You want Tavily to provide grounded web results on-demand, while preserving full conversation history.
+
+Typical use cases include AI assistants, research copilots, and agents that need to look things up multiple times over a single thread.
+
+<Columns cols={3}>
+
+<Card
+  title="Grounded conversations"
+  href="/tavily/best-practices/search"
+  icon="search"
+  cta="Search best practices"
+>
+
+Use Tavily to keep threaded replies up to date and well-cited.
+
+</Card>
+
+<Card
+  title="Multi-turn agents"
+  href="/tavily/api-reference/usage"
+  icon="users"
+  cta="API usage"
+>
+
+Let your agent call Tavily repeatedly as user goals evolve.
+
+</Card>
+
+<Card
+  title="Tool-call friendly"
+  href="/tavily/api-reference/introduction"
+  icon="code"
+  cta="API reference"
+>
+
+Represent Tavily as a tool or function in your threads API.
+
+</Card>
+
+</Columns>
+
+## When to use the Threads pattern
+
+Use the Threads integration pattern if:
+
+- Your backend groups messages by a thread id and stores history server-side.
+- The model API you use (for example, chat completions with tools) can:
+  - Read the conversation history for a thread.
+  - Decide when to invoke Tavily.
+  - Incorporate search results back into the reply.
+
+If your application only needs single-turn answers without state, the regular Tavily search endpoints may be simpler than a threads-style abstraction.
+
+## Basic setup
+
+At a high level, you model Tavily as a tool that your threads API can invoke. The exact implementation depends on your stack, but the pattern is consistent.
+
+<Steps>
+
+<Step title="Define the Tavily tool" icon="code">
+
+Describe a tool that your model can call with search parameters.
+
+```python
+# Pseudocode: tool schema for Tavily search
+tavily_tool = {
+    "name": "tavily_search",
+    "description": "Search the web and return grounded, cited results.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "query": {"type": "string"},
+            "search_depth": {"type": "string"},
+            "max_results": {"type": "integer"}
+        },
+        "required": ["query"]
+    }
+}
+```
+
+</Step>
+
+<Step title="Wire the tool into your threads API" icon="terminal">
+
+Attach the Tavily tool to your model configuration, so each thread can call it when needed.
+
+```python
+# Pseudocode: register tools on your model config
+model = configure_model(
+    tools=[tavily_tool],
+    system_prompt="You are a helpful assistant. Use tavily_search when you need web data."
+)
+```
+
+</Step>
+
+<Step title="Implement the Tavily tool handler" icon="settings">
+
+On tool calls, execute a Tavily search and pass the results back to the model within the same thread.
+
+```python
+# Pseudocode: tool executor used by your threads backend
+def handle_tool_call(tool_name, args):
+    if tool_name == "tavily_search":
+        return tavily_search_api(
+            query=args["query"],
+            search_depth=args.get("search_depth", "basic"),
+            max_results=args.get("max_results", 5)
+        )
+    # handle other tools
+```
+
+</Step>
+
+</Steps>
+
+## Threaded conversation loop with Tavily
+
+Below is a generic loop for a `threads`-style API that supports messages, runs, and tools. It omits error handling and persistence details for clarity.
+
+<CodeGroup tabs="Python-like,TypeScript-like">
+
+```python
+# Pseudocode: Python-style threads loop
+
+# 1. Create or fetch an existing thread
+thread = threads.get_or_create(thread_id=session_id)
+
+# 2. Add the user message
+threads.add_message(
+    thread_id=thread.id,
+    role="user",
+    content=user_input
+)
+
+# 3. Start a run with tools enabled (including Tavily)
+run = threads.start_run(
+    thread_id=thread.id,
+    model=model,
+    tools=[tavily_tool]
+)
+
+# 4. Process the run, handling tool calls
+while not run.is_completed():
+    if run.next_action == "tool_call":
+        for call in run.tool_calls:
+            tool_output = handle_tool_call(call.name, call.arguments)
+            threads.submit_tool_output(
+                run_id=run.id,
+                tool_call_id=call.id,
+                output=tool_output
+            )
+    run = threads.refresh_run(run.id)
+
+# 5. Read the assistant message grounded by Tavily results
+assistant_reply = threads.get_last_message(thread.id, role="assistant")
+```
+
+```ts
+// Pseudocode: TypeScript-style threads loop
+
+// 1. Create or fetch a thread
+const thread = await threads.getOrCreate({ threadId: sessionId })
+
+// 2. Append user message
+await threads.addMessage({
+  threadId: thread.id,
+  role: "user",
+  content: userInput
+})
+
+// 3. Kick off a run with Tavily tool enabled
+let run = await threads.startRun({
+  threadId: thread.id,
+  model,
+  tools: [tavilyTool]
+})
+
+// 4. Handle Tavily tool calls inside the run
+while (!run.completed) {
+  if (run.nextAction === "tool_call") {
+    for (const call of run.toolCalls) {
+      const output = await handleToolCall(call.name, call.arguments)
+      await threads.submitToolOutput({
+        runId: run.id,
+        toolCallId: call.id,
+        output
+      })
+    }
+  }
+  run = await threads.refreshRun({ runId: run.id })
+}
+
+// 5. Get the final assistant message for this turn
+const assistantReply = await threads.getLastMessage({
+  threadId: thread.id,
+  role: "assistant"
+})
+```
+
+</CodeGroup>
+
+## Tuning Tavily for multi-turn threads
+
+<Callout kind="tip">
+
+For multi-turn conversations, keep Tavily queries focused and lightweight by default. Start with `search_depth` set to `"basic"` and `max_results` between 3 and 5, and only escalate to deeper searches or more results when the assistant explicitly needs more context (for example, summarizing long time ranges or complex topics). This reduces latency and cost while keeping answers grounded.
+
+</Callout>
+
+You can further refine behavior using the guidelines in [Best Practices for Search](/tavily/best-practices/search).
