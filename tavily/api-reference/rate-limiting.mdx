@@ -1,0 +1,375 @@
+---
+title: Rate Limiting
+description: Practical guidance for handling Tavily API rate limits in your applications.
+---
+
+## Overview
+
+Tavily enforces rate limits to ensure reliable performance for all users. Limits are tied to your plan and available credits, and are typically enforced over short windows (for example, per-minute) plus broader daily or monthly quotas.
+
+This page focuses on how rate limiting behaves at the API level and how to build resilient clients. For a high-level view of plans and aggregate limits, see the [Rate Limits overview](/tavily/rate-limits) and [Credits and Pricing](/tavily/api-credits).
+
+<Callout kind="info">
+
+The exact numeric limits for your account may change over time and can depend on your plan and usage. Always treat limits as configuration that may evolve, not as hard-coded constants in your application.
+
+</Callout>
+
+## How Rate Limiting Works
+
+### Relationship between credits and rate limits
+
+Your ability to call the API is governed by two related constraints:
+
+- **Credits**: Each request consumes credits based on the endpoint and options you use.
+- **Rate limits**: Separate guardrails ensure you do not send too many requests in a short time window, even if you still have credits.
+
+Conceptually, Tavily enforces:
+
+- A **burst limit** over a short window (for example, per-minute).
+- A **longer-term quota** (for example, per-day) that is aligned with your plan and credits.
+
+When either constraint is hit, the API returns a rate limit error and does not process additional requests until enough capacity is restored.
+
+### Typical enforcement pattern
+
+The Tavily API uses a sliding window style of enforcement:
+
+1. **Short-term burst checks**  
+   Requests are counted over a small time window. If you exceed the allowed number of calls in that window, additional requests are temporarily blocked.
+
+2. **Long-term quota checks**  
+   Overall usage is tracked over a larger time period. If you exhaust your plan allocation (for example, your daily or monthly quota), further requests will fail until the quota resets or you upgrade.
+
+3. **Reset behavior**  
+   - Short-term limits automatically recover as time passes and older requests fall out of the window.
+   - Longer-term quotas reset according to your billing cycle and plan.
+
+### Headers and metadata
+
+Depending on your integration and environment, responses may include headers that help you introspect your current limit status, for example:
+
+- `X-RateLimit-Limit`  
+- `X-RateLimit-Remaining`  
+- `X-RateLimit-Reset`
+
+You can use these values to implement **adaptive throttling**. If such headers are not present in your environment, you should still implement client-side limits as described below.
+
+<ExpandableGroup>
+
+<Expandable title="Should I assume hard per-minute numbers?" default-open="false">
+
+Do not rely on any specific per-minute or per-day number. Instead:
+
+- Implement a **configurable** rate limit in your client.
+- Start conservatively, then gradually increase throughput while monitoring for rate limit responses.
+- Allow configuration per-environment (for example, staging vs. production).
+
+</Expandable>
+
+<Expandable title="How does this relate to concurrency?" default-open="false">
+
+Rate limiting is about **how many calls happen over time**, while concurrency is about **how many are in flight at once**. You may be able to send multiple requests concurrently as long as you stay within your allowed rate.
+
+A good practice is to keep a small pool of concurrent workers and throttle how quickly they dequeue jobs based on recent rate limit responses.
+
+</Expandable>
+
+</ExpandableGroup>
+
+## Handling Rate Limit Errors
+
+### Error shape
+
+When you exceed a rate limit, the Tavily API returns an error response. The exact status code and payload may vary by environment, but you should expect:
+
+- An HTTP status in the **4xx range** (commonly used for rate limit violations).
+- A JSON response describing the error and suggesting when to retry.
+
+<Response tabs="429,Other 4xx" default-tab="1" show-lines="true">
+
+```json
+{
+  "error": {
+    "type": "rate_limit_exceeded",
+    "message": "You have exceeded your current rate limit. Please retry later or reduce your request frequency."
+  }
+}
+```
+
+```json
+{
+  "error": {
+    "type": "quota_exceeded",
+    "message": "You have exhausted your current plan quota. Please wait for reset or upgrade your plan."
+  }
+}
+```
+
+</Response>
+
+### Recommended backoff strategy
+
+When you receive a rate limit error, you should:
+
+1. **Stop retrying immediately at full speed.**
+2. **Apply exponential backoff with jitter**, for example:
+   - 1st retry: wait 1 to 2 seconds  
+   - 2nd retry: wait 2 to 4 seconds  
+   - 3rd retry: wait 4 to 8 seconds  
+   - Then cap at a reasonable maximum (for example, 30 to 60 seconds).
+3. **Honor explicit reset hints**, such as:
+   - A `Retry-After` header, if present.
+   - A `reset_at` or similar timestamp field in the error body, when available.
+
+<Callout kind="tip">
+
+Always treat rate limit errors as **signal**, not noise. If you see frequent rate limiting in production, lower your global send rate or upgrade your plan instead of relying on aggressive retries.
+
+</Callout>
+
+### Example: robust client with backoff
+
+<CodeGroup tabs="JavaScript,Python" show-lines={true}>
+
+```javascript
+async function callTavilyWithBackoff(fetchFn, payload, maxRetries = 5) {
+  let attempt = 0
+
+  while (true) {
+    const res = await fetchFn(payload)
+
+    if (res.ok) {
+      return res
+    }
+
+    const status = res.status
+
+    if (status === 429 || status === 403) {
+      // Rate limit or quota related
+      if (attempt >= maxRetries) {
+        throw new Error("Rate limit exceeded and maxRetries reached")
+      }
+
+      const retryAfterHeader = res.headers.get("Retry-After")
+      const baseDelayMs = retryAfterHeader
+        ? parseInt(retryAfterHeader, 10) * 1000
+        : 1000 * Math.pow(2, attempt)
+
+      // Add jitter between 0.5x and 1.5x
+      const jitter = 0.5 + Math.random()
+      const delayMs = Math.min(baseDelayMs * jitter, 60000)
+
+      await new Promise((resolve) => setTimeout(resolve, delayMs))
+      attempt += 1
+      continue
+    }
+
+    // Non rate-limit error
+    throw new Error(`Request failed with status ${status}`)
+  }
+}
+```
+
+```python
+import random
+import time
+import requests
+
+def call_tavily_with_backoff(request_fn, payload, max_retries=5):
+    attempt = 0
+
+    while True:
+        response = request_fn(payload)
+
+        if response.ok:
+            return response
+
+        status = response.status_code
+
+        if status in (429, 403):
+            # Rate limit or quota related
+            if attempt >= max_retries:
+                raise RuntimeError("Rate limit exceeded and max_retries reached")
+
+            retry_after_header = response.headers.get("Retry-After")
+            if retry_after_header is not None:
+                base_delay = int(retry_after_header)
+            else:
+                base_delay = 1 * (2 ** attempt)
+
+            jitter = 0.5 + random.random()
+            delay = min(base_delay * jitter, 60)
+
+            time.sleep(delay)
+            attempt += 1
+            continue
+
+        # Non rate-limit error
+        response.raise_for_status()
+```
+
+</CodeGroup>
+
+## Best Practices
+
+### Design for limits from the start
+
+<Steps>
+
+<Step title="Make rate limits configurable" icon="settings">
+
+Store any assumed limits or worker counts in configuration, not code. This allows you to tune behavior per environment and adapt quickly if your plan changes or you add new workloads.
+
+</Step>
+
+<Step title="Use queues instead of fire-and-forget" icon="database">
+
+Instead of sending requests directly from user-triggered events at arbitrary rates, queue them and process through a worker that enforces a maximum send rate. This gives you a single place to coordinate backoff and retries.
+
+</Step>
+
+<Step title="Batch or deduplicate work where possible" icon="bar-chart">
+
+If your use case allows it:
+
+- Merge multiple related tasks into a single Tavily request.
+- Cache results for frequently repeated queries.
+- Deduplicate equivalent requests that happen close together in time.
+
+This reduces both credit consumption and rate limit pressure.
+
+</Step>
+
+<Step title="Monitor and alert on rate limit errors" icon="alert-triangle">
+
+Track:
+
+- Count of rate limit errors over time.
+- Percentage of total requests that fail due to rate limits.
+- Queuing or latency impacts caused by backoff.
+
+Set alerts when these cross thresholds so you can proactively adjust your configuration or upgrade your plan.
+
+</Step>
+
+</Steps>
+
+### Example: simple client-side throttling
+
+The snippet below illustrates one approach to enforcing a fixed maximum request rate on the client.
+
+<Request tabs="JavaScript" show-lines="true" default-tab="1">
+
+```javascript
+class TavilyRateLimiter {
+  constructor(maxPerInterval, intervalMs) {
+    this.maxPerInterval = maxPerInterval
+    this.intervalMs = intervalMs
+    this.queue = []
+    this.currentIntervalStart = Date.now()
+    this.sentInInterval = 0
+    this.timer = null
+  }
+
+  schedule(task) {
+    return new Promise((resolve, reject) => {
+      this.queue.push({ task, resolve, reject })
+      this.process()
+    })
+  }
+
+  process() {
+    if (this.timer) return
+
+    const now = Date.now()
+    if (now - this.currentIntervalStart >= this.intervalMs) {
+      this.currentIntervalStart = now
+      this.sentInInterval = 0
+    }
+
+    if (this.queue.length === 0) return
+
+    if (this.sentInInterval >= this.maxPerInterval) {
+      const waitMs =
+        this.intervalMs - (now - this.currentIntervalStart)
+      this.timer = setTimeout(() => {
+        this.timer = null
+        this.process()
+      }, Math.max(waitMs, 0))
+      return
+    }
+
+    const item = this.queue.shift()
+    this.sentInInterval += 1
+    Promise.resolve()
+      .then(item.task)
+      .then(item.resolve)
+      .catch(item.reject)
+      .finally(() => {
+        this.timer = null
+        this.process()
+      })
+  }
+}
+```
+
+</Request>
+
+You can adapt the `maxPerInterval` and `intervalMs` values based on your plan and observed behavior.
+
+## FAQs
+
+### Common questions
+
+<ExpandableGroup>
+
+<Expandable title="What happens when I hit a short-term rate limit?" default-open="true">
+
+You will receive a rate limit error response and your request will not be processed. After a brief period, once your request volume falls back under the limit window, requests will start succeeding again.
+
+Your client should:
+
+- Detect the rate limit response.
+- Slow down subsequent requests using backoff.
+- Optionally, respect any reset or retry hints provided in the response.
+
+</Expandable>
+
+<Expandable title="What happens when I exhaust my longer-term quota?" default-open="false">
+
+When you hit your plan-level quota (for example, daily or monthly), Tavily will reject additional requests with an error indicating that your quota has been exceeded. These errors will generally not disappear after a short delay; you must:
+
+- Wait for the quota to reset, or  
+- Upgrade your plan or add credits, depending on your account configuration.
+
+Retries with short backoff will not help in this scenario.
+
+</Expandable>
+
+<Expandable title="How can I see my current limits?" default-open="false">
+
+Use the [Rate Limits overview](/tavily/rate-limits) and your Tavily dashboard to see:
+
+- The limits associated with your plan.
+- Your recent and historical usage.
+- Any upgrade options that may be available.
+
+Do not attempt to infer limits solely from API behavior.
+
+</Expandable>
+
+<Expandable title="Can Tavily increase my limits?" default-open="false">
+
+In many cases, higher limits are available by changing plans or contacting Tavily support with details about your workload. It is still recommended to keep client-side throttling and backoff logic in place even if your limits are increased.
+
+</Expandable>
+
+</ExpandableGroup>
+
+### Summary
+
+- Rate limits protect the reliability of the Tavily service.
+- Limits are associated with your plan and credits and are enforced over both short-term and longer-term windows.
+- When limits are exceeded, you receive an error and should respond with backoff and, where helpful, client-side throttling.
+- For full plan-level details, always refer to the [Rate Limits overview](/tavily/rate-limits).
