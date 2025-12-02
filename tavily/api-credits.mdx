@@ -6,7 +6,9 @@ description: Learn how to get and manage your Tavily API Credits.
 ## Free API Credits
 
 <Card icon="key" href="https://app.tavily.com" title="Get your free API key" horizontal>
+  
   You get 1,000 free API Credits every month. **No credit card required.**
+
 </Card>
 
 ## Pricing Overview
@@ -70,6 +72,100 @@ Tavily Crawl combines both mapping and extraction operations, so the cost is the
 
 For example:
 
-- If you crawl 10 pages with basic extraction depth, you'll be charged **1 credit for mapping** (10 pages) + **2 credits for extraction** (10 successful extractions ÷ 5) = **3 total credits**
-- If you crawl 10 pages with advanced extraction depth, you'll be charged **1 credit for mapping** + **4 credits for extraction** = **5 total credits**
+- If you crawl 10 pages with basic extraction depth, you'll be charged **1 credit for mapping** (10 pages) plus **2 credits for extraction** (10 successful extractions divided by 5) which equals **3 total credits**
+- If you crawl 10 pages with advanced extraction depth, you'll be charged **1 credit for mapping** plus **4 credits for extraction** which equals **5 total credits**
 
+## Plans & Billing
+
+Tavily offers multiple ways to access the API depending on your usage level. This section explains how plans work together, how production access is unlocked, and how to manage billing.
+
+<Callout kind="info">
+  
+  All billing and usage controls are available in your Tavily dashboard under **Billing** and **Usage**.
+
+</Callout>
+
+### Relationship Between Free, Monthly Plans, and Pay-as-You-Go
+
+<Columns cols={3}>
+
+<Card title="Free Tier" href="https://app.tavily.com/billing" icon="info">
+
+  
+  You always receive 1,000 free credits per month. Ideal for testing or small workloads.
+
+</Card>
+
+<Card title="Monthly Plans" href="https://app.tavily.com/billing" icon="bar-chart">
+
+  
+  Predictable monthly quotas at a discounted per-credit rate.
+
+</Card>
+
+<Card title="Pay-as-you-go" href="https://app.tavily.com/billing" icon="zap">
+
+  
+  Optional per-credit billing at $0.008 per credit once your included credits run out.
+
+</Card>
+
+</Columns>
+
+### Unlocking Production API Keys
+
+<Steps>
+
+<Step title="Select a paid monthly plan" icon="credit-card">
+  
+  Any paid plan immediately unlocks production-grade keys and removes test-only restrictions.
+
+</Step>
+
+<Step title="Or enable pay-as-you-go" icon="settings">
+  
+  If you prefer not to commit to a plan, you can enable usage-based billing to unlock production keys.
+
+</Step>
+
+</Steps>
+
+### How Overage Billing Works
+
+<Expandable title="What happens when I exceed my plan's credits?" default-open="false">
+
+  
+  When you use all credits included in your plan:
+
+  - If **pay-as-you-go is enabled**, additional API calls continue seamlessly and are billed at $0.008 per credit.
+  - If **pay-as-you-go is disabled**, API requests may fail once you exceed your plan quota. Enable usage-based billing to avoid interruptions.
+
+</Expandable>
+
+### Where to Manage Billing and View Usage
+
+<Tabs>
+
+<Tab title="Billing" icon="credit-card">
+  
+  Visit the **Billing** page in the dashboard to:
+  - Change or cancel your plan
+  - Enable or disable pay-as-you-go
+  - Update payment methods
+
+  [Go to Billing](https://app.tavily.com/billing)
+
+</Tab>
+
+<Tab title="Usage" icon="bar-chart">
+  
+  The **Usage** page shows:
+  - Daily credit consumption
+  - Breakdowns by endpoint
+  - Remaining plan credits for the current cycle
+
+  [View Usage](https://app.tavily.com/usage)
+
+</Tab>
+
+</Tabs>
