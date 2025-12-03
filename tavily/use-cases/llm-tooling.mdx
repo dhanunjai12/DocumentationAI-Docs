@@ -1,0 +1,249 @@
+---
+title: "Using Tavily as an LLM Tool"
+description: "Learn how to integrate Tavily as a tool or function within LLM agents and RAG applications, including patterns, parameters, and guardrails."
+---
+
+## Concept: Tavily as a Search Tool for LLMs
+
+Large language models can call external functions to gather real‑time information. Tavily serves as a high‑precision search and extraction tool that LLMs can invoke when they need verified facts, fresh context, or structured data.
+
+<Callout kind="info">
+
+Using Tavily as a tool means the LLM does not generate its own search queries in text. Instead, it returns a JSON tool call that your application executes before resuming the conversation.
+
+</Callout>
+
+## Core Pattern: Tool‑Calling Workflow
+
+Below is a typical flow for using Tavily inside an LLM agent.
+
+<Steps>
+
+<Step title="Model decides to call Tavily" icon="zap">
+
+The LLM identifies that external information is required and emits a tool call with arguments such as query text and parameters.
+
+</Step>
+
+<Step title="Your application executes the tool" icon="terminal">
+
+You make a Tavily API request using the provided arguments and capture the structured response.
+
+</Step>
+
+<Step title="Return data back to the model" icon="arrow-right">
+
+Feed the Tavily results into the LLM as tool output so it can synthesize a final answer.
+
+</Step>
+
+</Steps>
+
+## Example: OpenAI Tool Definition and Call
+
+The following pattern works for any OpenAI model that supports tool calling. Attribute values inside inline code are shown literally as `{ ... }` because they represent JSON used by your application.
+
+<CodeGroup tabs="JavaScript,Python">
+
+```javascript
+import OpenAI from "openai";
+const client = new OpenAI();
+
+const tools = [
+  {
+    type: "function",
+    function: {
+      name: "tavily_search",
+      description: "Search the web using Tavily",
+      parameters: {
+        type: "object",
+        properties: {
+          query: { type: "string" },
+          max_results: { type: "number" },
+          search_depth: { type: "string" },
+          include_answer: { type: "boolean" }
+        },
+        required: ["query"]
+      }
+    }
+  }
+];
+
+const response = await client.chat.completions.create({
+  model: "gpt-4.1",
+  messages: [
+    { role: "user", content: "What is the current unemployment rate in France?" }
+  ],
+  tools
+});
+
+// Inspect response.tool_calls and execute Tavily request if present
+```
+
+```python
+from openai import OpenAI
+client = OpenAI()
+
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "tavily_search",
+            "description": "Search the web using Tavily",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string"},
+                    "max_results": {"type": "number"},
+                    "search_depth": {"type": "string"},
+                    "include_answer": {"type": "boolean"}
+                },
+                "required": ["query"]
+            }
+        }
+    }
+]
+
+response = client.chat.completions.create(
+    model="gpt-4.1",
+    messages=[{"role": "user", "content": "Latest news on renewable energy in Japan"}],
+    tools=tools
+)
+
+# Inspect response.tool_calls and execute Tavily request if present
+```
+
+</CodeGroup>
+
+## Pseudocode Pattern for Agents
+
+Below is a generic pseudocode loop showing how most agent frameworks handle tool calling.
+
+```text
+repeat:
+  send messages to LLM
+  if LLM returns a tool call:
+    parse tool call arguments
+    if tool is tavily_search:
+      result = tavily.search(arguments)
+      append tool result to messages
+    continue
+  else:
+    return LLM final answer
+```
+
+## Recommended Default Parameters
+
+These settings work well for most agents and RAG applications.
+
+- `max_results`: 3  
+- `search_depth`: "basic" for quick answers, "advanced" for deeper investigative tasks  
+- `include_answer`: true (recommended for fast summarization)  
+- `include_raw_content`: false unless full-text snippets are needed  
+- `include_images`: false unless image‑aware tasks  
+- `topic`: optional; improves precision when known  
+- `query`: keep under 200 characters for higher accuracy
+
+<Callout kind="tip">
+
+Short queries work best. Avoid sending long user prompts as direct search queries; instead extract the minimal search intent.
+
+</Callout>
+
+## Using Anthropic and Other Providers
+
+Anthropic, Google, Microsoft ADK, and other providers also support function or tool patterns. The logic is the same:
+
+- Define a tool schema for Tavily  
+- Let the model decide when to use it  
+- Execute the request server‑side  
+- Return structured results as tool output  
+
+Provider-specific syntax differs, but the workflow mirrors the OpenAI example above.
+
+## Guardrails and Cost Control
+
+### When the Agent Should Not Call Tavily
+
+- The user asks for opinions or creative tasks where retrieval is unnecessary  
+- The question is fully answerable from context you already provided  
+- The agent is rephrasing or performing an internal reasoning step  
+- Duplicate or near-duplicate queries within a short window  
+
+### How to Reduce Unnecessary Calls
+
+<Columns cols={2}>
+
+<Card title="Limit Calls per Turn" href="/tavily/rate-limits" icon="gauge">
+
+  
+Implement guardrail logic to cap search calls per message or conversation step.
+
+</Card>
+
+<Card title="Set Maximum Query Length" href="/tavily/best-practices/search" icon="search">
+
+  
+Truncate long model queries; concise queries lead to fewer repeated attempts.
+
+</Card>
+
+</Columns>
+
+### Best Practices for Agent‑Managed Search
+
+- Cache Tavily responses for repeated questions  
+- Add simple heuristics like "if query is similar to previous, skip"  
+- Use `max_results` of 3 or fewer unless deeper research is required  
+- Prefer "basic" depth for fast interactions; reserve "advanced" for heavy tasks  
+
+<Callout kind="alert">
+
+Be cautious with loops. Agents that repeatedly request external searches without analyzing results can burn credits quickly.
+
+</Callout>
+
+## Related Pages
+
+<Columns cols={3}>
+
+<Card title="Quickstart" href="/tavily/quickstart" icon="rocket">
+
+  
+Start here if you need the fastest introduction to the Tavily API.
+
+</Card>
+
+<Card title="Best Practices for Search" href="/tavily/best-practices/search" icon="search">
+
+  
+Improve relevance and retrieval quality.
+
+</Card>
+
+<Card title="Best Practices for Extract" href="/tavily/best-practices/extract" icon="file-text">
+
+  
+Learn how to extract structured data from URLs.
+
+</Card>
+
+</Columns>
+
+<Columns cols={2}>
+
+<Card title="RAG with Tavily" href="/tavily/use-cases/rag" icon="database">
+
+  
+Patterns and architecture for RAG pipelines using Tavily.
+
+</Card>
+
+<Card title="Search Depth Recommendations" href="/tavily/best-practices/search" icon="bar-chart">
+
+  
+Guidance on choosing between basic and advanced depth.
+
+</Card>
+
+</Columns>
