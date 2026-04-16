@@ -1,1 +1,13 @@
-{}
+{
+  "name": "Documentation AI App",
+  "initialRoute": "tavily/about",
+  "navigation": {
+    "groups": [
+      {
+        "group": "Tavily",
+        "icon": "search",
+        "pages": []
+      }
+    ]
+  }
+}
