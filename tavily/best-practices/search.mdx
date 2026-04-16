@@ -1,17 +1,20 @@
 ---
 title: Best Practices for Search
-description: Learn how to optimize your queries, refine search filters, and leverage advanced parameters for better performance.
+description: >-
+  Learn how to optimize your queries, refine search filters, and leverage
+  advanced parameters for better performance.
 canonical: paperguide.ai
 ---
-
 ## Optimize your query
 
-Use short, specific queries that reflect the information you want the search engine to retrieve.
+Use short, specific queries that reflect the information you want the search engine to retrieve
 
 ### Keep queries under 400 characters
 
 - Use concise intent-focused text.
+
 - Treat queries as search instructions, not prompts.
+
 - Overlong queries return an error.
 
 ```json
@@ -25,6 +28,7 @@ Use short, specific queries that reflect the information you want the search eng
 ### Break complex tasks into sub-queries
 
 - Split broad research tasks into multiple focused calls.
+
 - Improves relevance and reduces noise.
 
 <CodeGroup show-lines="true" tabs={[]}>
@@ -54,9 +58,10 @@ Use short, specific queries that reflect the information you want the search eng
 
 Use only the parameters you need. Each one affects cost, relevance, and response size.
 
-### max_results
+### max\_results
 
 - Controls number of retrieved results (default is 5).
+
 - Set intentionally; large values reduce relevance.
 
 <CodeGroup show-lines="true" tabs={[]}>
@@ -75,10 +80,12 @@ Use only the parameters you need. Each one affects cost, relevance, and response
   ```
 </CodeGroup>
 
-### content and search_depth
+### content and search\_depth
 
 - `content`: NLP-generated snippet for quick inspection.
+
 - `search_depth=advanced`: Returns highly aligned snippets.
+
 - Combine with `chunks_per_source` and `include_raw_content` when you need deeper retrieval.
 
 <CodeGroup show-lines="true" tabs={[]}>
@@ -111,7 +118,7 @@ Use only the parameters you need. Each one affects cost, relevance, and response
 
 Use time filters when recency matters.
 
-#### time_range
+#### time\_range
 
 <CodeGroup show-lines="true" tabs={[]}>
   ```json
@@ -128,7 +135,7 @@ Use time filters when recency matters.
   ```
 </CodeGroup>
 
-#### start_date and end_date
+#### start\_date and end\_date
 
 <CodeGroup show-lines="true" tabs={[]}>
   ```json
@@ -147,11 +154,12 @@ Use time filters when recency matters.
   ```
 </CodeGroup>
 
-### include_raw_content
+### include\_raw\_content
 
 Use for full-page extraction, but prefer a two-step process when depth matters.
 
 1. Search for URLs.
+
 2. Extract with the Extract API.
 
 See the guidance in [Best Practices for the Extract API](/tavily/best-practices/extract#2-two-step-process-search-then-extract).
@@ -190,10 +198,12 @@ Retrieve only news articles with `published_date` metadata.
   ```
 </CodeGroup>
 
-### auto_parameters
+### auto\_parameters
 
 - Enables automatic tuning.
+
 - Explicit settings override automatic ones.
+
 - Defaults may select `advanced` search (2 credits).
 
 <CodeGroup show-lines="true" tabs={[]}>
@@ -215,7 +225,7 @@ Retrieve only news articles with `published_date` metadata.
   ```
 </CodeGroup>
 
-### include_domains
+### include\_domains
 
 Scope search to trusted domains.
 
@@ -250,7 +260,7 @@ Scope search to trusted domains.
   ```
 </CodeGroup>
 
-### exclude_domains
+### exclude\_domains
 
 Filter out unwanted sources. Use sparingly.
 
@@ -325,7 +335,9 @@ Filter out unwanted sources. Use sparingly.
 Use meaningful concurrency patterns to avoid blocking and stay within rate limits.
 
 - Reuse a single `AsyncTavilyClient`.
+
 - Use `asyncio.gather` for parallel queries.
+
 - Catch exceptions to keep pipelines resilient.
 
 ```python
@@ -359,7 +371,9 @@ Combine search metadata, regex extraction, and LLM reasoning for higher-quality 
 ### LLM + keyword filtering
 
 - Remove results containing unwanted terms.
+
 - Prioritize content with key signals.
+
 - Reduce cost by filtering before LLM use.
 
 ### Use metadata effectively
@@ -367,8 +381,11 @@ Combine search metadata, regex extraction, and LLM reasoning for higher-quality 
 Key fields:
 
 - `title`: quick relevance indicator.
+
 - `raw_content`: detailed analysis; pair with Extract API when needed.
+
 - `score`: alignment between snippet and query.
+
 - `content`: general summary; deeper alignment in advanced mode.
 
 You can sort by score, set thresholds, and combine metadata for ranking.
@@ -393,10 +410,8 @@ emails = re.findall(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", text)
 print(emails)
 ```
 
-<Callout kind="info">
-  
-Refine results by combining metadata analysis, regex extraction, and LLM reasoning. This produces more reliable and task-relevant output.
-
+<Callout kind="info" collapsed="false">
+  Refine results by combining metadata analysis, regex extraction, and LLM reasoning. This produces more reliable and task-relevant output.
 </Callout>
 
 ## Recommended integrations
@@ -404,11 +419,16 @@ Refine results by combining metadata analysis, regex extraction, and LLM reasoni
 Use these integrations to operationalize best practices:
 
 - **OpenAI**: Use Tavily as a tool/function in chat completions.
+
 - **LangChain**: Add Tavily to agents and RAG workflows.
+
 - **LlamaIndex**: Merge fresh web results into index-based pipelines.
 
 Links:
 
 - [OpenAI integration](/tavily/integrations/openai)
+
 - [LangChain integration](/tavily/integrations/langchain)
+
 - [LlamaIndex integration](/tavily/integrations/llamaindex)
+
