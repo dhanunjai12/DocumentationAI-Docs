@@ -90,11 +90,6 @@
                 "icon": "server"
               },
               {
-                "title": "Best Practices for Crawl",
-                "path": "tavily/best-practices/crawl",
-                "icon": "navigation"
-              },
-              {
                 "title": "Crawl & Map Deep Dive",
                 "path": "tavily/best-practices/crawl-advanced",
                 "icon": "navigation"
