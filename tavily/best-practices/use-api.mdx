@@ -1,0 +1,100 @@
+---
+title: Best Practices for Using the API
+description: Use Tavily APIs efficiently with practical guidance on query design, request scope, and response handling.
+---
+
+## Overview
+
+Use the Tavily API with focused inputs and narrow outputs so your application gets the data it needs without unnecessary work.
+
+The recommendations below help you keep requests fast, relevant, and easier to maintain. They also reduce follow-up filtering in your application code.
+
+## Recommended practices
+
+<Steps>
+  <Step title="Start with a focused request">
+
+Keep your request targeted to the information you need. Short, specific inputs usually produce more relevant results and are easier to debug when something changes.
+
+  </Step>
+  <Step title="Request only the data you will use">
+
+Keep responses as small as possible by avoiding extra fields or follow-up calls you do not need. Smaller responses are easier to process and less likely to add noise to your workflow.
+
+  </Step>
+  <Step title="Treat API output as input for the next step">
+
+Use the API to gather the information your application needs, then pass only the relevant results into extraction, ranking, or downstream processing. That keeps each step narrow and easier to reason about.
+
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+Prefer deterministic application logic around Tavily responses. Handle filtering, ranking, and presentation in your code instead of depending on a single request to solve every downstream need.
+</Callout>
+
+## Keep requests concise
+
+Use the smallest request that still answers the question. If your application can split a broad task into smaller requests, do that instead of sending one oversized query.
+
+```bash
+curl -X POST https://api.tavily.com/search \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer sk_live_example_9xmk7q2r" \
+  -d '{
+    "query": "Tavily API best practices",
+    "search_depth": "basic",
+    "max_results": 5
+  }'
+```
+
+This pattern keeps the request narrow and gives you a response that is easier to validate and present.
+
+## Validate the response before you use it
+
+Check the fields you depend on before rendering, storing, or chaining the result into another step. That protects your application from unexpected data shape changes or empty results.
+
+```python
+import requests
+
+response = requests.post(
+    "https://api.tavily.com/search",
+    headers={
+        "Authorization": "Bearer sk_live_example_9xmk7q2r",
+        "Content-Type": "application/json",
+    },
+    json={
+        "query": "Tavily API best practices",
+        "search_depth": "basic",
+        "max_results": 5,
+    },
+)
+
+data = response.json()
+
+results = data.get("results", [])
+if not results:
+    raise ValueError("No search results returned")
+
+first_result = results[0]
+title = first_result.get("title")
+url = first_result.get("url")
+
+if not title or not url:
+    raise ValueError("Search result is missing required fields")
+```
+
+Use this pattern when your next step depends on a result being present and well formed.
+
+## Related best practices
+
+Use these pages alongside this one:
+
+<Columns cols={2}>
+  <Card title="Best Practices for Search" href="/tavily/best-practices/search" icon="search">
+    Keep search queries short and specific so Tavily returns relevant results.
+  </Card>
+  <Card title="Best Practices for Extract" href="/tavily/best-practices/extract" icon="database">
+    Retrieve full page content after search when you need the source text.
+  </Card>
+</Columns>

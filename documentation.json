@@ -75,6 +75,11 @@
                 "icon": "file-text"
               },
               {
+                "title": "Best Practices for Using the API",
+                "path": "tavily/best-practices/use-api",
+                "icon": "code"
+              },
+              {
                 "title": "Best Practices for Multi-Query Research",
                 "path": "tavily/best-practices/multi-query",
                 "icon": "search"
