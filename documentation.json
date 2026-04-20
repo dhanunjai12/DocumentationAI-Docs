@@ -70,14 +70,14 @@
                 "icon": "search"
               },
               {
-                "title": "Best Practices for Search and Extract",
-                "path": "tavily/best-practices/search-and-extract",
-                "icon": "search"
-              },
-              {
                 "title": "Best Practices for Extract",
                 "path": "tavily/best-practices/extract",
                 "icon": "file-text"
+              },
+              {
+                "title": "Best Practices for Multi-Query Research",
+                "path": "tavily/best-practices/multi-query",
+                "icon": "search"
               },
               {
                 "title": "Best Practices for Crawl",

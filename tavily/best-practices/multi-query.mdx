@@ -1,0 +1,100 @@
+---
+title: Best Practices for Multi-Query Research
+description: Break broad research tasks into focused Tavily queries, run them in parallel, and merge the results into a cleaner final answer.
+---
+
+## Break a broad question into focused queries
+
+A single broad search often returns mixed signals, duplicate sources, and results that only partially answer the question. Split the research task into smaller queries when you need better coverage, cleaner relevance, or faster iteration.
+
+Use a broad query only when the topic is narrow enough that one search can cover it cleanly. For multi-part research, separate the question by subtopic or intent first, then search each part directly.
+
+### Group queries by subtopic or intent
+
+Organize queries around the way you plan to use the results.
+
+- **Subtopic** — one query per major theme, such as pricing, limitations, or implementation details.
+- **Intent** — one query per research goal, such as finding official docs, comparing options, or checking recent changes.
+- **Audience** — one query per reader need when the same topic has different angles, such as technical setup versus business context.
+
+Keep each query concise and specific. A good query names the concept and the angle you want; a weak query asks for too much at once.
+
+<Callout kind="tip">
+
+If one query would need "and" to connect several unrelated ideas, split it into separate searches. That usually produces cleaner source sets and easier synthesis.
+
+</Callout>
+
+## Run searches in parallel
+
+Parallel execution reduces wait time and makes it easier to compare results across subtopics. Start all queries at once, then merge the outputs after each search returns.
+
+<Steps>
+<Step title="Define the research slices">
+
+Write one focused query for each subtopic you need to answer. Keep the wording short and use terms that match the language in the sources you want to find.
+
+</Step>
+<Step title="Execute the queries concurrently">
+
+Run all searches at the same time instead of waiting for one result before starting the next. This pattern works well when the queries are independent.
+
+</Step>
+<Step title="Merge the results by theme">
+
+Combine overlapping findings, remove duplicates, and keep the source that best supports each point. Group the final notes by subtopic so the answer reads as one coherent summary.
+
+</Step>
+</Steps>
+
+<Callout kind="info">
+
+Parallel queries are most useful when the answer depends on multiple independent facts. They are less helpful when each result depends on the previous one.
+
+</Callout>
+
+## Combine results into one answer
+
+Treat each query result as a partial view of the topic, not a final answer. After the searches finish, compare the returned sources, extract the strongest evidence from each group, and assemble the final response in the order your reader needs it.
+
+When results overlap, prefer the source that is most specific to the subtopic. When results conflict, keep the source with the clearest support and note the difference before you finalize the answer.
+
+```python
+import asyncio
+from tavily import TavilyClient
+
+client = TavilyClient(api_key="tvly_example_9xmk7q2r")
+
+queries = [
+    "Tavily search best practices for query planning",
+    "Tavily search best practices for source selection",
+    "Tavily search best practices for result synthesis",
+]
+
+async def run_query(query: str):
+    return await client.search(query=query, max_results=5)
+
+async def main():
+    results = await asyncio.gather(*(run_query(query) for query in queries))
+
+    for query, result in zip(queries, results):
+        print(f"\nQuery: {query}")
+        for item in result.get("results", []):
+            print(f"- {item.get('title')}: {item.get('url')}")
+
+asyncio.run(main())
+```
+
+This pattern keeps each search focused and gives you separate result sets to merge. You can then deduplicate sources, compare coverage, and produce a final answer that is easier to trust.
+
+<Callout kind="info">
+
+If your workflow already uses a queue or async job runner, map each query to a separate task and merge the completed results in memory before generating the final summary.
+
+</Callout>
+
+## Keep the final synthesis tight
+
+Use the merged results to answer the original question, not to restate every search result. The best final answers usually preserve the structure of the subtopics you searched, then compress the evidence into a short, readable summary.
+
+For research workflows that need repeated queries, keep a small set of query patterns for common intents and adjust only the subject term. That makes it easier to reuse the workflow without turning every search into a custom prompt.
