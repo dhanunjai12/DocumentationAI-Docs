@@ -85,6 +85,11 @@
                 "icon": "search"
               },
               {
+                "title": "Best Practices for Using MCP",
+                "path": "tavily/best-practices/mcp",
+                "icon": "server"
+              },
+              {
                 "title": "Best Practices for Crawl",
                 "path": "tavily/best-practices/crawl",
                 "icon": "navigation"

@@ -1,0 +1,111 @@
+---
+title: Best Practices for Using MCP
+description: Configure Tavily MCP clients securely and choose the right connection method to keep requests reliable and API keys protected.
+---
+
+## Overview
+
+Use Tavily through MCP when you want to connect an existing MCP client to Tavily without building a direct API integration. It works best when you want consistent access to Tavily tools across clients, while keeping configuration predictable and credentials isolated.
+
+## Choose the right connection method
+
+<Steps>
+
+<Step title="Prefer local MCP when the client runs on your machine">
+
+Use a local MCP server when you want the client to read your Tavily credentials from your environment and keep traffic on your machine. This is the safest default for development and individual use.
+
+A local setup also keeps the client configuration simple. You control the process lifetime, the environment variables, and any updates to the server binary or package.
+
+</Step>
+
+<Step title="Use remote MCP when you need shared access or centralized operations">
+
+Use a remote MCP server when multiple clients need the same Tavily integration or when you want to manage the connection in one place. Remote setups reduce per-machine setup, but they add a network dependency and a public endpoint to maintain.
+
+Make sure the client is configured for the exact remote URL your deployment exposes, and confirm whether the endpoint requires authentication before you share it broadly.
+
+</Step>
+
+<Step title="Keep the client configuration minimal">
+
+Expose only the tools and settings your client actually needs. Smaller configurations are easier to review, easier to rotate, and less likely to break when you update the server.
+
+If your client supports per-server configuration, give the Tavily entry a clear name such as `tavily` so developers can identify it quickly in logs and settings.
+
+</Step>
+
+</Steps>
+
+## Handle API keys securely
+
+Store your Tavily API key outside source control and inject it through environment variables or the client’s secret storage. Avoid placing keys directly in checked-in configuration files, shared snippets, or screenshots.
+
+<Callout kind="alert">
+
+Never paste a live API key into a remote MCP config unless the deployment model protects that secret on the server side. If the key is stored on a developer workstation, treat that workstation as a sensitive environment.
+
+</Callout>
+
+A typical local pattern looks like this:
+
+```bash
+export TAVILY_API_KEY="tvly_example_8f2c9d1a7b4e"
+```
+
+If your client supports separate server definitions, keep the secret in the environment and reference it indirectly in the config:
+
+```json
+{
+  "mcpServers": {
+    "tavily": {
+      "command": "npx",
+      "args": ["-y", "@tavily/mcp-server"],
+      "env": {
+        "TAVILY_API_KEY": "tvly_example_8f2c9d1a7b4e"
+      }
+    }
+  }
+}
+```
+
+For remote deployments, prefer a server-side secret manager or deployment environment variable instead of embedding the key in the client.
+
+## Keep requests predictable
+
+Use MCP for focused, narrow requests. Clients work best when they ask for a specific search task instead of chaining multiple broad queries that return more data than the workflow needs.
+
+For best results:
+
+- Keep search intent specific.
+- Use the fewest tool calls needed to answer the task.
+- Reuse the same client configuration across similar environments.
+- Review any client-side defaults that change tool behavior between local and remote setups.
+
+## Review client configuration before rollout
+
+Before you share a setup with a team, verify three things:
+
+1. The client points to the correct local command or remote URL.
+2. The Tavily API key is stored outside the repo and rotated when needed.
+3. The client only exposes the tools your workflow uses.
+
+<Callout kind="tip">
+
+If you move from a local setup to a remote one, recheck every place the client stores connection details. A working local config can still fail remotely if the URL, headers, or secret source changes.
+
+</Callout>
+
+## Related resources
+
+<Columns cols={2}>
+
+<Card title="Tavily MCP Server" href="/tavily/mcp" icon="shield">
+Learn how to install and configure the Tavily MCP Server for local and remote clients.
+</Card>
+
+<Card title="Best practices for using the API" href="/tavily/best-practices/use-api" icon="book-open">
+Use focused inputs and narrow outputs when you call Tavily directly from code.
+</Card>
+
+</Columns>
