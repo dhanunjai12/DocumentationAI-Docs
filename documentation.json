@@ -70,6 +70,11 @@
                 "icon": "search"
               },
               {
+                "title": "Best Practices for Search and Extract",
+                "path": "tavily/best-practices/search-and-extract",
+                "icon": "search"
+              },
+              {
                 "title": "Best Practices for Extract",
                 "path": "tavily/best-practices/extract",
                 "icon": "file-text"

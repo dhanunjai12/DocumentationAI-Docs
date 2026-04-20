@@ -1,0 +1,76 @@
+---
+title: Best Practices for Search and Extract
+description: Combine Tavily Search and Extract to find relevant URLs first, then fetch full page content from the best matches.
+---
+
+## Best Practices for Search and Extract
+
+Use Search to discover relevant URLs, then use Extract to read the full content from the pages that matter most. Search is the right first step when you need to compare sources, narrow a broad query, or identify which pages are worth fetching in full. Extract is the right tool when you already have a URL or when you want the full text from a small set of known pages.
+
+<Callout kind="tip">
+
+For most workflows, search first and extract second. That keeps requests focused and avoids fetching full content from pages you do not need.
+
+</Callout>
+
+## When to use each API
+
+Use Search alone when you only need a ranked list of relevant URLs, titles, and snippets. This is the fastest way to explore a topic, confirm whether a source exists, or gather candidate pages for later processing.
+
+Use Extract alone when you already know the URLs you want. It is the most direct path when a page list comes from your own system, a sitemap, or a previous search step.
+
+Use Search and Extract together when you need the full content of the most relevant pages but do not know which pages matter yet. This is the best pattern for research, monitoring, and knowledge base workflows.
+
+## Recommended workflow
+
+<Search>
+<Steps>
+
+<Step title="Search for relevant URLs">
+
+Run a focused Tavily Search query and keep the parameters as specific as your use case allows. Look for the best candidate pages, not every possible result.
+
+</Step>
+
+<Step title="Extract the most relevant pages">
+
+Pass the top URLs into Tavily Extract and fetch the full content only from the pages that are likely to answer your question.
+
+</Step>
+
+</Steps>
+</Search>
+
+<Callout kind="info">
+
+If freshness matters, apply a time filter at the search step before you extract anything. That keeps the extraction step aligned with the most recent sources.
+
+</Callout>
+
+## Example
+
+Use the first step to find candidate URLs, then feed the best result into Extract.
+
+```python
+from tavily import TavilyClient
+
+client = TavilyClient(api_key="tvly_example_9xmk7q2r")
+
+search_result = client.search(
+    query="Tavily Search and Extract best practices"
+)
+
+top_url = search_result["results"][0]["url"]
+
+extract_result = client.extract(
+    urls=[top_url]
+)
+
+print(extract_result)
+```
+
+## Keep the workflow narrow
+
+A search-then-extract flow works best when you keep the search query short and the URL list small. Broad queries tend to produce weaker candidates, which makes the extraction step less efficient.
+
+If you already know the exact page you need, skip Search and call Extract directly. If you only need discovery, stop after Search.
