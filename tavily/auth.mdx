@@ -1,16 +1,15 @@
 ---
-title: "Authentication & Security"
-description: "Authenticate with Tavily APIs and manage API keys securely in production environments."
+title: Authentication & Security
+description: >-
+  Authenticate with Tavily APIs and manage API keys securely in production
+  environments.
 ---
-
 ## How Authentication Works
 
 Tavily APIs use a single API key associated with your account. Every HTTP request must include the `Authorization` header with your bearer token. SDKs handle this automatically when you configure the client.
 
-<Callout kind="info">
-
-All API keys are scoped to your Tavily account and carry the same capabilities until you rotate or revoke them in the dashboard.
-
+<Callout kind="info" collapsed="false">
+  All API keys are scoped to your Tavily account and carry the same capabilities until you rotate or revoke them in the dashboard.
 </Callout>
 
 ### Basic Request Flow
@@ -26,136 +25,114 @@ graph TD
 
 ### Environment Variables (Recommended)
 
-Use an environment variable such as `TAVILY_API_KEY` and load it in your backend service.
+Use an environment variable such as `TAVILY_API_KEY` and load it in your backend service..
 
-<CodeGroup tabs="Python,JavaScript">
+<CodeGroup show-lines="true" tabs={[]}>
+  ```python
+  import os
+  from tavily import TavilyClient
 
-```python
-import os
-from tavily import TavilyClient
+  client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
+  ```
 
-client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
-```
+  ```javascript
+  import { TavilyClient } from "tavily";
 
-```javascript
-import { TavilyClient } from "tavily";
-
-const client = new TavilyClient({
-  apiKey: process.env.TAVILY_API_KEY
-});
-```
-
+  const client = new TavilyClient({
+    apiKey: process.env.TAVILY_API_KEY
+  });
+  ```
 </CodeGroup>
 
 ### Direct Configuration
 
 Pass the key directly when constructing the client only when your application can keep it on the server.
 
-<CodeGroup tabs="Python,JavaScript">
+<CodeGroup show-lines="true" tabs={[]}>
+  ```python
+  from tavily import TavilyClient
 
-```python
-from tavily import TavilyClient
+  client = TavilyClient(api_key="your-key-here")
+  ```
 
-client = TavilyClient(api_key="your-key-here")
-```
+  ```javascript
+  import { TavilyClient } from "tavily";
 
-```javascript
-import { TavilyClient } from "tavily";
-
-const client = new TavilyClient({
-  apiKey: "your-key-here"
-});
-```
-
+  const client = new TavilyClient({
+    apiKey: "your-key-here"
+  });
+  ```
 </CodeGroup>
 
 ## Client vs Server Usage
 
-<Callout kind="alert">
-
-Never expose your Tavily API key in public frontends, mobile apps, browser bundles, or shared repositories.
-
+<Callout kind="alert" collapsed="false">
+  Never expose your Tavily API key in public frontends, mobile apps, browser bundles, or shared repositories.
 </Callout>
 
 ### Recommended Patterns
 
 <Steps>
+  <Step title="Server-side API calls" icon="server" title-type="p">
+    Backend services and server frameworks should load the key from environment variables and call Tavily directly.
+  </Step>
 
-<Step title="Server-side API calls" icon="server">
+  <Step title="Backend-for-frontend" icon="layers" title-type="p">
+    Your frontend calls a protected backend route, which then talks to Tavily using the secret key.
+  </Step>
 
-Backend services and server frameworks should load the key from environment variables and call Tavily directly.
-
-</Step>
-
-<Step title="Backend-for-frontend" icon="layers">
-
-Your frontend calls a protected backend route, which then talks to Tavily using the secret key.
-
-</Step>
-
-<Step title="Serverless functions" icon="cloud">
-
-Use platform secrets and keep Tavily calls inside secure serverless handlers.
-
-</Step>
-
+  <Step title="Serverless functions" icon="cloud" title-type="p">
+    Use platform secrets and keep Tavily calls inside secure serverless handlers.
+  </Step>
 </Steps>
 
 ## Key Rotation and Revocation
 
 <ExpandableGroup>
+  <Expandable title="Rotating keys" default-open="false">
+    - Create a new key in the Tavily dashboard.
 
-<Expandable title="Rotating keys" default-open="false">
+    - Update environment variables and redeploy your application after confirming the new key is active.
+  </Expandable>
 
-- Create a new key in the Tavily dashboard.  
-- Update environment variables and redeploy your application after confirming the new key is active.
+  <Expandable title="Revoking old keys" default-open="false">
+    - Revoke the old key in the dashboard once new deployments are active.
 
-</Expandable>
-
-<Expandable title="Revoking old keys" default-open="false">
-
-- Revoke the old key in the dashboard once new deployments are active.  
-- Requests that use a revoked key fail immediately with an authentication error.
-
-</Expandable>
-
+    - Requests that use a revoked key fail immediately with an authentication error.
+  </Expandable>
 </ExpandableGroup>
 
 ## Production Security Checklist
 
 The cards below link to related pages.
 
-<Columns cols={3}>
+<Columns cols="3">
+  <Card title="Quickstart" href="/tavily/quickstart" icon="rocket" cta="View" horizontal="false">
 
-<Card
-  title="Quickstart"
-  href="/tavily/quickstart"
-  icon="rocket"
-  cta="View"
-/>
+  </Card>
 
-<Card
-  title="SDK Overview"
-  href="/tavily/sdk/overview"
-  icon="code"
-  cta="Open"
-/>
+  <Card title="SDK Overview" href="/tavily/sdk/overview" icon="code" cta="Open" horizontal="false">
 
-<Card
-  title="Credits & Pricing"
-  href="/tavily/api-credits"
-  icon="credit-card"
-  cta="Check"
-/>
+  </Card>
 
+  <Card title="Credits & Pricing" href="/tavily/api-credits" icon="credit-card" cta="Check" horizontal="false">
+
+  </Card>
 </Columns>
 
 ### Checklist
 
-- Store the API key only in environment variables.  
-- Never bundle the key into client-side code.  
-- Use HTTPS everywhere Tavily is called.  
-- Rotate keys periodically and revoke unused ones.  
-- Restrict logs and traces to avoid leaking secrets.  
-- Use backend integration patterns described above.  
+- Store the API key only in environment variables.
+
+- Never bundle the key into client-side code.
+
+- Use HTTPS everywhere Tavily is called.
+
+- Rotate keys periodically and revoke unused ones.
+
+- Restrict logs and traces to avoid leaking secrets.
+
+- Use backend integration patterns described above.
+
 - Monitor account usage via the dashboard to detect anomalies.
+
