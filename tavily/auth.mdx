@@ -1,15 +1,15 @@
 ---
 title: "Authentication & Security"
-description: "How to authenticate with Tavily APIs and securely manage API keys in production."
+description: "Authenticate with Tavily APIs and manage API keys securely in production environments."
 ---
 
 ## How Authentication Works
 
-Tavily APIs use a single API key associated with your account. Every HTTP request must include the header `Authorization: Bearer` followed by your key. SDKs handle this automatically when you configure the client.
+Tavily APIs use a single API key associated with your account. Every HTTP request must include the `Authorization` header with your bearer token. SDKs handle this automatically when you configure the client.
 
 <Callout kind="info">
 
-All API keys are scoped to your Tavily account and carry the same capabilities unless you rotate or revoke them in the dashboard.
+All API keys are scoped to your Tavily account and carry the same capabilities until you rotate or revoke them in the dashboard.
 
 </Callout>
 
@@ -26,7 +26,7 @@ graph TD
 
 ### Environment Variables (Recommended)
 
-Use an environment variable such as `TAVILY_API_KEY` and load it in your backend.
+Use an environment variable such as `TAVILY_API_KEY` and load it in your backend service.
 
 <CodeGroup tabs="Python,JavaScript">
 
@@ -49,7 +49,7 @@ const client = new TavilyClient({
 
 ### Direct Configuration
 
-You can pass the key directly when constructing the client.
+Pass the key directly when constructing the client only when your application can keep it on the server.
 
 <CodeGroup tabs="Python,JavaScript">
 
@@ -83,13 +83,13 @@ Never expose your Tavily API key in public frontends, mobile apps, browser bundl
 
 <Step title="Server-side API calls" icon="server">
 
-Backend services or server frameworks should load the key from environment variables and call Tavily directly.
+Backend services and server frameworks should load the key from environment variables and call Tavily directly.
 
 </Step>
 
 <Step title="Backend-for-frontend" icon="layers">
 
-Your frontend calls a protected backend route which then talks to Tavily using the secret key.
+Your frontend calls a protected backend route, which then talks to Tavily using the secret key.
 
 </Step>
 
@@ -108,14 +108,14 @@ Use platform secrets and keep Tavily calls inside secure serverless handlers.
 <Expandable title="Rotating keys" default-open="false">
 
 - Create a new key in the Tavily dashboard.  
-- Update environment variables and redeploy your application.
+- Update environment variables and redeploy your application after confirming the new key is active.
 
 </Expandable>
 
 <Expandable title="Revoking old keys" default-open="false">
 
 - Revoke the old key in the dashboard once new deployments are active.  
-- Any request using a revoked key immediately fails with an authentication error.
+- Requests that use a revoked key fail immediately with an authentication error.
 
 </Expandable>
 
@@ -123,7 +123,7 @@ Use platform secrets and keep Tavily calls inside secure serverless handlers.
 
 ## Production Security Checklist
 
-Columns below link to relevant pages.
+The cards below link to related pages.
 
 <Columns cols={3}>
 

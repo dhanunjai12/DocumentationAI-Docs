@@ -1,15 +1,15 @@
 ---
 title: Introduction
-description: Easily integrate our APIs with your services.
+description: Reference for Tavily API base URLs, authentication, and available endpoints.
 ---
 
 <Callout kind="tip">
-  Looking for the Python or JavaScript SDK Reference? Head to our SDKs page to see how to natively integrate Tavily in your project.
+  Looking for the Python or JavaScript SDK reference? Visit the SDKs page for language-specific integration guidance.
 </Callout>
 
 ## Base URL
 
-The base URL for all requests to the Tavily API is:
+Use the following base URL for all Tavily API requests:
 
 ```plaintext
 https://api.tavily.com
@@ -17,7 +17,7 @@ https://api.tavily.com
 
 ## Authentication
 
-All Tavily endpoints are authenticated using API keys.
+All Tavily endpoints require API key authentication.
 [Get your free API key](https://app.tavily.com).
 
 ```bash
@@ -33,19 +33,19 @@ curl -X POST https://api.tavily.com/search \
   <Card icon="search" horizontal href="/api-reference/endpoint/search">
     **`/search`**
 
-    Tavily's powerful web search API.
+    Tavily's web search API endpoint.
   </Card>
 
   <Card icon="file-text" horizontal href="/api-reference/endpoint/extract">
     **`/extract`**
 
-    Tavily's powerful content extraction API.
+    Tavily's content extraction API endpoint.
   </Card>
 
   <Card icon="network" horizontal href="/api-reference/endpoint/crawl">
-    `/crawl` , `/map`
+    `/crawl`, `/map`
 
-    Tavily's intelligent sitegraph navigation and extraction tools.
+    Tavily's site crawling and mapping tools.
   </Card>
 </Columns>
 

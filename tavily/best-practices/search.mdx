@@ -1,21 +1,20 @@
 ---
 title: Best Practices for Search
 description: >-
-  Learn how to optimize your queries, refine search filters, and leverage
-  advanced parameters for better performance..
+  Learn how to write effective search queries, tune request parameters, and apply filtering techniques for more relevant results.
 canonical: paperguide.ai
 ---
 ## Optimize your query
 
-Use short, specific queries that reflect the information you want the search engine to retrieve.
+Use short, specific queries that match the information you want the search request to return.
 
 ### Keep queries under 400 characters
 
-- Use concise intent-focused text.
+- Use concise, intent-focused text.
 
 - Treat queries as search instructions, not prompts.
 
-- Overlong queries return an error.
+- Queries longer than 400 characters return an error.
 
 ```json
 {
@@ -27,7 +26,7 @@ Use short, specific queries that reflect the information you want the search eng
 
 ### Break complex tasks into sub-queries
 
-- Split broad research tasks into multiple focused calls.
+- Split broad research tasks into multiple focused search requests.
 
 - Improves relevance and reduces noise.
 
@@ -60,9 +59,9 @@ Use only the parameters you need. Each one affects cost, relevance, and response
 
 ### max\_results
 
-- Controls number of retrieved results (default is 5).
+- Controls the number of retrieved results (default is 5).
 
-- Set intentionally; large values reduce relevance.
+- Set this intentionally; large values reduce relevance.
 
 <CodeGroup show-lines="true" tabs={[]}>
   ```json
@@ -84,7 +83,7 @@ Use only the parameters you need. Each one affects cost, relevance, and response
 
 - `content`: NLP-generated snippet for quick inspection.
 
-- `search_depth=advanced`: Returns highly aligned snippets.
+- `search_depth=advanced`: Returns more closely aligned snippets.
 
 - Combine with `chunks_per_source` and `include_raw_content` when you need deeper retrieval.
 
@@ -116,7 +115,7 @@ Use only the parameters you need. Each one affects cost, relevance, and response
 
 ### Time filtering parameters
 
-Use time filters when recency matters.
+Use time filters when recency affects relevance.
 
 #### time\_range
 
@@ -204,7 +203,7 @@ Retrieve only news articles with `published_date` metadata.
 
 - Explicit settings override automatic ones.
 
-- Defaults may select `advanced` search (2 credits).
+- Defaults may select `advanced` search, which uses 2 credits.
 
 <CodeGroup show-lines="true" tabs={[]}>
   ```json
@@ -332,11 +331,11 @@ Filter out unwanted sources. Use sparingly.
 
 ## Asynchronous usage
 
-Use meaningful concurrency patterns to avoid blocking and stay within rate limits.
+Use a clear concurrency pattern to avoid blocking and stay within rate limits.
 
 - Reuse a single `AsyncTavilyClient`.
 
-- Use `asyncio.gather` for parallel queries.
+- Use `asyncio.gather` for parallel search requests.
 
 - Catch exceptions to keep pipelines resilient.
 
@@ -372,7 +371,7 @@ Combine search metadata, regex extraction, and LLM reasoning for higher-quality 
 
 - Remove results containing unwanted terms.
 
-- Prioritize content with key signals.
+- Prioritize content with strong relevance signals.
 
 - Reduce cost by filtering before LLM use.
 
@@ -388,7 +387,7 @@ Key fields:
 
 - `content`: general summary; deeper alignment in advanced mode.
 
-You can sort by score, set thresholds, and combine metadata for ranking.
+Sort by score, set thresholds, and combine metadata when you rank results.
 
 ### Regex extraction
 
@@ -411,14 +410,14 @@ print(emails)
 ```
 
 <Callout kind="info" collapsed="false">
-  Refine results by combining metadata analysis, regex extraction, and LLM reasoning. This produces more reliable and task-relevant output.
+  Refine results by combining metadata analysis, regex extraction, and LLM reasoning. This produces more reliable, task-relevant output.
 </Callout>
 
 ## Recommended integrations
 
-Use these integrations to operationalize best practices:
+Use these integrations to apply these practices in production:
 
-- **OpenAI**: Use Tavily as a tool/function in chat completions.
+- **OpenAI**: Use Tavily as a tool or function in chat completions.
 
 - **LangChain**: Add Tavily to agents and RAG workflows.
 

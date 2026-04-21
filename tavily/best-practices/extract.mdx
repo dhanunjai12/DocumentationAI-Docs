@@ -1,28 +1,28 @@
 ---
 title: Best Practices for Extract
-description: Learn the best practices for web content extraction process
+description: Best practices for extracting web content with Tavily, including recommended workflows and advanced extraction guidance
 ---
 
 ## Extracting web content using Tavily
 
-Efficiently extracting content from web pages is crucial for AI-powered applications. Tavily provides two main approaches to content extraction, each suited for different use cases.
+Extracting content from web pages is a core requirement for AI-powered applications. Tavily supports two primary extraction approaches, each suited to a different workflow.
 
 ### 1. One-step extraction: directly retrieve `raw_content`
 
-You can extract web content by enabling `include_raw_content = true` when making a Tavily Search API call. This allows you to retrieve both search results and extracted content in a single step.
+Enable `include_raw_content = true` in a Tavily Search API call to retrieve both search results and extracted content in a single step.
 
-**However**, this can increase latency because you may extract raw content from sources that are not relevant in the first place. It's recommended to split the process into two steps: running multiple sub-queries to expand the pool of sources, then curating the most relevant documents based on content snippets or source scores. By extracting raw content from the most relevant sources, you get high-quality RAG documents.
+This approach can increase latency because you may extract raw content from sources that are not relevant. For many applications, a two-step process is more efficient: run multiple sub-queries to expand the source pool, then curate the most relevant documents based on content snippets or source scores. Extracting raw content only from the most relevant sources produces higher-quality RAG documents.
 
 ### 2. Two-step process: search, then extract
 
-For better accuracy and customization, we recommend a two-step process:
+For higher accuracy and greater control, use a two-step process:
 
 <Steps>
   <Step title="Step 1: Search">
-    Use the Tavily Search API to retrieve relevant web pages, which output URLs.
+    Use the Tavily Search API to retrieve relevant web pages and their URLs.
   </Step>
   <Step title="Step 2: Extract">
-    Use the Tavily Extract API to fetch the full content from the most relevant URLs.
+    Use the Tavily Extract API to fetch the full content from the selected URLs.
   </Step>
 </Steps>
 
@@ -35,7 +35,7 @@ from tavily import AsyncTavilyClient
 tavily_client = AsyncTavilyClient(api_key="tvly-YOUR_API_KEY")
 
 async def fetch_and_extract():
-   # Define the queries with search_depth and max_results inside the query dictionary
+   # Define the queries with search_depth and max_results inside each query dictionary
    queries = [
        {"query": "AI applications in healthcare", "search_depth": "advanced", "max_results": 10},
        {"query": "ethical implications of AI in healthcare", "search_depth": "advanced", "max_results": 10},
@@ -44,10 +44,10 @@ async def fetch_and_extract():
        {"query": "AI and healthcare regulatory challenges", "search_depth": "advanced", "max_results": 10}
    ]
 
-   # Perform the search queries concurrently, passing the entire query dictionary
+   # Perform the search queries concurrently by passing each query dictionary
    responses = await asyncio.gather(*[tavily_client.search(**q) for q in queries])
 
-   # Filter URLs with a score greater than 0.5. Alternatively, you can use a re-ranking model or an LLM to identify the most relevant sources, or cluster your documents and extract content only from the most relevant cluster
+   # Filter URLs with a score greater than 0.5. You can also use a re-ranking model, an LLM, or document clustering to identify the most relevant sources
    relevant_urls = []
    for response in responses:
        for result in response.get('results', []):
@@ -65,21 +65,21 @@ async def fetch_and_extract():
 asyncio.run(fetch_and_extract())
 ```
 
-#### **Pros of two-Step extraction**
+#### **Pros of two-step extraction**
 
-✅ **More control** – Extract only from selected URLs.
+✅ **More control** – Extract content only from selected URLs.
 
 ✅ **Higher accuracy** – Filter out irrelevant results before extraction.
 
-✅ **Advanced extraction capabilities** – Using `search_depth = "advanced"`.
+✅ **Advanced extraction capabilities** – Use `search_depth = "advanced"`.
 
 #### **Cons of two-step extraction**
 
-❌ slightly more expensive.
+❌ Slightly higher cost.
 
 ### Using advanced extraction
 
-Using `extract_depth = "advanced"` in the Extract API allows for more comprehensive content retrieval. This mode is particularly useful when dealing with:
+Use `extract_depth = "advanced"` in the Extract API for more comprehensive content retrieval. This mode is particularly useful when working with:
 
 - **Complex web pages** with dynamic content, embedded media, or structured data.
 - **Tables and structured information** that require accurate parsing.
