@@ -261,6 +261,11 @@
                 "icon": "puzzle"
               }
             ]
+          },
+          {
+            "title": "Kohli IPL 2026",
+            "path": "kohli-ipl-2026",
+            "icon": "trophy"
           }
         ]
       }
